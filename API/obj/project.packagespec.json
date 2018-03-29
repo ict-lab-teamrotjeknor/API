@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/media/rodero/Media/Projects/ICTLAB/API/API.csproj",
+    "projectUniqueName": "/media/rodero/Media/Projects/ICTLAB/API/API/API.csproj",
     "projectName": "API",
-    "projectPath": "/media/rodero/Media/Projects/ICTLAB/API/API.csproj",
-    "outputPath": "/media/rodero/Media/Projects/ICTLAB/API/obj/",
+    "projectPath": "/media/rodero/Media/Projects/ICTLAB/API/API/API.csproj",
+    "outputPath": "/media/rodero/Media/Projects/ICTLAB/API/API/obj/",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
       "/usr/share/dotnet/sdk/NuGetFallbackFolder"
