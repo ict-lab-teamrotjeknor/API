@@ -20,7 +20,81 @@ namespace API.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
 
-            modelBuilder.Entity("API.Models.DbUser", b =>
+            modelBuilder.Entity("API.Models.Data.Classroom", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BuildingId");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Classrooms");
+                });
+
+            modelBuilder.Entity("API.Models.Data.Day", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("WeekDay");
+
+                    b.Property<string>("WeekId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WeekId");
+
+                    b.ToTable("Days");
+                });
+
+            modelBuilder.Entity("API.Models.Data.Hour", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Class");
+
+                    b.Property<string>("Course");
+
+                    b.Property<string>("ScheduleDayId");
+
+                    b.Property<string>("ShortName");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<int>("which");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ScheduleDayId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Hours");
+                });
+
+            modelBuilder.Entity("API.Models.Data.Period", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("PeriodNumber");
+
+                    b.Property<string>("ScheduleYearId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ScheduleYearId");
+
+                    b.ToTable("Periods");
+                });
+
+            modelBuilder.Entity("API.Models.Data.User", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -68,6 +142,42 @@ namespace API.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("API.Models.Data.Week", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("EndWeek");
+
+                    b.Property<string>("SchedulePeriodId");
+
+                    b.Property<DateTime>("StartWeek");
+
+                    b.Property<int>("WeekNumber");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SchedulePeriodId");
+
+                    b.ToTable("Weeks");
+                });
+
+            modelBuilder.Entity("API.Models.Data.Year", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("RoomId");
+
+                    b.Property<int>("SchoolYear");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("Years");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -177,6 +287,45 @@ namespace API.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("API.Models.Data.Day", b =>
+                {
+                    b.HasOne("API.Models.Data.Week", "Week")
+                        .WithMany("Days")
+                        .HasForeignKey("WeekId");
+                });
+
+            modelBuilder.Entity("API.Models.Data.Hour", b =>
+                {
+                    b.HasOne("API.Models.Data.Day", "Day")
+                        .WithMany("Hours")
+                        .HasForeignKey("ScheduleDayId");
+
+                    b.HasOne("API.Models.Data.User", "User")
+                        .WithMany("Hours")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("API.Models.Data.Period", b =>
+                {
+                    b.HasOne("API.Models.Data.Year", "Year")
+                        .WithMany("Periods")
+                        .HasForeignKey("ScheduleYearId");
+                });
+
+            modelBuilder.Entity("API.Models.Data.Week", b =>
+                {
+                    b.HasOne("API.Models.Data.Period", "Period")
+                        .WithMany("Week")
+                        .HasForeignKey("SchedulePeriodId");
+                });
+
+            modelBuilder.Entity("API.Models.Data.Year", b =>
+                {
+                    b.HasOne("API.Models.Data.Classroom", "Classroom")
+                        .WithMany("Years")
+                        .HasForeignKey("RoomId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -187,7 +336,7 @@ namespace API.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("API.Models.DbUser")
+                    b.HasOne("API.Models.Data.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -195,7 +344,7 @@ namespace API.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("API.Models.DbUser")
+                    b.HasOne("API.Models.Data.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -208,7 +357,7 @@ namespace API.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("API.Models.DbUser")
+                    b.HasOne("API.Models.Data.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -216,7 +365,7 @@ namespace API.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("API.Models.DbUser")
+                    b.HasOne("API.Models.Data.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

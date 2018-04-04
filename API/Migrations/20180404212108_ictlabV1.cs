@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace API.Migrations
 {
-    public partial class newIctLab : Migration
+    public partial class ictlabV1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,19 @@ namespace API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Classrooms",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    BuildingId = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Classrooms", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -154,6 +167,114 @@ namespace API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Years",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    RoomId = table.Column<string>(nullable: true),
+                    SchoolYear = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Years", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Years_Classrooms_RoomId",
+                        column: x => x.RoomId,
+                        principalTable: "Classrooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Periods",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    PeriodNumber = table.Column<int>(nullable: false),
+                    ScheduleYearId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Periods", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Periods_Years_ScheduleYearId",
+                        column: x => x.ScheduleYearId,
+                        principalTable: "Years",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Weeks",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    EndWeek = table.Column<DateTime>(nullable: false),
+                    SchedulePeriodId = table.Column<string>(nullable: true),
+                    StartWeek = table.Column<DateTime>(nullable: false),
+                    WeekNumber = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Weeks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Weeks_Periods_SchedulePeriodId",
+                        column: x => x.SchedulePeriodId,
+                        principalTable: "Periods",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Days",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
+                    WeekDay = table.Column<string>(nullable: true),
+                    WeekId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Days", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Days_Weeks_WeekId",
+                        column: x => x.WeekId,
+                        principalTable: "Weeks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Hours",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Class = table.Column<string>(nullable: true),
+                    Course = table.Column<string>(nullable: true),
+                    ScheduleDayId = table.Column<string>(nullable: true),
+                    ShortName = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    which = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Hours", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Hours_Days_ScheduleDayId",
+                        column: x => x.ScheduleDayId,
+                        principalTable: "Days",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Hours_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -190,6 +311,36 @@ namespace API.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Days_WeekId",
+                table: "Days",
+                column: "WeekId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Hours_ScheduleDayId",
+                table: "Hours",
+                column: "ScheduleDayId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Hours_UserId",
+                table: "Hours",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Periods_ScheduleYearId",
+                table: "Periods",
+                column: "ScheduleYearId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Weeks_SchedulePeriodId",
+                table: "Weeks",
+                column: "SchedulePeriodId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Years_RoomId",
+                table: "Years",
+                column: "RoomId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -210,10 +361,28 @@ namespace API.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Hours");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Days");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Weeks");
+
+            migrationBuilder.DropTable(
+                name: "Periods");
+
+            migrationBuilder.DropTable(
+                name: "Years");
+
+            migrationBuilder.DropTable(
+                name: "Classrooms");
         }
     }
 }

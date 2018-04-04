@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using API.Process.Model.Agenda;
 
 namespace API.Process.Model
 {
@@ -16,6 +17,11 @@ namespace API.Process.Model
             var stringJson = JsonConvert.SerializeObject(serilizeObject);
             var sendback = JObject.Parse(stringJson);
             return sendback;
+        }
+
+        public Schedule GetSchedule(JObject schedule)
+        {
+            return JsonConvert.DeserializeObject<Schedule>(schedule.ToString());
         }
     }
 }

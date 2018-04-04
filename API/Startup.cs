@@ -31,7 +31,7 @@ namespace API
             var connectionString = this.Configuration.GetConnectionString("ApplicationDb");
             services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
 
-            services.AddIdentity<DbUser, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             

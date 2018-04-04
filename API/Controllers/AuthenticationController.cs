@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Models;
+using API.Models.Data;
 using API.Process;
 using API.Process.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
 namespace API.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     public class AuthenticationController : Controller
     {
@@ -18,13 +21,14 @@ namespace API.Controllers
         private readonly JsonEditor _json;
         
         public AuthenticationController(
-            UserManager<DbUser> userManager,
-            SignInManager<DbUser> signInManager)
+            UserManager<User> userManager,
+            SignInManager<User> signInManager)
         {
             _authentication = new Authentication(userManager, signInManager);
             _json = new JsonEditor();
         }
         
+        [AllowAnonymous]
         [HttpPost("signup")]
         public async Task<JObject> SignUp([FromBody] JObject createAccount)
         {
@@ -33,6 +37,7 @@ namespace API.Controllers
             return await messageBack;
         }
         
+        [AllowAnonymous]
         [HttpPost("signin")]
         public async Task<JObject> SignIn([FromBody] JObject loginAccount)
         {

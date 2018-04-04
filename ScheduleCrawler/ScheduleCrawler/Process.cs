@@ -43,7 +43,8 @@ namespace ScheduleCrawler
                 }
             }
 
-            return _schedule;
+            var newSchedule = RemoveZeroHours();
+            return newSchedule;
         }
 
         private void ChooseRightFunction(string line, int lineId)
@@ -204,6 +205,27 @@ namespace ScheduleCrawler
                     break;
                 }
             }
+        }
+
+        private Schedule RemoveZeroHours()
+        {
+            var newSchedule = _schedule;
+
+            for (var i = 0; i < _schedule.Days.Count; i++)
+            {
+                var totalHours = _schedule.Days[i].Hours.Count; 
+                for (var y = 0; y < totalHours; y++)
+                {
+                    if (!_schedule.Days[i].Hours[y].Reserved)
+                    {
+                        newSchedule.Days[i].Hours.RemoveAt(y);
+                        y--;
+                        totalHours--;
+                    }
+                }
+            }
+
+            return newSchedule;
         }
     }
 }

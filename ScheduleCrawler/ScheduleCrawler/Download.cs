@@ -10,7 +10,7 @@ namespace ScheduleCrawler
             
             using (WebClient client = new WebClient()) 
             {
-                htmlSchedule = client.DownloadString("http://misc.hro.nl/roosterdienst/webroosters/CMI/kw3/13/r/r00008.htm");
+                htmlSchedule = client.DownloadString("http://misc.hro.nl/roosterdienst/webroosters/CMI/kw3/14/r/r00008.htm");
             }
 
             return htmlSchedule;

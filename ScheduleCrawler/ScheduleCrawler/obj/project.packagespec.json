@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/media/rodero/Media/Projects/ICTLAB/ScheduleCrawler/ScheduleCrawler/ScheduleCrawler.csproj",
+    "projectUniqueName": "/media/rodero/Media/Projects/ICTLAB/API/ScheduleCrawler/ScheduleCrawler/ScheduleCrawler.csproj",
     "projectName": "ScheduleCrawler",
-    "projectPath": "/media/rodero/Media/Projects/ICTLAB/ScheduleCrawler/ScheduleCrawler/ScheduleCrawler.csproj",
-    "outputPath": "/media/rodero/Media/Projects/ICTLAB/ScheduleCrawler/ScheduleCrawler/obj/",
+    "projectPath": "/media/rodero/Media/Projects/ICTLAB/API/ScheduleCrawler/ScheduleCrawler/ScheduleCrawler.csproj",
+    "outputPath": "/media/rodero/Media/Projects/ICTLAB/API/ScheduleCrawler/ScheduleCrawler/obj/",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
       "/usr/share/dotnet/sdk/NuGetFallbackFolder"

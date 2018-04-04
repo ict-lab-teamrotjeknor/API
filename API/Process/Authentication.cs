@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using API.Models;
+using API.Models.Data;
 using API.Process.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -9,13 +10,13 @@ namespace API.Process
 {
     public class Authentication
     {
-        private readonly UserManager<DbUser> _userManager;
-        private readonly SignInManager<DbUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly JsonEditor _json;
         
         public Authentication(
-            UserManager<DbUser> userManager,
-            SignInManager<DbUser> signInManager)
+            UserManager<User> userManager,
+            SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -24,7 +25,7 @@ namespace API.Process
         
         public async Task<JObject> SignUp(Account newAccount)
         {
-            var user = new DbUser { Email = newAccount.Email, UserName = newAccount.Email};
+            var user = new User { Email = newAccount.Email, UserName = newAccount.Email};
             var result = await _userManager.CreateAsync(user, newAccount.Password);
 
             var possibleError = new ErrorMessage();
