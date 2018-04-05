@@ -15,7 +15,7 @@ namespace API.Controllers
             _manage = new Manage(dbContext);
         }
         
-        [HttpGet("getallsensors")]
+        [HttpGet("getallrooms")]
         public JObject GetAllClassrooms()
         {
             return _manage.FindAllClassrooms();
