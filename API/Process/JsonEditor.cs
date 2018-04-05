@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using API.Models.Data;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using API.Process.Model.Agenda;
@@ -22,6 +24,33 @@ namespace API.Process.Model
         public Schedule GetSchedule(JObject schedule)
         {
             return JsonConvert.DeserializeObject<Schedule>(schedule.ToString());
+        }
+
+        public JObject MakeClassrooms(List<Classroom> classrooms)
+        {
+            var newClassrooms = new JObject();
+            newClassrooms.Add("Classroom", new JObject());
+
+            var getClass = newClassrooms["Classroom"] as JObject;
+
+            var totalRooms = 1;
+            
+            foreach (var classroom in classrooms)
+            {
+                var smallRoom = MakeSmallRoom(classroom);
+                getClass.Add(totalRooms.ToString(), smallRoom);
+                totalRooms++;
+            }
+
+            return newClassrooms;
+        }
+
+        private JObject MakeSmallRoom(Classroom classroom)
+        {
+            var newClassroom = new JObject();
+            newClassroom.Add("Id", classroom.Id);
+            newClassroom.Add("Name", classroom.Name);
+            return newClassroom;
         }
     }
 }

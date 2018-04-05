@@ -25,5 +25,11 @@ namespace API.Controllers
             
             return sendBack;
         }
+        
+        [HttpGet("getweek/{roomId}")]
+        public JObject GetWeek(string roomId)
+        { 
+            return new JObject();
+        }
     }
 }

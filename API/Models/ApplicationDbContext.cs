@@ -44,6 +44,16 @@ namespace API.Models.Data
                 .HasOne(b => b.Classroom)
                 .WithMany(y => y.Years)
                 .HasForeignKey(y => y.RoomId);
+
+            modelBuilder.Entity<Sensor>()
+                .HasOne(b => b.Classroom)
+                .WithMany(s => s.Sensors)
+                .HasForeignKey(s => s.RoomId);
+
+            modelBuilder.Entity<SensorData>()
+                .HasOne(s => s.Sensor)
+                .WithMany(d => d.SensorDatas)
+                .HasForeignKey(d => d.SensorId);
         }
 
         public DbSet<Classroom> Classrooms { get; set; }
@@ -52,6 +62,7 @@ namespace API.Models.Data
         public DbSet<Period> Periods { get; set;}
         public DbSet<Week> Weeks { get; set; }
         public DbSet<Year> Years { get; set; }
-
+        public DbSet<Sensor> Sensors { get; set; }
+        public DbSet<SensorData> SensorDatas { get; set; }
     }
 }

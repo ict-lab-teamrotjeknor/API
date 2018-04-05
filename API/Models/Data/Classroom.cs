@@ -9,5 +9,6 @@ namespace API.Models.Data
         public string BuildingId { get; set; }
 
         public List<Year> Years { get; set; }
+        public List<Sensor> Sensors { get; set; }
     }
 }
