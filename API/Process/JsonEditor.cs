@@ -45,6 +45,18 @@ namespace API.Process.Model
             return newClassrooms;
         }
 
+        public Sensor GetSensor(JObject sensor)
+        {
+            var newSensor = JsonConvert.DeserializeObject<Sensor>(sensor.ToString());
+            newSensor.Id = Guid.NewGuid().ToString();
+            return newSensor;
+        }
+
+        public string GetRoom(JObject sensor)
+        {
+            return sensor["Room"].ToString();
+        }
+
         private JObject MakeSmallRoom(Classroom classroom)
         {
             var newClassroom = new JObject();

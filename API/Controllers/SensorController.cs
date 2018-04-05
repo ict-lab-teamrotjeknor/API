@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using API.Models.Data;
+using API.Process;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
 namespace API.Controllers
@@ -6,9 +8,17 @@ namespace API.Controllers
     [Route("[controller]")]
     public class SensorController : Controller
     {
+        private SensorHandler _sensorHandler;
+
+        public SensorController(ApplicationDbContext newDbContext)
+        {
+            _sensorHandler = new SensorHandler(newDbContext);
+        }
+        
         [HttpPost("addnewsensor")]
         public JObject AddNewSensor([FromBody] JObject newSensor)
         {
+            var sendBack = _sensorHandler.AddSensor(newSensor);
             return new JObject();
         }
         
