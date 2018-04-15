@@ -26,6 +26,17 @@ namespace API.Process.Model
             return JsonConvert.DeserializeObject<Schedule>(schedule.ToString());
         }
 
+        public NewPI GetPi(JObject newPi)
+        {
+            return JsonConvert.DeserializeObject<NewPI>(newPi.ToString());
+        }
+        
+        public NewSensorData GetSensorData(JObject newData)
+        {
+            return JsonConvert.DeserializeObject<NewSensorData>(newData.ToString());
+        }
+
+
         public JObject MakeClassrooms(List<Classroom> classrooms)
         {
             var newClassrooms = new JObject();
@@ -55,6 +66,22 @@ namespace API.Process.Model
         public string GetRoom(JObject sensor)
         {
             return sensor["Room"].ToString();
+        }
+        
+        public JObject GetError(string errorMessage)
+        {
+            var error = new ErrorMessage();
+            error.Succeed = false;
+            error.Error = errorMessage;
+            return SerilizeJObject(error);
+        }
+
+        public JObject GetSucced()
+        {
+            var error = new ErrorMessage();
+            error.Succeed = true;
+            error.Error = string.Empty;
+            return SerilizeJObject(error);
         }
 
         private JObject MakeSmallRoom(Classroom classroom)

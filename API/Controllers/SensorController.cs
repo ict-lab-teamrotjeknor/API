@@ -1,5 +1,6 @@
 ﻿using API.Models.Data;
 using API.Process;
+using API.Process.Model;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
@@ -9,35 +10,41 @@ namespace API.Controllers
     public class SensorController : Controller
     {
         private SensorHandler _sensorHandler;
+        private JsonEditor _jsonEditor;
 
         public SensorController(ApplicationDbContext newDbContext)
         {
             _sensorHandler = new SensorHandler(newDbContext);
+            _jsonEditor = new JsonEditor();
         }
         
         [HttpPost("addnewsensor")]
         public JObject AddNewSensor([FromBody] JObject newSensor)
         {
             var sendBack = _sensorHandler.AddSensor(newSensor);
-            return new JObject();
+            return sendBack;
         }
         
         [HttpGet("getallsensors/{roomName}")]
         public JObject GetAllSensors(string roomName)
         {
-            return new JObject();
+            var sendBack = _sensorHandler.GetSensors(roomName);
+            return sendBack;
         }
         
-        [HttpGet("getSensorData/{roomName}/{idSensor}")]
-        public JObject GetSensorData(string roomName, string idSensor)
+        [HttpGet("getsensordata/{roomName}/{sensorName}")]
+        public JObject GetSensorData(string roomName, string sensorName)
         {
-            return new JObject();
+            var sendBack = _sensorHandler.GetData(roomName, sensorName);
+            return sendBack;
         }
         
-        [HttpPost("addnewsensordata")]
+        [HttpPost("adddata")]
         public JObject AddNewSensorData([FromBody] JObject newData)
         {
-            return new JObject();
+            var sensorData = _jsonEditor.GetSensorData(newData);
+            var sendBack = _sensorHandler.AddData(sensorData);
+            return sendBack;
         }
     }
 }
