@@ -46,5 +46,21 @@ namespace API.Process
                 return _jsonEditor.GetError("Pi already exists");
             }
         }
+
+        public JObject GetUsers()
+        {
+            var users = _dbManage.GetUsers();
+
+            var allUsers = new UserView();
+            foreach (var currentUser in users)
+            {
+                var getUser = new UserModel();
+                getUser.Id = currentUser.Id;
+                getUser.Email = currentUser.Email;
+                allUsers.Users.Add(getUser);
+            }
+
+            return _jsonEditor.SerilizeJObject(allUsers);
+        }
     }
 }

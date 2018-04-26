@@ -33,5 +33,11 @@ namespace API.Controllers
             
             return sendBack;
         }
+
+        [HttpGet("getusers")]
+        public JObject GetUsers()
+        {
+            return _manage.GetUsers();
+        }
     }
 }

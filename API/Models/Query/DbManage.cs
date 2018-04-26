@@ -57,5 +57,10 @@ namespace API.Models.Data.Query
             _dbContext.SaveChanges();
             return true;
         }
+
+        public List<User> GetUsers()
+        {
+            return _dbContext.Users.ToList();
+        }
     }
 }
