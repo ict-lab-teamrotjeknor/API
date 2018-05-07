@@ -22,9 +22,11 @@ namespace API.Controllers
         
         public AuthenticationController(
             UserManager<User> userManager,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager,
+            RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext dbContext)
         {
-            _authentication = new Authentication(userManager, signInManager);
+            _authentication = new Authentication(userManager, signInManager, roleManager, dbContext);
             _json = new JsonEditor();
         }
         
@@ -43,6 +45,39 @@ namespace API.Controllers
         {
             var account = _json.GetAccount(loginAccount);
             var messageBack = _authentication.SignIn(account);
+            return await messageBack;
+        }
+        
+        [Authorize(Roles = "Admin")]
+        [HttpPost("deleteaccount")]
+        public async Task<JObject> DeleteAccount([FromBody] JObject account)
+        {
+            var deleteAccount = _json.GetAccount(account);
+            var messageBack = await _authentication.DeleteAccount(deleteAccount);
+            return messageBack;
+        }
+        
+        [AllowAnonymous]
+        [HttpGet("createroles")]
+        public async Task<JObject> CreateRoles()
+        {
+            var messageBack = _authentication.CreateRoleAdminAndStudent();
+            return await messageBack;
+        }
+        
+        [Authorize(Roles = "Admin")]
+        [HttpPost("addrole")]
+        public async Task<JObject> AddRole([FromBody] JObject newRole)
+        {
+            var messageBack = _authentication.AddNewRole(newRole);
+            return await messageBack;
+        }
+        
+        [Authorize(Roles = "Admin")]
+        [HttpPost("changerole")]
+        public async Task<JObject> ChangeRole([FromBody] JObject changeRole)
+        {
+            var messageBack = _authentication.ChangeRole(changeRole);
             return await messageBack;
         }
         

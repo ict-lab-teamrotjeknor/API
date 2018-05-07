@@ -1,6 +1,7 @@
 ﻿using API.Models.Data;
 using API.Process;
 using API.Process.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
@@ -24,6 +25,7 @@ namespace API.Controllers
             return _manage.FindAllClassrooms();
         }
         
+        [Authorize(Roles = "Admin")]
         [HttpPost("add/pi")]
         public JObject AddPI([FromBody] JObject newPi)
         {
@@ -34,6 +36,7 @@ namespace API.Controllers
             return sendBack;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("getusers")]
         public JObject GetUsers()
         {

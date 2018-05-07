@@ -62,5 +62,18 @@ namespace API.Models.Data.Query
         {
             return _dbContext.Users.ToList();
         }
+
+        public bool DeleteUser(Account deleteAccount)
+        {
+            var user = _dbContext.Users
+                .SingleOrDefault(u => u.Email.Equals(deleteAccount.Email));
+
+            user.Delete = true;
+
+            _dbContext.Update(user);
+            _dbContext.SaveChanges();
+            
+            return true;
+        }
     }
 }

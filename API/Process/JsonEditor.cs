@@ -26,6 +26,11 @@ namespace API.Process.Model
             return JsonConvert.DeserializeObject<Schedule>(schedule.ToString());
         }
 
+        public Role GetRole(JObject role)
+        {
+            return JsonConvert.DeserializeObject<Role>(role.ToString());
+        }
+
         public NewPI GetPi(JObject newPi)
         {
             return JsonConvert.DeserializeObject<NewPI>(newPi.ToString());
