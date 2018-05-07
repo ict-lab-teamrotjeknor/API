@@ -7,6 +7,7 @@ git pull
 rm -r ../Publish
 
 cd API
+dotnet restore
 dotnet ef migrations add ictlabV6
 dotnet ef database update
 

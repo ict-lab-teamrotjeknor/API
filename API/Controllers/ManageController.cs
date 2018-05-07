@@ -36,7 +36,7 @@ namespace API.Controllers
             return sendBack;
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("getusers")]
         public JObject GetUsers()
         {
