@@ -81,6 +81,13 @@ namespace API.Controllers
             return await messageBack;
         }
         
+      /*  [HttpGet("currentuser/getrole")]
+        public async Task<JObject> UserGetRole()
+        {
+            
+            return messageBack;
+        } */
+        
         /*
         // GET api/values
         [HttpGet]

@@ -38,7 +38,7 @@ namespace API.Process
 
             var possibleError = new ErrorMessage();
             possibleError.Succeed = result.Succeeded;
-            //possibleError.Error = result.Errors.ToString();
+            if(!possibleError.Succeed) possibleError.Error = result.Errors.First().ToString();
             var messsageBack =  _json.SerilizeJObject(possibleError);
             return messsageBack;
         }
@@ -112,5 +112,10 @@ namespace API.Process
             var result = _dbManage.DeleteUser(deleteAccount);
             return result ? _json.GetSucced() : _json.GetError("Account " + deleteAccount.Email + " doesn't exists");
         }
+
+      /*  public async Task<JObject> CheckRole()
+        {
+            
+        } */
     }
 }
