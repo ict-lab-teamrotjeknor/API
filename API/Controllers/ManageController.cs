@@ -43,10 +43,17 @@ namespace API.Controllers
             return _manage.GetUsers();
         }
 
-        [HttpPost("test")]
-        public JObject Test()
+        [HttpPost("testpost")]
+        public JObject TestPost([FromBody] JObject random)
         {
-            var test = JObject.Parse(@"{test:'test'}");
+            var test = JObject.Parse(@"{Request:'Post'}");
+            return test;
+        }
+        
+        [HttpPost("testget")]
+        public JObject TestGet()
+        {
+            var test = JObject.Parse(@"{Request:'Get'}");
             return test;
         }
     }
