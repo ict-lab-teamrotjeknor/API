@@ -1,4 +1,6 @@
-﻿namespace API.Models.Data
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace API.Models.Data
 {
     public class PI
     {

@@ -42,5 +42,12 @@ namespace API.Controllers
         {
             return _manage.GetUsers();
         }
+
+        [HttpPost("test")]
+        public JObject Test()
+        {
+            var test = JObject.Parse(@"{test:'test'}");
+            return test;
+        }
     }
 }
