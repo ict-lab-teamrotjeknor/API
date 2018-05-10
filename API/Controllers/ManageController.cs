@@ -50,9 +50,9 @@ namespace API.Controllers
             return test;
         }
         
-        [HttpPost("testget")]
+        [HttpGet("testget")]
         public JObject TestGet()
-        {
+        {   
             var test = JObject.Parse(@"{Request:'Get'}");
             return test;
         }
