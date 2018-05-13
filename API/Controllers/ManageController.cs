@@ -56,5 +56,13 @@ namespace API.Controllers
             var test = JObject.Parse(@"{Request:'Get'}");
             return test;
         }
+        
+        [Authorize]
+        [HttpGet("testcredentials")]
+        public JObject TestCredentials()
+        {   
+            var test = JObject.Parse(@"{Request:'Get'}");
+            return test;
+        }
     }
 }
