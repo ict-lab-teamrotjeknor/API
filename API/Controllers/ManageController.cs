@@ -64,5 +64,13 @@ namespace API.Controllers
             var test = JObject.Parse(@"{Request:'Get'}");
             return test;
         }
+        
+        [Authorize]
+        [HttpPost("testcredentialspost")]
+        public JObject TestCredentialsPost([FromBody] JObject random)
+        {
+            var test = JObject.Parse(@"{Request:'Post'}");
+            return test;
+        }        
     }
 }
