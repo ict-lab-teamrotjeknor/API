@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API.csproj", "{7608B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleCrawler", "..\ScheduleCrawler\ScheduleCrawler\ScheduleCrawler.csproj", "{317287AA-40EB-49B4-9B50-C9F945B9973D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "..\UnitTest\UnitTest.csproj", "{E1449DB2-2262-41B6-90E6-B32D05D9A500}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{317287AA-40EB-49B4-9B50-C9F945B9973D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{317287AA-40EB-49B4-9B50-C9F945B9973D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{317287AA-40EB-49B4-9B50-C9F945B9973D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1449DB2-2262-41B6-90E6-B32D05D9A500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1449DB2-2262-41B6-90E6-B32D05D9A500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1449DB2-2262-41B6-90E6-B32D05D9A500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1449DB2-2262-41B6-90E6-B32D05D9A500}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

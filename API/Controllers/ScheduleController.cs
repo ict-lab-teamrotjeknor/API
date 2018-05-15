@@ -26,10 +26,11 @@ namespace API.Controllers
             return sendBack;
         }
         
-        [HttpGet("getweek/{roomId}")]
-        public JObject GetWeek(string roomId)
-        { 
-            return new JObject();
+        [HttpGet("getweek/{roomId}/{year}/{kwartaal}/{weekNumber}")]
+        public JObject GetWeek(string roomId, int year, int kwartaal, int weeknumber)
+        {
+            var sendBack = _agenda.GetWeek(roomId, year, kwartaal, weeknumber);
+            return sendBack;
         }
     }
 }

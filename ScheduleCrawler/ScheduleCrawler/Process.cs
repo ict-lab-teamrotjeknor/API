@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using ScheduleCrawler.Models;
 
 namespace ScheduleCrawler
@@ -39,6 +40,7 @@ namespace ScheduleCrawler
                 while ((line = reader.ReadLine()) != null)
                 {
                     ChooseRightFunction(line, lineId);
+                    
                     lineId++;
                 }
             }
@@ -66,8 +68,13 @@ namespace ScheduleCrawler
 
             if (_timeReady)
             {
-                var check = line.Remove(3, 1);
-                
+                var check = string.Empty;
+
+                if (line.Length > 4)
+                {
+                    check = line.Remove(3, 1);
+                }
+
                 if (check.Equals("<b></b>"))
                 {
                     _hourLine += 1;

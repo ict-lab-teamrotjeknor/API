@@ -18,6 +18,9 @@ namespace ScheduleCrawler
             
             var schedulePage = download.GetHTMLPageSchedule();
             var schedule = process.GetModelSchedule(schedulePage);
+            schedule.StartDate = "2018-05-14 00:00:00,000";
+            schedule.EndDate = "2018-05-20 00:00:00,000";
+            
             var done = save.SaveSchedule(schedule);
             
             Console.WriteLine(done);
