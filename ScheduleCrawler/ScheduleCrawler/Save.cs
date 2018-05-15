@@ -26,7 +26,7 @@ namespace ScheduleCrawler
         {
             try
             {
-                var httpWebRequest = (HttpWebRequest) WebRequest.Create("http://localhost:5000/schedule/uploadnewweek");
+                var httpWebRequest = (HttpWebRequest) WebRequest.Create("145.24.222.103:8080/schedule/uploadnewweek");
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
 
