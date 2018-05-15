@@ -1,16 +1,18 @@
 #!/bin/bash
+
+uid=$(id -u)
 systemctl stop kestrel-api-ictlab.service
 
-rm -r API/obj
-git pull
+sudo -u $uid rm -r API/obj
+sudo -u $uid git pull
 
-rm -r ../Publish
+sudo -u $uid rm -r ../Publish
 
-cd API
-dotnet restore
-dotnet ef migrations add ictlabV6
-dotnet ef database update
+sudo -u $uid cd API
+sudo -u $uid dotnet restore
+sudo -u $uid dotnet ef migrations add ictlabV6
+sudo -u $uid dotnet ef database update
 
-dotnet publish -o ../../Publish
+sudo -u $uid dotnet publish -o ../../Publish
 
-sudo systemctl start kestrel-api-ictlab.service
+systemctl start kestrel-api-ictlab.service
