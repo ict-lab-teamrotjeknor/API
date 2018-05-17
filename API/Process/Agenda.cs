@@ -12,15 +12,15 @@ using Hour = API.Models.Data.Hour;
 
 namespace API.Process
 {
-    public class Agenda
+    public class Agenda 
     {
-        private DbAgenda _dbAgenda;
-        private JsonEditor _jsonEditor;
+        private IDbAgenda _dbAgenda;
+        private IJsonEditor _jsonEditor;
 
-        public Agenda(ApplicationDbContext dbContext)
+        public Agenda(IDbAgenda dbAgenda, IJsonEditor jsonEditor)
         {
-            _dbAgenda = new DbAgenda(dbContext);
-            _jsonEditor = new JsonEditor();
+            _dbAgenda = dbAgenda;
+            _jsonEditor = jsonEditor;
         }
         
         public JObject Upload(JObject newWeek)

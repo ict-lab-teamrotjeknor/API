@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace API.Models.Data.Query
 {
-    public class DbAgenda
+    public class DbAgenda : IDbAgenda
     {
         private ApplicationDbContext _dbContext;
 

@@ -7,7 +7,7 @@ using API.Process.Model.Agenda;
 
 namespace API.Process.Model
 {
-    public class JsonEditor
+    public class JsonEditor : IJsonEditor
     {
         public Account GetAccount(JObject account)
         {

@@ -1,6 +1,8 @@
 ﻿using System;
 using API.Models.Data;
+using API.Models.Data.Query;
 using API.Process;
+using API.Process.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -15,7 +17,9 @@ namespace API.Controllers
 
         public ScheduleController(ApplicationDbContext dbContext)
         {
-            _agenda = new Agenda(dbContext);
+            var dbAgenda = new DbAgenda(dbContext);
+            var jsonEditor = new JsonEditor();
+            _agenda = new Agenda(dbAgenda, jsonEditor);
         }
         
         [HttpPost("uploadnewweek")]
