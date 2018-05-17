@@ -1,0 +1,10 @@
+/media/rodero/Media/Projects/ICTLAB/API/UnitTest/bin/Debug/netcoreapp2.0/netcoreapp2.0/UnitTest.deps.json
+/media/rodero/Media/Projects/ICTLAB/API/UnitTest/bin/Debug/netcoreapp2.0/netcoreapp2.0/UnitTest.runtimeconfig.json
+/media/rodero/Media/Projects/ICTLAB/API/UnitTest/bin/Debug/netcoreapp2.0/netcoreapp2.0/UnitTest.runtimeconfig.dev.json
+/media/rodero/Media/Projects/ICTLAB/API/UnitTest/bin/Debug/netcoreapp2.0/netcoreapp2.0/UnitTest.dll
+/media/rodero/Media/Projects/ICTLAB/API/UnitTest/bin/Debug/netcoreapp2.0/netcoreapp2.0/UnitTest.pdb
+/media/rodero/Media/Projects/ICTLAB/API/UnitTest/obj/Debug/netcoreapp2.0/netcoreapp2.0/UnitTest.csproj.CoreCompileInputs.cache
+/media/rodero/Media/Projects/ICTLAB/API/UnitTest/obj/Debug/netcoreapp2.0/netcoreapp2.0/UnitTest.AssemblyInfoInputs.cache
+/media/rodero/Media/Projects/ICTLAB/API/UnitTest/obj/Debug/netcoreapp2.0/netcoreapp2.0/UnitTest.AssemblyInfo.cs
+/media/rodero/Media/Projects/ICTLAB/API/UnitTest/obj/Debug/netcoreapp2.0/netcoreapp2.0/UnitTest.dll
+/media/rodero/Media/Projects/ICTLAB/API/UnitTest/obj/Debug/netcoreapp2.0/netcoreapp2.0/UnitTest.pdb
