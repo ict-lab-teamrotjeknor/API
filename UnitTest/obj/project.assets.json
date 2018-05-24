@@ -4799,7 +4799,6 @@
           "Microsoft.EntityFrameworkCore.InMemory": "2.0.2",
           "Microsoft.EntityFrameworkCore.Tools.DotNet": "2.1.0-preview1-final",
           "Microsoft.NET.Sdk": "1.0.0-alpha-20161104-2",
-          "Microsoft.NETCore.App": "2.0.0",
           "Newtonsoft.Json": "11.0.2",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "2.0.1",
           "xunit": "2.3.1"
@@ -12701,7 +12700,7 @@
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/home/rodero/.nuget/NuGet/NuGet.Config"
+        "/home/rodero/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"

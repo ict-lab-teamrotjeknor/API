@@ -143,7 +143,7 @@ namespace API.Process
         {
             var newWeek = new Week();
             newWeek.Id = Guid.NewGuid().ToString();
-            newWeek.WeekNumber = 20;
+            newWeek.WeekNumber = 21;
             newWeek.SchedulePeriodId = periodId;
             newWeek.StartWeek = DateTime.ParseExact(newSchedule.StartDate, "yyyy-MM-dd HH:mm:ss,fff",
                                     CultureInfo.InvariantCulture);

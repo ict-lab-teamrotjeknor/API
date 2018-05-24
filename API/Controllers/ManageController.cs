@@ -43,6 +43,12 @@ namespace API.Controllers
             return _manage.GetUsers();
         }
 
+        [HttpPost("sendnotification")]
+        public JObject SendNotification()
+        {
+            return new JObject();
+        }
+
         [HttpPost("testpost")]
         public JObject TestPost([FromBody] JObject random)
         {
