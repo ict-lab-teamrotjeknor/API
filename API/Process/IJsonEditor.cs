@@ -17,6 +17,7 @@ namespace API.Process
         NewSensorData GetSensorData(JObject newData);
         JObject MakeClassrooms(List<Classroom> classrooms);
         Sensor GetSensor(JObject sensor);
+        NewHour GetNewHour(JObject newHour);
         string GetRoom(JObject sensor);
         JObject GetError(string errorMessage);
         JObject GetSucced();

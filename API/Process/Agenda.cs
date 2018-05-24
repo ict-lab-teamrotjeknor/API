@@ -31,6 +31,34 @@ namespace API.Process
             return new JObject();
         }
 
+        public JObject NewHour(JObject newHour)
+        {
+            var sendBack = new JObject();
+            var hours = _jsonEditor.GetNewHour(newHour);
+            var found = _dbAgenda.FindHours(hours);
+
+            if (!found.Equals(string.Empty))
+            {
+                for (var i = 0; i < hours.TotalHours; i++) {
+                    var saveHour = new Hour();
+                    saveHour.Class = String.Empty;
+                    saveHour.Course = hours.Type;
+                    saveHour.ScheduleDayId = found;
+                    saveHour.ShortName = hours.Username;
+                    saveHour.which = hours.StartHour + i;
+                    _dbAgenda.SaveHour(saveHour);
+                }
+
+                sendBack = _jsonEditor.GetSucced();
+            }
+            else
+            {
+                sendBack = _jsonEditor.GetError("Hour already exists");
+            }
+            
+            return sendBack;
+        }
+
         public JObject GetWeek(string roomName, int year, int kwartaal, int weekNumber)
         {
             var classroom = _dbAgenda.GetClassroom(roomName);
@@ -70,9 +98,9 @@ namespace API.Process
 
             foreach (var hour in hours)
             {
-                schedule.SetCourse(hour.which, currentDay, hour.Course);
-                schedule.SetClassName(hour.which, currentDay, hour.Class);
-                schedule.SetTeacherName(hour.which, currentDay, hour.ShortName);
+                schedule.SetCourse(hour.which - 1, currentDay, hour.Course);
+                schedule.SetClassName(hour.which - 1, currentDay, hour.Class);
+                schedule.SetTeacherName(hour.which - 1, currentDay, hour.ShortName);
             }
 
             return schedule;

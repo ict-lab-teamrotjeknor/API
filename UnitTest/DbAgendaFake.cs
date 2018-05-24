@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using API.Models.Data;
 using API.Models.Data.Query;
+using API.Process.Model.Agenda;
 
 namespace UnitTest
 {
@@ -67,6 +68,11 @@ namespace UnitTest
         }
 
         public void SaveHour(Hour newHour)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string FindHours(NewHour newHour)
         {
             throw new System.NotImplementedException();
         }

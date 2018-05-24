@@ -68,6 +68,12 @@ namespace API.Process.Model
             return newSensor;
         }
 
+        public NewHour GetNewHour(JObject hour)
+        {
+            var newHour = JsonConvert.DeserializeObject<NewHour>(hour.ToString());
+            return newHour;
+        }
+
         public string GetRoom(JObject sensor)
         {
             return sensor["Room"].ToString();

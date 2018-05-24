@@ -49,6 +49,11 @@ namespace UnitTest
             throw new System.NotImplementedException();
         }
 
+        public NewHour GetNewHour(JObject newHour)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public string GetRoom(JObject sensor)
         {
             throw new System.NotImplementedException();

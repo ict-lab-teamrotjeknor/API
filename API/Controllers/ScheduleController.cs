@@ -36,5 +36,12 @@ namespace API.Controllers
             var sendBack = _agenda.GetWeek(roomId, year, kwartaal, weeknumber);
             return sendBack;
         }
+
+        [HttpPost("uploadhour")]
+        public JObject UploadHour([FromBody] JObject hourSchedule)
+        {
+            var sendBack = _agenda.NewHour(hourSchedule);
+            return sendBack;
+        }
     }
 }

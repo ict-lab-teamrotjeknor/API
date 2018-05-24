@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using API.Process.Model.Agenda;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace API.Models.Data.Query
@@ -135,6 +136,49 @@ namespace API.Models.Data.Query
             return hours;
         }
 
+        public string FindHours(NewHour newHour)
+        {
+            var dayId = GetIdDay(newHour);
+            
+            for (var i = 0; i < newHour.TotalHours; i++) {
+                var hoursExists = _dbContext.Classrooms
+                    .Where(c => c.Name.Equals(newHour.Classroom))
+                    .Join(_dbContext.Years,
+                        c => c.Id,
+                        y => y.RoomId,
+                        (c, y) => new {Classroom = c, Year = y})
+                    .Where(y => y.Year.SchoolYear.Equals(newHour.Year))
+                    .Join(_dbContext.Periods,
+                        y => y.Year.Id,
+                        p => p.ScheduleYearId,
+                        (y, p) => new {Year = y, Period = p})
+                    .Where(p => p.Period.PeriodNumber.Equals(newHour.Quator))
+                    .Join(_dbContext.Weeks,
+                        p => p.Period.Id,
+                        w => w.SchedulePeriodId,
+                        (p, w) => new {Period = p, Week = w})
+                    .Where(w => w.Week.WeekNumber.Equals(newHour.Week))
+                    .Join(_dbContext.Days,
+                        w => w.Week.Id,
+                        d => d.WeekId,
+                        (w, d) => new {Week = w, Day = d})
+                    .Where(d => d.Day.WeekDay.Equals(newHour.Day))
+                    .Join(_dbContext.Hours,
+                        d => d.Day.Id,
+                        h => h.ScheduleDayId,
+                        (d, h) => new {Day = d, Hour = h})
+                    .Where(h => h.Hour.which.Equals(newHour.StartHour))
+                    .ToList();
+                
+                if (hoursExists.Count > 0)
+                {
+                    return string.Empty;
+                }
+            }
+
+            return dayId;
+        }
+
         public void SaveHour(Hour newHour)
         {
             try
@@ -146,6 +190,33 @@ namespace API.Models.Data.Query
             {
 
             }
+        }
+
+        private string GetIdDay(NewHour newHour)
+        {
+            var hoursExists = _dbContext.Classrooms
+                .Where(c => c.Name.Equals(newHour.Classroom))
+                .Join(_dbContext.Years,
+                    c => c.Id,
+                    y => y.RoomId,
+                    (c, y) => new {Classroom = c, Year = y})
+                .Where(y => y.Year.SchoolYear.Equals(newHour.Year))
+                .Join(_dbContext.Periods,
+                    y => y.Year.Id,
+                    p => p.ScheduleYearId,
+                    (y, p) => new {Year = y, Period = p})
+                .Where(p => p.Period.PeriodNumber.Equals(newHour.Quator))
+                .Join(_dbContext.Weeks,
+                    p => p.Period.Id,
+                    w => w.SchedulePeriodId,
+                    (p, w) => new {Period = p, Week = w})
+                .Where(w => w.Week.WeekNumber.Equals(newHour.Week))
+                .Join(_dbContext.Days,
+                    w => w.Week.Id,
+                    d => d.WeekId,
+                    (w, d) => new {Week = w, Day = d})
+                .Where(d => d.Day.WeekDay.Equals(newHour.Day)).ToList();
+            return hoursExists[0].Day.Id;
         }
     }
 }

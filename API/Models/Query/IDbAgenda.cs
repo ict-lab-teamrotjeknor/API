@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using API.Process.Model.Agenda;
 
 namespace API.Models.Data.Query
 {
@@ -17,5 +18,6 @@ namespace API.Models.Data.Query
         void SaveDay(Day newDay);
         List<Hour> GetHours(string dayId);
         void SaveHour(Hour newHour);
+        string FindHours(NewHour newHour);    
     }
 }
