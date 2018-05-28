@@ -35,6 +35,7 @@ namespace API.Process
         {
             var user = new User { Email = newAccount.Email, UserName = newAccount.Email};
             var result = await _userManager.CreateAsync(user, newAccount.Password);
+            await _userManager.AddToRoleAsync(user, "Student");
 
             var possibleError = new ErrorMessage();
             possibleError.Succeed = result.Succeeded;
