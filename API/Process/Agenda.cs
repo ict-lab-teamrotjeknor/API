@@ -76,6 +76,27 @@ namespace API.Process
             return _jsonEditor.SerilizeJObject(schedule);
         }
 
+        public JObject GetPersonalReservations(string userId)
+        {
+            var days = _dbAgenda.GetReservations(userId);
+            var setJsonList = new JsonList();
+            setJsonList.random = days;
+            var sendBack = _jsonEditor.SerilizeJObject(setJsonList);
+            return sendBack;
+        }
+        
+        public JObject GetPersonalReservations(string userId, string day)
+        {
+            day = day + " 00:00:00,000";
+            var realDay = DateTime.ParseExact(day, "yyyy-MM-dd HH:mm:ss,fff",
+                CultureInfo.InvariantCulture);
+            var detailDay = _dbAgenda.GetReservations(userId, realDay);
+            detailDay = RemoveZeroHoursDay(detailDay);
+            
+            var sendBack = _jsonEditor.SerilizeJObject(detailDay);
+            return sendBack;
+        }
+
         private Schedule GetDays(Schedule schedule, Week week)
         {
             var days = _dbAgenda.GetDays(week.Id);
@@ -188,19 +209,23 @@ namespace API.Process
                 newWeek.Id = weekExitst.Id;
             }
 
+            var dayWeek = newWeek.StartWeek;
+
             foreach (var currentDay in newSchedule.Days)
             {
-                NewDay(currentDay, newWeek.Id);
+                NewDay(currentDay, newWeek.Id,dayWeek);
+                dayWeek = dayWeek.AddDays(1);
             }
             
         }
 
-        private void NewDay(MDay currentMDay, string weekId)
+        private void NewDay(MDay currentMDay, string weekId, DateTime dayWeek)
         {
             var newDay = new Day();
             newDay.Id = Guid.NewGuid().ToString();
             newDay.WeekDay = currentMDay.Name;
             newDay.WeekId = weekId;
+            newDay.Date = dayWeek;
 
             var dayExitst = _dbAgenda.GetDay(newDay.WeekDay, weekId);
 
@@ -239,19 +264,28 @@ namespace API.Process
 
             for (var i = 0; i < schedule.Days.Count; i++)
             {
-                var totalHours = schedule.Days[i].Hours.Count; 
-                for (var y = 0; y < totalHours; y++)
-                {
-                    if (!schedule.Days[i].Hours[y].Reserved)
-                    {
-                        newSchedule.Days[i].Hours.RemoveAt(y);
-                        y--;
-                        totalHours--;
-                    }
-                }
+                var removedDay = RemoveZeroHoursDay(schedule.Days[i]);
+                newSchedule.Days[i] = removedDay;
             }
 
             return newSchedule;
+        }
+
+        private MDay RemoveZeroHoursDay(MDay currentDay)
+        {
+            var newDay = currentDay;
+            var totalHours = currentDay.Hours.Count; 
+            for (var y = 0; y < totalHours; y++)
+            {
+                if (!currentDay.Hours[y].Reserved)
+                {
+                    newDay.Hours.RemoveAt(y);
+                    y--;
+                    totalHours--;
+                }
+            }
+
+            return newDay;
         }
     }
 }

@@ -4,6 +4,7 @@ using API.Models;
 using API.Models.Data;
 using API.Models.Data.Query;
 using API.Process.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json.Linq;
@@ -113,6 +114,7 @@ namespace API.Process
             var result = _dbManage.DeleteUser(deleteAccount);
             return result ? _json.GetSucced() : _json.GetError("Account " + deleteAccount.Email + " doesn't exists");
         }
+
 
       /*  public async Task<JObject> CheckRole()
         {

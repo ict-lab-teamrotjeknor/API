@@ -155,7 +155,7 @@ namespace API.Models.Data.Query
                     .Where(p => p.Period.PeriodNumber.Equals(newHour.Quator))
                     .Join(_dbContext.Weeks,
                         p => p.Period.Id,
-                        w => w.SchedulePeriodId,
+                        w => w.SchedulePeriodId,    
                         (p, w) => new {Period = p, Week = w})
                     .Where(w => w.Week.WeekNumber.Equals(newHour.Week))
                     .Join(_dbContext.Days,
@@ -177,6 +177,60 @@ namespace API.Models.Data.Query
             }
 
             return dayId;
+        }
+
+        public List<string> GetReservations(string userId)
+        {
+            var currentUser = _dbContext.Users
+                .SingleOrDefault(u => u.Id.Equals(userId));
+
+            var days = _dbContext.Days
+                .Join(_dbContext.Hours,
+                    d => d.Id,
+                    h => h.ScheduleDayId,
+                    (d, h) => new {Day = d, Hour = h})
+                .Where(dh => dh.Hour.ShortName.Equals(currentUser.Email))
+                .ToList();
+
+            var allDays = new List<string>();
+            foreach (var day in days)
+            {
+                allDays.Add(day.Day.Date.ToString());
+            }
+
+            allDays = allDays.Distinct().ToList();
+            return allDays;
+        }
+
+        public MDay GetReservations(string userId, DateTime Day)
+        {
+            var currentUser = _dbContext.Users
+                .SingleOrDefault(u => u.Id.Equals(userId));
+            
+            var days = _dbContext.Days
+                .Where(d => d.Date.Equals(Day))
+                .Join(_dbContext.Hours,
+                    d => d.Id,
+                    h => h.ScheduleDayId,
+                    (d, h) => new {Day = d, Hour = h})
+                .Where(dh => dh.Hour.ShortName.Equals(currentUser.Email))
+                .ToList();
+
+            var setDay = new MDay(days[0].Day.WeekDay);
+
+            foreach (var day in days)
+            {
+                var tempHour = day.Hour;
+                
+                var newHour = new MHour(day.Hour.which);
+                newHour.Class = tempHour.Class;
+                newHour.Course = tempHour.Course;
+                newHour.Teacher = tempHour.ShortName;
+                newHour.Reserved = true;
+                setDay.Hours.Add(newHour);
+            }
+
+            return setDay;    
         }
 
         public void SaveHour(Hour newHour)

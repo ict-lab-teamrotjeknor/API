@@ -2,6 +2,7 @@
 using API.Process;
 using API.Process.Model;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
@@ -45,6 +46,12 @@ namespace API.Controllers
 
         [HttpPost("sendnotification")]
         public JObject SendNotification()
+        {
+            return new JObject();
+        }
+
+        [HttpPost("sendMessage")]
+        public JObject SendMessageToBuilding()
         {
             return new JObject();
         }
