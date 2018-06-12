@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using API.Models.Data;
 using API.Models.Data.Query;
 using API.Process.Model.Agenda;
@@ -75,6 +76,16 @@ namespace UnitTest
         public string FindHours(NewHour newHour)
         {
             throw new System.NotImplementedException();
+        }
+
+        public List<string> GetReservations(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public MDay GetReservations(string userId, DateTime Day)
+        {
+            throw new NotImplementedException();
         }
     }
 }

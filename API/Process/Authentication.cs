@@ -47,7 +47,7 @@ namespace API.Process
         }
 
         public async Task<JObject> SignIn(Account account)
-        {            
+        {           
             var result = await _signInManager.PasswordSignInAsync(account.Email, 
                 account.Password, true, lockoutOnFailure: false);
             
@@ -73,7 +73,7 @@ namespace API.Process
             var user = new User { UserName = "admin@admin.nl", Email = "admin@admin.nl" };
             var result = await _userManager.CreateAsync(user, "Test1234:)");
 
-            await _userManager.AddToRoleAsync(user, "admin");
+            await _userManager.AddToRoleAsync(user, "Admin");
             
             exists = await _roleManager.RoleExistsAsync("Student");
 
@@ -103,7 +103,7 @@ namespace API.Process
         {
             var role = _json.GetRole(changeRole);
             
-            var user = new User{ Email = role.UserEmail};
+            var user = await _userManager.FindByNameAsync(role.UserEmail);
             
             var result = await _userManager.AddToRoleAsync(user, role.RoleName);
 
