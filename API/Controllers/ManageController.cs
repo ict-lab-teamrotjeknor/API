@@ -44,16 +44,24 @@ namespace API.Controllers
             return _manage.GetUsers();
         }
 
-        [HttpPost("sendnotification")]
-        public JObject SendNotification()
+        [HttpPost("sendnotificationgroup")]
+        public JObject SendGroupNotification(JObject notification)
         {
-            return new JObject();
+            var sendBack = _manage.SendGroupNotification();
+            return sendBack;
+        }
+        
+        [HttpPost("sendnotification")]
+        public JObject SendSingleNotification(JObject notification)
+        {
+            var sendBack = _manage.SendNotification();
+            return sendBack;
         }
 
-        [HttpPost("sendMessage")]
-        public JObject SendMessageToBuilding()
+        [HttpGet("notifications")]
+        public JObject GetNotifications()
         {
-            return new JObject();
+            return _manage.GetNotifications();
         }
 
         [HttpPost("testpost")]

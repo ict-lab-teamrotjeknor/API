@@ -63,5 +63,33 @@ namespace API.Process
 
             return _jsonEditor.SerilizeJObject(allUsers);
         }
+
+        public JObject SendNotification()
+        {
+            return _jsonEditor.GetSucced();
+        }
+
+        public JObject SendGroupNotification()
+        {
+            return _jsonEditor.GetSucced();
+        }
+
+        public JObject GetNotifications()
+        {
+            var allNotifications = new Notifications();
+
+            for (var i = 0; i < 3; i++)
+            {
+                var newNotification = new Notification();
+                newNotification.ID = i.ToString();
+                newNotification.Message = "test" + i;
+                allNotifications.Messages.Add(newNotification);
+            }
+
+            var sendBack = _jsonEditor.SerilizeJObject(allNotifications);
+
+            return sendBack;
+
+        }
     }
 }
