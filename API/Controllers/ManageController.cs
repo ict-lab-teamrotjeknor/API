@@ -45,15 +45,17 @@ namespace API.Controllers
         }
 
         [HttpPost("sendnotificationgroup")]
-        public JObject SendGroupNotification(JObject notification)
+        public JObject SendGroupNotification([FromBody] JObject notification)
         {
+            var test = notification;    
             var sendBack = _manage.SendGroupNotification();
             return sendBack;
         }
         
         [HttpPost("sendnotification")]
-        public JObject SendSingleNotification(JObject notification)
+        public JObject SendSingleNotification([FromBody] JObject notification)
         {
+            var test = notification;
             var sendBack = _manage.SendNotification();
             return sendBack;
         }

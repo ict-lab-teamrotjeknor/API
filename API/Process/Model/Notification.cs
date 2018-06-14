@@ -1,10 +1,12 @@
-﻿namespace API.Process.Model
+﻿using System;
+
+namespace API.Process.Model
 {
     public class Notification
     {
-        public string ID { get; set; }
-        public string Role { get; set; }
+        public string ID { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty;
         public string Message { get; set; }
-        public string UserName { get; set; }
+        public string UserName { get; set; } = string.Empty;
     }
 }
