@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
+using Microsoft.WindowsAzure.Storage;
 using Newtonsoft.Json.Linq;
 
 namespace API.Process
@@ -41,19 +42,27 @@ namespace API.Process
 
             var possibleError = new ErrorMessage();
             possibleError.Succeed = result.Succeeded;
-            if(!possibleError.Succeed) possibleError.Error = result.Errors.First().ToString();
+            if(!possibleError.Succeed) possibleError.Error = result.Errors.First().Description.ToString();
             var messsageBack =  _json.SerilizeJObject(possibleError);
             return messsageBack;
         }
 
         public async Task<JObject> SignIn(Account account)
-        {           
-            var result = await _signInManager.PasswordSignInAsync(account.Email, 
-                account.Password, true, lockoutOnFailure: false);
-            
+        {
+            var access = false;
+            var user = await _userManager.FindByNameAsync(account.Email);
+            access = !user.Delete;
+
+            if (access)
+            {
+                var result = await _signInManager.PasswordSignInAsync(account.Email,
+                    account.Password, true, lockoutOnFailure: false);
+                access = result.Succeeded;
+            }
+
             var possibleError = new ErrorMessage();
-            possibleError.Succeed = result.Succeeded;
-            if (result.IsNotAllowed)
+            possibleError.Succeed = access;
+            if (!access)
             {
                 possibleError.Error = "Email and/or password combination is wrong.";
             }
@@ -71,7 +80,7 @@ namespace API.Process
             await _roleManager.CreateAsync( adminRole ); 
             
             var user = new User { UserName = "admin@admin.nl", Email = "admin@admin.nl" };
-            var result = await _userManager.CreateAsync(user, "Test1234:)");
+                var result = await _userManager.CreateAsync(user, "Test1234:)");
 
             await _userManager.AddToRoleAsync(user, "Admin");
             
@@ -104,10 +113,29 @@ namespace API.Process
             var role = _json.GetRole(changeRole);
             
             var user = await _userManager.FindByNameAsync(role.UserEmail);
-            
-            var result = await _userManager.AddToRoleAsync(user, role.RoleName);
 
-            return result.Succeeded ? _json.GetSucced() : _json.GetError(result.Errors.First().ToString());
+            var currentRole = await _userManager.GetRolesAsync(user);
+            
+            var resultRemove = await _userManager.RemoveFromRoleAsync(user, currentRole[0].ToString());
+
+            if (resultRemove.Succeeded)
+            {
+                var resultAdd = await _userManager.AddToRoleAsync(user, role.RoleName);
+
+                if (resultAdd.Succeeded)
+                {
+                    return _json.GetSucced();
+                }
+                else
+                {
+                    await _userManager.AddToRoleAsync(user, currentRole[0]);
+                    return _json.GetError(resultAdd.Errors.First().Description);
+                }
+            }
+            else
+            {
+                return _json.GetError(resultRemove.Errors.First().Description);
+            }
         }
 
         public async Task<JObject> DeleteAccount(Account deleteAccount)

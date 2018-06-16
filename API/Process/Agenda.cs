@@ -35,6 +35,7 @@ namespace API.Process
         {
             var sendBack = new JObject();
             var hours = _jsonEditor.GetNewHour(newHour);
+            hours.Quator = 4;
             var found = _dbAgenda.FindHours(hours);
 
             if (!found.Equals(string.Empty))
@@ -59,11 +60,11 @@ namespace API.Process
             return sendBack;
         }
 
-        public JObject GetWeek(string roomName, int year, int kwartaal, int weekNumber)
+        public JObject GetWeek(string roomName, int year, int weekNumber)
         {
             var classroom = _dbAgenda.GetClassroom(roomName);
             var yearModel = _dbAgenda.GetYear(year, classroom.Id);
-            var kwartaalModel = _dbAgenda.GetPeriode(kwartaal, yearModel.Id);
+            var kwartaalModel = _dbAgenda.GetPeriode(4, yearModel.Id);
             var week = _dbAgenda.GetWeek(weekNumber, kwartaalModel.Id);
             
             var schedule = new Schedule();
