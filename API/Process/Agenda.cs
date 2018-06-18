@@ -6,6 +6,7 @@ using API.Models.Data;
 using API.Models.Data.Query;
 using API.Process.Model;
 using API.Process.Model.Agenda;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using Day = API.Models.Data.Day;
 using Hour = API.Models.Data.Hour;
@@ -16,9 +17,20 @@ namespace API.Process
     {
         private IDbAgenda _dbAgenda;
         private IJsonEditor _jsonEditor;
+        private readonly ILogger _logger;
+        private bool Deployment;
 
+        public Agenda(IDbAgenda dbAgenda, IJsonEditor jsonEditor, ILogger logger)
+        {
+            Deployment = true;
+            _dbAgenda = dbAgenda;
+            _jsonEditor = jsonEditor;
+            _logger = logger;
+        }
+        
         public Agenda(IDbAgenda dbAgenda, IJsonEditor jsonEditor)
         {
+            Deployment = false;
             _dbAgenda = dbAgenda;
             _jsonEditor = jsonEditor;
         }
@@ -28,7 +40,7 @@ namespace API.Process
             var schedule = _jsonEditor.GetSchedule(newWeek);
             NewClassroom(schedule);
 
-            return new JObject();
+            return _jsonEditor.GetSucced();
         }
 
         public JObject NewHour(JObject newHour)
@@ -54,27 +66,35 @@ namespace API.Process
             }
             else
             {
+                if (Deployment) _logger.LogInformation("Hour already exists");
                 sendBack = _jsonEditor.GetError("Hour already exists");
             }
-            
             return sendBack;
         }
 
         public JObject GetWeek(string roomName, int year, int weekNumber)
         {
             var classroom = _dbAgenda.GetClassroom(roomName);
-            var yearModel = _dbAgenda.GetYear(year, classroom.Id);
-            var kwartaalModel = _dbAgenda.GetPeriode(4, yearModel.Id);
-            var week = _dbAgenda.GetWeek(weekNumber, kwartaalModel.Id);
-            
-            var schedule = new Schedule();
-            schedule.ClassroomName = classroom.Name;
-            schedule.StartDate = week.StartWeek.ToString(CultureInfo.CurrentCulture);
-            schedule.EndDate = week.EndWeek.ToString(CultureInfo.CurrentCulture);
-            schedule = GetDays(schedule, week);
-            schedule = RemoveZeroHours(schedule);
 
-            return _jsonEditor.SerilizeJObject(schedule);
+            if (classroom != null)
+            {
+                var yearModel = _dbAgenda.GetYear(year, classroom.Id);
+                var kwartaalModel = _dbAgenda.GetPeriode(4, yearModel.Id);
+                var week = _dbAgenda.GetWeek(weekNumber, kwartaalModel.Id);
+
+                var schedule = new Schedule();
+                schedule.ClassroomName = classroom.Name;
+                schedule.StartDate = week.StartWeek.ToString(CultureInfo.CurrentCulture);
+                schedule.EndDate = week.EndWeek.ToString(CultureInfo.CurrentCulture);
+                schedule = GetDays(schedule, week);
+                schedule = RemoveZeroHours(schedule);
+                return _jsonEditor.SerilizeJObject(schedule);
+            }
+            else
+            {
+                if (Deployment) _logger.LogInformation("Classroom already exists");
+                return _jsonEditor.GetError("Classroom already exists");
+            }
         }
 
         public JObject GetPersonalReservations(string userId)

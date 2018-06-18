@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using API.Process.Model;
+using Microsoft.Extensions.Logging;
+
 
 namespace API.Models.Data.Query
 {
-    public class DbManage
+    public class DbManage : IDbManage
     {
         private ApplicationDbContext _dbContext;
+        private ILogger _logger;
         
-        public DbManage(ApplicationDbContext newDbContext)
+        public DbManage(ApplicationDbContext newDbContext, ILogger logger)
         {
             _dbContext = newDbContext;
+            _logger = logger;
         }
 
         public List<Classroom> GetAllClassrooms()
@@ -54,7 +58,15 @@ namespace API.Models.Data.Query
 
             _dbContext.Add(pi);
             _dbContext.Update(room);
-            _dbContext.SaveChanges();
+            try
+            {
+                _dbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                    
+            }
+
             return true;
         }
 
@@ -71,8 +83,15 @@ namespace API.Models.Data.Query
             user.Delete = true;
 
             _dbContext.Update(user);
-            _dbContext.SaveChanges();
-            
+            try
+            {
+                _dbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+
             return true;
         }
     }

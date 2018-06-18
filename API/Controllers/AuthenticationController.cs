@@ -9,6 +9,9 @@ using API.Process.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.OData.Query.SemanticAst;
+using Microsoft.EntityFrameworkCore.Query.ExpressionTranslators.Internal;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace API.Controllers
@@ -19,21 +22,25 @@ namespace API.Controllers
     {
         private readonly Authentication _authentication;
         private readonly JsonEditor _json;
+        private readonly ILogger _logger;
         
         public AuthenticationController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             RoleManager<IdentityRole> roleManager,
-            ApplicationDbContext dbContext)
+            ApplicationDbContext dbContext,
+            ILogger<AuthenticationController> logger)
         {
-            _authentication = new Authentication(userManager, signInManager, roleManager, dbContext);
-            _json = new JsonEditor();
+            _authentication = new Authentication(userManager, signInManager, roleManager, dbContext, logger);
+            _json = new JsonEditor(logger);
+            _logger = logger;
         }
         
         [AllowAnonymous]
         [HttpPost("signup")]
         public async Task<JObject> SignUp([FromBody] JObject createAccount)
         {
+            LogUrl();
             var newAccount = _json.GetAccount(createAccount);
             var messageBack = _authentication.SignUp(newAccount);
             return await messageBack;
@@ -43,8 +50,7 @@ namespace API.Controllers
         [HttpPost("signin")]
         public async Task<JObject> SignIn([FromBody] JObject loginAccount)
         {
-            
-            
+            LogUrl();
             var account = _json.GetAccount(loginAccount);
             var messageBack = _authentication.SignIn(account);
             return await messageBack;
@@ -54,6 +60,7 @@ namespace API.Controllers
         [HttpPost("deleteaccount")]
         public async Task<JObject> DeleteAccount([FromBody] JObject account)
         {
+            LogUrl();
             var deleteAccount = _json.GetAccount(account);
             var messageBack = await _authentication.DeleteAccount(deleteAccount);
             return messageBack;
@@ -63,6 +70,7 @@ namespace API.Controllers
         [HttpGet("createroles")]
         public async Task<JObject> CreateRoles()
         {
+            LogUrl();
             var messageBack = _authentication.CreateRoleAdminAndStudent();
             return await messageBack;
         }
@@ -71,6 +79,7 @@ namespace API.Controllers
         [HttpPost("addrole")]
         public async Task<JObject> AddRole([FromBody] JObject newRole)
         {
+            LogUrl();
             var messageBack = _authentication.AddNewRole(newRole);
             return await messageBack;
         }
@@ -78,11 +87,28 @@ namespace API.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost("changerole")]
         public async Task<JObject> ChangeRole([FromBody] JObject changeRole)
-        {
+        { 
+            LogUrl();
             var messageBack = _authentication.ChangeRole(changeRole);
             return await messageBack;
         }
         
+        [HttpGet("checkrole/{username}")]
+        public async Task<JObject> CheckRole(string username)
+        {
+            LogUrl();
+            var messageBack = _authentication.CheckRole(username);
+            return await messageBack;
+        }
+
+        private void LogUrl()
+        {
+            var location = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}{Request.QueryString}");
+            var url = location.AbsoluteUri;
+            var remoteIpAddress = HttpContext.Connection.RemoteIpAddress.ToString();
+            _logger.LogInformation(remoteIpAddress + ": " + url);
+        }
+                
       /*  [HttpGet("currentuser/getrole")]
         public async Task<JObject> UserGetRole()
         {

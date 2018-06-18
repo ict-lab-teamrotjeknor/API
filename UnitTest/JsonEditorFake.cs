@@ -3,6 +3,7 @@ using API.Models.Data;
 using API.Process;
 using API.Process.Model;
 using API.Process.Model.Agenda;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace UnitTest
@@ -16,12 +17,24 @@ namespace UnitTest
 
         public JObject SerilizeJObject(object serilizeObject)
         {
-            throw new System.NotImplementedException();
+            var stringJson = JsonConvert.SerializeObject(serilizeObject);
+            var sendback = JObject.Parse(stringJson);
+            return sendback;
         }
 
         public Schedule GetSchedule(JObject schedule)
         {
-            throw new System.NotImplementedException();
+            var newSchedule = new Schedule();
+            newSchedule.ClassroomName = "H.3.103";
+            newSchedule.ClassroomType = "School";
+            newSchedule.StartDate = "2018-05-28 00:00:00,000";
+            newSchedule.EndDate = "2018-05-28 00:00:00,000";
+            newSchedule.AddDay("Maandag");
+            newSchedule.Days[0].Hours[0].Class = "BBVIP";
+            newSchedule.Days[0].Hours[0].Teacher = "BBVIP";
+            newSchedule.Days[0].Hours[0].Course = "BBVIP";
+            newSchedule.Days[0].Hours[0].Reserved = true;
+            return newSchedule;
         }
 
         public Role GetRole(JObject role)
@@ -41,32 +54,53 @@ namespace UnitTest
 
         public JObject MakeClassrooms(List<Classroom> classrooms)
         {
-            throw new System.NotImplementedException();
+            var classroomsList = JObject.Parse(@"{
+                'Classroom': {
+                         '1': {
+                             'Id': '0',
+                             'Name': 'Name0'
+                         },
+                         '2': {
+                             'Id': '1',
+                             'Name': 'Name1'
+                         }
+                     }
+                 }");
+            return classroomsList;
         }
 
         public Sensor GetSensor(JObject sensor)
         {
-            throw new System.NotImplementedException();
+            return new Sensor();
         }
 
         public NewHour GetNewHour(JObject newHour)
         {
-            throw new System.NotImplementedException();
+            var currentHour = new NewHour();
+            currentHour.Username = "test@test.nl";
+            currentHour.Type = "Student";
+            currentHour.Classroom = "H.1.103";
+            currentHour.Week = 22;
+            currentHour.StartHour = 4;
+            currentHour.TotalHours = 2;
+            currentHour.Day = "Friday";
+            currentHour.Year = 2018;
+            return currentHour;
         }
 
         public string GetRoom(JObject sensor)
         {
-            throw new System.NotImplementedException();
+            return "room";
         }
 
         public JObject GetError(string errorMessage)
         {
-            throw new System.NotImplementedException();
+             return JObject.Parse(@"{'Succeed':false}");
         }
 
         public JObject GetSucced()
         {
-            throw new System.NotImplementedException();
+            return JObject.Parse(@"{'Succeed':true}");
         }
     }
 }

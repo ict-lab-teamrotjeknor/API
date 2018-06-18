@@ -1,77 +1,168 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Transactions;
 using API.Models.Data;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using API.Process.Model.Agenda;
+using Microsoft.Extensions.Logging;
+
 
 namespace API.Process.Model
 {
     public class JsonEditor : IJsonEditor
     {
+        private ILogger _logger;
+        private bool Deployment;
+
+        public JsonEditor(ILogger logger)
+        {
+            Deployment = true;
+            _logger = logger;
+        }
+
+        public JsonEditor()
+        {
+            Deployment = false;
+        }
+
         public Account GetAccount(JObject account)
         {
-            return JsonConvert.DeserializeObject<Account>(account.ToString());
+            try
+            {
+                return JsonConvert.DeserializeObject<Account>(account.ToString());
+            }
+            catch (Exception e)
+            {
+                if (Deployment) _logger.LogInformation("Something went wrong with Account");
+            }
+
+            return new Account();
         }
 
         public JObject SerilizeJObject(Object serilizeObject)
         {
-            var stringJson = JsonConvert.SerializeObject(serilizeObject);
-            var sendback = JObject.Parse(stringJson);
-            return sendback;
+            try
+            {
+                var stringJson = JsonConvert.SerializeObject(serilizeObject);
+                var sendback = JObject.Parse(stringJson);
+                return sendback;
+            }
+            catch (Exception e)
+            {
+                if (Deployment) _logger.LogInformation("Something went wrong with SerilizeObject");
+                return this.GetError("Object bad");
+            }
         }
 
         public Schedule GetSchedule(JObject schedule)
         {
-            return JsonConvert.DeserializeObject<Schedule>(schedule.ToString());
+            try
+            {
+                return JsonConvert.DeserializeObject<Schedule>(schedule.ToString());
+            }
+            catch (Exception e)
+            {
+                if (Deployment) _logger.LogInformation("Something went wrong with Schedule");
+                return new Schedule();
+            }
         }
 
         public Role GetRole(JObject role)
         {
-            return JsonConvert.DeserializeObject<Role>(role.ToString());
+            try
+            {
+                return JsonConvert.DeserializeObject<Role>(role.ToString());
+            }
+            catch (Exception e)
+            {
+                if (Deployment) _logger.LogInformation("Something went wrong with Role");
+                return new Role();
+            }
         }
 
         public NewPI GetPi(JObject newPi)
         {
-            return JsonConvert.DeserializeObject<NewPI>(newPi.ToString());
+            try
+            {
+                return JsonConvert.DeserializeObject<NewPI>(newPi.ToString());
+            }
+            catch (Exception e)
+            {
+                if (Deployment) _logger.LogInformation("Something went wrong with Schedule");
+                return new NewPI();
+            }
         }
-        
+
         public NewSensorData GetSensorData(JObject newData)
         {
-            return JsonConvert.DeserializeObject<NewSensorData>(newData.ToString());
+            try
+            {
+                return JsonConvert.DeserializeObject<NewSensorData>(newData.ToString());
+            }
+            catch (Exception e)
+            {
+                if (Deployment) _logger.LogInformation("Something went wrong with NewSensorData");
+                return new NewSensorData();
+            }
         }
 
 
         public JObject MakeClassrooms(List<Classroom> classrooms)
         {
-            var newClassrooms = new JObject();
-            newClassrooms.Add("Classroom", new JObject());
-
-            var getClass = newClassrooms["Classroom"] as JObject;
-
-            var totalRooms = 1;
-            
-            foreach (var classroom in classrooms)
+            try
             {
-                var smallRoom = MakeSmallRoom(classroom);
-                getClass.Add(totalRooms.ToString(), smallRoom);
-                totalRooms++;
+                var newClassrooms = new JObject();
+                newClassrooms.Add("Classroom", new JObject());
+
+                var getClass = newClassrooms["Classroom"] as JObject;
+
+                var totalRooms = 1;
+
+                foreach (var classroom in classrooms)
+                {
+                    var smallRoom = MakeSmallRoom(classroom);
+                    getClass.Add(totalRooms.ToString(), smallRoom);
+                    totalRooms++;
+                }
+
+                return newClassrooms;
+            }
+            catch (Exception e)
+            {
+                if (Deployment) _logger.LogInformation("Something went wrong with Classroom");
+                return this.GetError("Classroom is wrong");
             }
 
-            return newClassrooms;
         }
 
         public Sensor GetSensor(JObject sensor)
         {
-            var newSensor = JsonConvert.DeserializeObject<Sensor>(sensor.ToString());
-            newSensor.Id = Guid.NewGuid().ToString();
-            return newSensor;
+            try
+            {
+                var newSensor = JsonConvert.DeserializeObject<Sensor>(sensor.ToString());
+                newSensor.Id = Guid.NewGuid().ToString();
+                return newSensor;
+            }
+            catch (Exception e)
+            {
+                if (Deployment) _logger.LogInformation("Something went wrong with Sensor");
+                return new Sensor();
+            }
         }
 
         public NewHour GetNewHour(JObject hour)
         {
-            var newHour = JsonConvert.DeserializeObject<NewHour>(hour.ToString());
-            return newHour;
+            try
+            {
+                var newHour = JsonConvert.DeserializeObject<NewHour>(hour.ToString());
+                return newHour;
+            }
+            catch (Exception e)
+            {
+                if (Deployment) _logger.LogInformation("Something went wrong with NewHour");
+                return new NewHour();
+            }
         }
 
         public string GetRoom(JObject sensor)

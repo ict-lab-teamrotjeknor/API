@@ -2,19 +2,30 @@
 using API.Models.Data;
 using API.Models.Data.Query;
 using API.Process.Model;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace API.Process
 {
     public class SensorHandler
     {
-        private DbSensor _dbSensor;
-        private JsonEditor _jsonEditor;
+        private IDbSensor _dbSensor;
+        private IJsonEditor _jsonEditor;
+        private ILogger _logger;
+        private bool Deployment;
 
-        public SensorHandler(ApplicationDbContext newDbContext)
+        public SensorHandler(IDbSensor newDbSensor, ILogger logger, bool newDeployment = true)
         {
-            _dbSensor = new DbSensor(newDbContext);
-            _jsonEditor = new JsonEditor();
+            _dbSensor = newDbSensor;
+            _jsonEditor = new JsonEditor(logger);
+            Deployment = newDeployment;
+        }
+
+        public SensorHandler(IDbSensor newDbSensor, IJsonEditor jsonEditor)
+        {
+            _dbSensor = newDbSensor;
+            _jsonEditor = jsonEditor;
+            Deployment = false;
         }
 
         public JObject AddSensor(JObject sensor)
@@ -30,6 +41,7 @@ namespace API.Process
             }
             else
             {
+                if (Deployment) _logger.LogInformation("Sensor already exists");
                 return _jsonEditor.GetError("Sensor already exists");
             }
         }
@@ -44,6 +56,7 @@ namespace API.Process
             }
             else
             {
+                if (Deployment) _logger.LogInformation("Sensor doesn't exists");
                 return _jsonEditor.GetError("Sensor doesn't exists");
             }
         }
@@ -74,6 +87,7 @@ namespace API.Process
             }
             else
             {
+                if (Deployment) _logger.LogInformation("Sensor doesn't exists");
                 return _jsonEditor.GetError("Sensor doesn't exists");
             }
         }

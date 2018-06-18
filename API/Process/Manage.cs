@@ -4,19 +4,24 @@ using API.Models.Data;
 using API.Models.Data.Query;
 using API.Process.Model;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace API.Process
 {
     public class Manage
     {
-        private DbManage _dbManage;
-        private JsonEditor _jsonEditor;
+        private IDbManage _dbManage;
+        private IJsonEditor _jsonEditor;
+        private ILogger _logger;
+        private bool Deployment;
 
-        public Manage(ApplicationDbContext dbContext)
+        public Manage(IDbManage newDbManage, IJsonEditor newJsonEditor, ILogger logger, bool newDeployemnt = true)
         {
-            _dbManage = new DbManage(dbContext);
-            _jsonEditor = new JsonEditor();
+            _dbManage = newDbManage;
+            _jsonEditor = newJsonEditor;
+            _logger = logger;
+            Deployment = newDeployemnt;
         } 
         
         public JObject FindAllClassrooms()
@@ -39,11 +44,13 @@ namespace API.Process
                 }
                 else
                 {
+                    if (Deployment) _logger.LogInformation("Room doesn;t exists");
                     return _jsonEditor.GetError("Room doesn't exists");
                 }
             }
             else
             {
+                if (Deployment) _logger.LogInformation("Pi already exists");
                 return _jsonEditor.GetError("Pi already exists");
             }
         }

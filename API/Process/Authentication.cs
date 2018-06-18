@@ -1,12 +1,15 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using API.Controllers;
 using API.Models;
 using API.Models.Data;
 using API.Models.Data.Query;
 using API.Process.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.WindowsAzure.Storage;
 using Newtonsoft.Json.Linq;
@@ -18,20 +21,32 @@ namespace API.Process
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly JsonEditor _json;
-        private readonly DbManage _dbManage;
+        private readonly IJsonEditor _json;
+        private readonly IDbManage _dbManage;
+        private readonly ILogger _logger;
+        private bool deployed;
         
         public Authentication(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             RoleManager<IdentityRole> roleManager,
-            ApplicationDbContext dbContext)
+            ApplicationDbContext dbContext,
+            ILogger logger)
         {
+            deployed = true;
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
-            _json = new JsonEditor();
-            _dbManage = new DbManage(dbContext);
+            _json = new JsonEditor(logger);
+            _dbManage = new DbManage(dbContext, logger);
+            _logger = logger;
+        }
+
+        public Authentication(IDbManage newDbManage, IJsonEditor newJson)
+        {
+            deployed = false;
+            _dbManage = newDbManage;
+            _json = newJson;
         }
         
         public async Task<JObject> SignUp(Account newAccount)
@@ -42,7 +57,11 @@ namespace API.Process
 
             var possibleError = new ErrorMessage();
             possibleError.Succeed = result.Succeeded;
-            if(!possibleError.Succeed) possibleError.Error = result.Errors.First().Description.ToString();
+            if (!possibleError.Succeed)
+            {
+                possibleError.Error = result.Errors.First().Description.ToString();
+                _logger.LogError(result.Errors.First().Description.ToString());
+            }
             var messsageBack =  _json.SerilizeJObject(possibleError);
             return messsageBack;
         }
@@ -59,12 +78,17 @@ namespace API.Process
                     account.Password, true, lockoutOnFailure: false);
                 access = result.Succeeded;
             }
+            else
+            {
+                _logger.LogInformation("Account deleted");
+            }
 
             var possibleError = new ErrorMessage();
             possibleError.Succeed = access;
             if (!access)
             {
                 possibleError.Error = "Email and/or password combination is wrong.";
+                _logger.LogInformation(possibleError.Error);
             }
 
             return _json.SerilizeJObject(possibleError);
@@ -74,7 +98,11 @@ namespace API.Process
         {   
             var exists = await _roleManager.RoleExistsAsync("Admin");
 
-            if (exists) return _json.GetError("Admin role already exists");
+            if (exists)
+            {
+                _logger.LogError("Admin role already exists");
+                return _json.GetError("Admin role already exists");
+            }
             
             var adminRole = new IdentityRole { Name = "Admin" };
             await _roleManager.CreateAsync( adminRole ); 
@@ -86,7 +114,11 @@ namespace API.Process
             
             exists = await _roleManager.RoleExistsAsync("Student");
 
-            if (exists) return _json.GetError("Student role already exists");
+            if (exists)
+            {
+                _logger.LogError("Student role already exists");
+                return _json.GetError("Student role already exists");
+            }
             
             var studentRole = new IdentityRole { Name = "Student" };
             await _roleManager.CreateAsync( studentRole );
@@ -100,7 +132,11 @@ namespace API.Process
             
             var exists = await _roleManager.RoleExistsAsync(role.RoleName);
 
-            if (exists) return _json.GetError(role.RoleName + " role already exists");
+            if (exists)
+            {
+                _logger.LogInformation("role already exists");
+                return _json.GetError(role.RoleName + " role already exists");
+            }
             
             var identityRole = new IdentityRole { Name = role.RoleName };
             await _roleManager.CreateAsync( identityRole );
@@ -128,12 +164,14 @@ namespace API.Process
                 }
                 else
                 {
+                    _logger.LogInformation(resultRemove.Errors.First().Description);
                     await _userManager.AddToRoleAsync(user, currentRole[0]);
                     return _json.GetError(resultAdd.Errors.First().Description);
                 }
             }
             else
             {
+                _logger.LogInformation(resultRemove.Errors.First().Description);
                 return _json.GetError(resultRemove.Errors.First().Description);
             }
         }
@@ -141,13 +179,32 @@ namespace API.Process
         public async Task<JObject> DeleteAccount(Account deleteAccount)
         {
             var result = _dbManage.DeleteUser(deleteAccount);
-            return result ? _json.GetSucced() : _json.GetError("Account " + deleteAccount.Email + " doesn't exists");
+            if (result)
+            {
+                return _json.GetSucced();
+            }
+            else
+            {
+                _logger.LogInformation("Account doesn't exists");
+                return _json.GetError("Account " + deleteAccount.Email + " doesn't exists");
+            }
+            
         }
 
 
-      /*  public async Task<JObject> CheckRole()
+        public async Task<JObject> CheckRole(string UserEmail)
         {
-            
-        } */
+            var user = await _userManager.FindByNameAsync(UserEmail);
+            if (user == null)
+            {
+                _logger.LogInformation("Account doesn't exists");
+                return _json.GetError("Account " + user.Email + " doesn't exists");
+            }
+            var currentRole = await _userManager.GetRolesAsync(user);
+            var userRole = new Role();
+            userRole.RoleName = currentRole[0];
+            userRole.UserEmail = UserEmail;
+            return _json.SerilizeJObject(userRole);
+        } 
     }
 }

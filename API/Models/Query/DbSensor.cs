@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using API.Process.Model;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Logging;
 
 namespace API.Models.Data.Query
 {
-    public class DbSensor
+    public class DbSensor : IDbSensor
     {
         private ApplicationDbContext _dbContext;
+        private ILogger _logger;
 
-        public DbSensor(ApplicationDbContext newDbContext)
+        public DbSensor(ApplicationDbContext newDbContext, ILogger logger)
         {
             _dbContext = newDbContext;
+            _logger = logger;
         }
 
         public bool SaveSensor(Sensor newSensor, string roomName)
@@ -29,6 +32,7 @@ namespace API.Models.Data.Query
             }
             catch (Exception e)
             {
+                _logger.LogError(e.Message);
                 return false;
             }
 
@@ -88,6 +92,7 @@ namespace API.Models.Data.Query
             }
             catch (Exception e)
             {
+                _logger.LogError(e.Message);
                 return false;
             }
 

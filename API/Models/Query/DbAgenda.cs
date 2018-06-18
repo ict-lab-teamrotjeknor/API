@@ -3,24 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using API.Process.Model.Agenda;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Logging;
+
 
 namespace API.Models.Data.Query
 {
     public class DbAgenda : IDbAgenda
     {
         private ApplicationDbContext _dbContext;
+        private ILogger _logger;
 
-        public DbAgenda(ApplicationDbContext newDbContext)
+        public DbAgenda(ApplicationDbContext newDbContext, ILogger logger)
         {
+            _logger = logger;
             _dbContext = newDbContext;
         }
 
         public Classroom GetClassroom(string classroomName)
         {
-            var classroom = _dbContext.Classrooms
-                .SingleOrDefault(c => c.Name.Equals(classroomName));
+            try
+            {
+                var classroom = _dbContext.Classrooms
+                    .SingleOrDefault(c => c.Name.Equals(classroomName));
+                return classroom;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
 
-            return classroom;
+            return new Classroom();
         }
 
         public void SaveClassroom(Classroom newRoom)
@@ -32,7 +44,7 @@ namespace API.Models.Data.Query
             }
             catch (Exception e)
             {
-
+                _logger.LogError(e.Message);
             }
         }
 
@@ -53,7 +65,7 @@ namespace API.Models.Data.Query
             }
             catch (Exception e)
             {
-
+                _logger.LogError(e.Message);
             }
         }
 
@@ -74,7 +86,7 @@ namespace API.Models.Data.Query
             }
             catch (Exception e)
             {
-
+                _logger.LogError(e.Message);
             }
         }
 
@@ -95,7 +107,7 @@ namespace API.Models.Data.Query
             }
             catch (Exception e)
             {
-
+                _logger.LogError(e.Message);
             }
         }
 
@@ -124,7 +136,7 @@ namespace API.Models.Data.Query
             }
             catch (Exception e)
             {
-
+                _logger.LogError(e.Message);
             }
         }
 
@@ -242,7 +254,7 @@ namespace API.Models.Data.Query
             }
             catch (Exception e)
             {
-
+                _logger.LogError(e.Message);
             }
         }
 

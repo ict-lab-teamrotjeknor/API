@@ -1,0 +1,130 @@
+2018-06-18T10:48:16.7190045+02:00 0HLEKV0TVNVLU:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/autentication/checkrole/test@test.nl application/json  (ca22a1cb)
+2018-06-18T10:48:17.8107164+02:00 0HLEKV0TVNVLU:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-18T10:48:18.5885170+02:00 0HLEKV0TVNVLU:00000001 [INF] Executed DbCommand ("59"ms) [Parameters=["@__get_Item_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"e\".\"Id\", \"e\".\"AccessFailedCount\", \"e\".\"ConcurrencyStamp\", \"e\".\"Delete\", \"e\".\"Email\", \"e\".\"EmailConfirmed\", \"e\".\"LockoutEnabled\", \"e\".\"LockoutEnd\", \"e\".\"NormalizedEmail\", \"e\".\"NormalizedUserName\", \"e\".\"PasswordHash\", \"e\".\"PhoneNumber\", \"e\".\"PhoneNumberConfirmed\", \"e\".\"SecurityStamp\", \"e\".\"TwoFactorEnabled\", \"e\".\"UserName\"
+FROM \"AspNetUsers\" AS \"e\"
+WHERE \"e\".\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-06-18T10:48:18.8097512+02:00 0HLEKV0TVNVLU:00000001 [INF] Executed DbCommand ("36"ms) [Parameters=["@__user_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"uc\".\"Id\", \"uc\".\"ClaimType\", \"uc\".\"ClaimValue\", \"uc\".\"UserId\"
+FROM \"AspNetUserClaims\" AS \"uc\"
+WHERE \"uc\".\"UserId\" = @__user_Id_0" (0723d8ff)
+2018-06-18T10:48:18.8915340+02:00 0HLEKV0TVNVLU:00000001 [INF] Executed DbCommand ("16"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"role\".\"Name\"
+FROM \"AspNetUserRoles\" AS \"userRole\"
+INNER JOIN \"AspNetRoles\" AS \"role\" ON \"userRole\".\"RoleId\" = \"role\".\"Id\"
+WHERE \"userRole\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-18T10:48:19.0394160+02:00 0HLEKV0TVNVLU:00000001 [INF] Executed DbCommand ("99"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2018-06-18T10:48:19.1866375+02:00 0HLEKV0TVNVLU:00000001 [INF] Executed DbCommand ("37"ms) [Parameters=["@__role_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"rc\".\"ClaimType\", \"rc\".\"ClaimValue\"
+FROM \"AspNetRoleClaims\" AS \"rc\"
+WHERE \"rc\".\"RoleId\" = @__role_Id_0" (0723d8ff)
+2018-06-18T10:48:19.2633669+02:00 0HLEKV0TVNVLU:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-18T10:48:19.4563320+02:00 0HLEKV0TVNVLU:00000001 [INF] Request finished in 2743.4635ms 404  (791a596a)
+2018-06-18T10:49:43.7930582+02:00 0HLEKV0TVNVLU:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/autentication/checkrole/test@test.nl application/json  (ca22a1cb)
+2018-06-18T10:49:43.8416253+02:00 0HLEKV0TVNVLU:00000002 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-18T10:49:43.8422887+02:00 0HLEKV0TVNVLU:00000002 [INF] Request finished in 49.2601ms 404  (791a596a)
+2018-06-18T10:49:56.6256763+02:00 0HLEKV0TVNVLU:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:5000/autentication/checkrole/test@test.nl application/json  (ca22a1cb)
+2018-06-18T10:49:56.6265359+02:00 0HLEKV0TVNVLU:00000003 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-18T10:49:56.6268595+02:00 0HLEKV0TVNVLU:00000003 [INF] Request finished in 1.1432ms 404  (791a596a)
+2018-06-18T10:51:08.4992786+02:00 0HLEKV0TVNVLU:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:5000/authentication/checkrole/test@test.nl application/json  (ca22a1cb)
+2018-06-18T10:51:08.5001124+02:00 0HLEKV0TVNVLU:00000004 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-18T10:51:08.5153291+02:00 0HLEKV0TVNVLU:00000004 [INF] Request finished in 16.1057ms 404  (791a596a)
+2018-06-18T10:52:34.4075365+02:00 0HLEKV0TVNVLU:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:5000/authentication/checkrole/test@test.nl application/json  (ca22a1cb)
+2018-06-18T10:52:34.4082530+02:00 0HLEKV0TVNVLU:00000005 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-18T10:52:34.4086281+02:00 0HLEKV0TVNVLU:00000005 [INF] Request finished in 1.1271ms 404  (791a596a)
+2018-06-18T10:53:06.3686418+02:00 0HLEKV3KA51H5:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/authentication/checkrole/test@test.nl application/json  (ca22a1cb)
+2018-06-18T10:53:06.6237071+02:00 0HLEKV3KA51H5:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-18T10:53:06.8313218+02:00 0HLEKV3KA51H5:00000001 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-18T10:53:06.8613781+02:00 0HLEKV3KA51H5:00000001 [INF] Executing action method "API.Controllers.AuthenticationController.CheckRole (API)" with arguments (["test@test.nl"]) - ModelState is Valid (ba7f4ac2)
+2018-06-18T10:53:11.0484416+02:00 0HLEKV3KA51H5:00000001 [INF] Test (66a3a9ac)
+2018-06-18T10:56:42.2105300+02:00 0HLEKV3KA51H5:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-18T11:22:15.6175870+02:00 0HLEKVJTKABS8:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/authentication/checkrole/test@test.nl application/json  (ca22a1cb)
+2018-06-18T11:22:16.5292629+02:00 0HLEKVJTKABS8:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-18T11:22:17.2095901+02:00 0HLEKVJTKABS8:00000001 [INF] Executed DbCommand ("37"ms) [Parameters=["@__get_Item_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"e\".\"Id\", \"e\".\"AccessFailedCount\", \"e\".\"ConcurrencyStamp\", \"e\".\"Delete\", \"e\".\"Email\", \"e\".\"EmailConfirmed\", \"e\".\"LockoutEnabled\", \"e\".\"LockoutEnd\", \"e\".\"NormalizedEmail\", \"e\".\"NormalizedUserName\", \"e\".\"PasswordHash\", \"e\".\"PhoneNumber\", \"e\".\"PhoneNumberConfirmed\", \"e\".\"SecurityStamp\", \"e\".\"TwoFactorEnabled\", \"e\".\"UserName\"
+FROM \"AspNetUsers\" AS \"e\"
+WHERE \"e\".\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-06-18T11:22:17.4132591+02:00 0HLEKVJTKABS8:00000001 [INF] Executed DbCommand ("34"ms) [Parameters=["@__user_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"uc\".\"Id\", \"uc\".\"ClaimType\", \"uc\".\"ClaimValue\", \"uc\".\"UserId\"
+FROM \"AspNetUserClaims\" AS \"uc\"
+WHERE \"uc\".\"UserId\" = @__user_Id_0" (0723d8ff)
+2018-06-18T11:22:17.5275832+02:00 0HLEKVJTKABS8:00000001 [INF] Executed DbCommand ("16"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"role\".\"Name\"
+FROM \"AspNetUserRoles\" AS \"userRole\"
+INNER JOIN \"AspNetRoles\" AS \"role\" ON \"userRole\".\"RoleId\" = \"role\".\"Id\"
+WHERE \"userRole\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-18T11:22:17.6288189+02:00 0HLEKVJTKABS8:00000001 [INF] Executed DbCommand ("36"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2018-06-18T11:22:17.7836016+02:00 0HLEKVJTKABS8:00000001 [INF] Executed DbCommand ("54"ms) [Parameters=["@__role_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"rc\".\"ClaimType\", \"rc\".\"ClaimValue\"
+FROM \"AspNetRoleClaims\" AS \"rc\"
+WHERE \"rc\".\"RoleId\" = @__role_Id_0" (0723d8ff)
+2018-06-18T11:22:17.8268145+02:00 0HLEKVJTKABS8:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-18T11:22:17.9939172+02:00 0HLEKVJTKABS8:00000001 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-18T11:22:18.0223795+02:00 0HLEKVJTKABS8:00000001 [INF] Executing action method "API.Controllers.AuthenticationController.CheckRole (API)" with arguments (["test@test.nl"]) - ModelState is Valid (ba7f4ac2)
+2018-06-18T11:22:21.6937368+02:00 0HLEKVJTKABS8:00000001 [INF] ::1:  (fa7df339)
+2018-06-18T11:22:22.6065239+02:00 0HLEKVJTKABS8:00000001 [INF] Executed DbCommand ("63"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"u\".\"Id\", \"u\".\"AccessFailedCount\", \"u\".\"ConcurrencyStamp\", \"u\".\"Delete\", \"u\".\"Email\", \"u\".\"EmailConfirmed\", \"u\".\"LockoutEnabled\", \"u\".\"LockoutEnd\", \"u\".\"NormalizedEmail\", \"u\".\"NormalizedUserName\", \"u\".\"PasswordHash\", \"u\".\"PhoneNumber\", \"u\".\"PhoneNumberConfirmed\", \"u\".\"SecurityStamp\", \"u\".\"TwoFactorEnabled\", \"u\".\"UserName\"
+FROM \"AspNetUsers\" AS \"u\"
+WHERE \"u\".\"NormalizedUserName\" = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2018-06-18T11:22:23.9105986+02:00 0HLEKVJTKABS8:00000001 [INF] Executed DbCommand ("41"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"role\".\"Name\"
+FROM \"AspNetUserRoles\" AS \"userRole\"
+INNER JOIN \"AspNetRoles\" AS \"role\" ON \"userRole\".\"RoleId\" = \"role\".\"Id\"
+WHERE \"userRole\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-18T11:22:26.1992681+02:00 0HLEKVJTKABS8:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-18T11:22:26.2142969+02:00  [WRN] Heartbeat took longer than "00:00:01" at "06/18/2018 09:22:25 +00:00". (439152bf)
+2018-06-18T11:22:26.2589728+02:00 0HLEKVJTKABS8:00000001 [INF] Executed action "API.Controllers.AuthenticationController.CheckRole (API)" in 8268.8102ms (afa2e885)
+2018-06-18T11:22:26.2672098+02:00 0HLEKVJTKABS8:00000001 [INF] Request finished in 10653.0022ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-18T11:24:32.6893516+02:00 0HLEKVL6FHKDT:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/authentication/checkrole/test@test.nl application/json  (ca22a1cb)
+2018-06-18T11:24:32.9373659+02:00 0HLEKVL6FHKDT:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-18T11:24:33.1495857+02:00 0HLEKVL6FHKDT:00000001 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-18T11:24:33.1791064+02:00 0HLEKVL6FHKDT:00000001 [INF] Executing action method "API.Controllers.AuthenticationController.CheckRole (API)" with arguments (["test@test.nl"]) - ModelState is Valid (ba7f4ac2)
+2018-06-18T11:24:43.5744370+02:00 0HLEKVL6FHKDT:00000001 [INF] ::1:  (fa7df339)
+2018-06-18T11:31:15.6997068+02:00 0HLEKVL6FHKDT:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-18T11:31:16.3896773+02:00 0HLEKVL6FHKDT:00000001 [INF] Executed DbCommand ("45"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"u\".\"Id\", \"u\".\"AccessFailedCount\", \"u\".\"ConcurrencyStamp\", \"u\".\"Delete\", \"u\".\"Email\", \"u\".\"EmailConfirmed\", \"u\".\"LockoutEnabled\", \"u\".\"LockoutEnd\", \"u\".\"NormalizedEmail\", \"u\".\"NormalizedUserName\", \"u\".\"PasswordHash\", \"u\".\"PhoneNumber\", \"u\".\"PhoneNumberConfirmed\", \"u\".\"SecurityStamp\", \"u\".\"TwoFactorEnabled\", \"u\".\"UserName\"
+FROM \"AspNetUsers\" AS \"u\"
+WHERE \"u\".\"NormalizedUserName\" = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2018-06-18T11:31:16.6278016+02:00 0HLEKVL6FHKDT:00000001 [INF] Executed DbCommand ("75"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"role\".\"Name\"
+FROM \"AspNetUserRoles\" AS \"userRole\"
+INNER JOIN \"AspNetRoles\" AS \"role\" ON \"userRole\".\"RoleId\" = \"role\".\"Id\"
+WHERE \"userRole\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-18T11:31:16.8528911+02:00 0HLEKVL6FHKDT:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-18T11:31:16.8799399+02:00 0HLEKVL6FHKDT:00000001 [INF] Executed action "API.Controllers.AuthenticationController.CheckRole (API)" in 403732.5331ms (afa2e885)
+2018-06-18T11:31:16.8871359+02:00 0HLEKVL6FHKDT:00000001 [INF] Request finished in 404202.822ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-18T11:46:26.0776052+02:00 0HLEKVL6FHKDT:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/authentication/checkrole/test@test.nl application/json  (ca22a1cb)
+2018-06-18T11:46:26.0873985+02:00 0HLEKVL6FHKDT:00000002 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-18T11:46:26.0882177+02:00 0HLEKVL6FHKDT:00000002 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-18T11:46:26.0963678+02:00 0HLEKVL6FHKDT:00000002 [INF] Executing action method "API.Controllers.AuthenticationController.CheckRole (API)" with arguments (["test@test.nl"]) - ModelState is Valid (ba7f4ac2)
+2018-06-18T11:48:49.5928252+02:00 0HLEL02OLCVSO:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/authentication/checkrole/test@test.nl application/json  (ca22a1cb)
+2018-06-18T11:48:49.8282318+02:00 0HLEL02OLCVSO:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-18T11:48:50.0400746+02:00 0HLEL02OLCVSO:00000001 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-18T11:48:50.0767265+02:00 0HLEL02OLCVSO:00000001 [INF] Executing action method "API.Controllers.AuthenticationController.CheckRole (API)" with arguments (["test@test.nl"]) - ModelState is Valid (ba7f4ac2)
+2018-06-18T11:48:58.5522375+02:00 0HLEL02OLCVSO:00000001 [INF] ::1: http://localhost:5000/authentication/checkrole/test@test.nl (7a1e9f5c)
+2018-06-18T11:49:06.3619177+02:00 0HLEL02OLCVSO:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-18T11:49:07.0835583+02:00 0HLEL02OLCVSO:00000001 [INF] Executed DbCommand ("43"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"u\".\"Id\", \"u\".\"AccessFailedCount\", \"u\".\"ConcurrencyStamp\", \"u\".\"Delete\", \"u\".\"Email\", \"u\".\"EmailConfirmed\", \"u\".\"LockoutEnabled\", \"u\".\"LockoutEnd\", \"u\".\"NormalizedEmail\", \"u\".\"NormalizedUserName\", \"u\".\"PasswordHash\", \"u\".\"PhoneNumber\", \"u\".\"PhoneNumberConfirmed\", \"u\".\"SecurityStamp\", \"u\".\"TwoFactorEnabled\", \"u\".\"UserName\"
+FROM \"AspNetUsers\" AS \"u\"
+WHERE \"u\".\"NormalizedUserName\" = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2018-06-18T11:49:07.3018378+02:00 0HLEL02OLCVSO:00000001 [INF] Executed DbCommand ("39"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"role\".\"Name\"
+FROM \"AspNetUserRoles\" AS \"userRole\"
+INNER JOIN \"AspNetRoles\" AS \"role\" ON \"userRole\".\"RoleId\" = \"role\".\"Id\"
+WHERE \"userRole\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-18T11:49:07.4788977+02:00 0HLEL02OLCVSO:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-18T11:49:07.5027186+02:00 0HLEL02OLCVSO:00000001 [INF] Executed action "API.Controllers.AuthenticationController.CheckRole (API)" in 17466.3238ms (afa2e885)
+2018-06-18T11:49:07.5090976+02:00 0HLEL02OLCVSO:00000001 [INF] Request finished in 17920.9035ms 200 application/json; charset=utf-8 (791a596a)
