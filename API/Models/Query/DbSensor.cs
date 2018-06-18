@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace API.Models.Data.Query
 {
+    //Database class for all sensors managing
     public class DbSensor : IDbSensor
     {
         private ApplicationDbContext _dbContext;

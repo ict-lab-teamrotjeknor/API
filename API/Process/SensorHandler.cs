@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace API.Process
 {
+    //This class handles every sensors
     public class SensorHandler
     {
         private IDbSensor _dbSensor;
@@ -28,6 +29,7 @@ namespace API.Process
             Deployment = false;
         }
 
+        //Add a new sensor to the pi
         public JObject AddSensor(JObject sensor)
         {
             var newsensor = _jsonEditor.GetSensor(sensor);
@@ -46,6 +48,7 @@ namespace API.Process
             }
         }
 
+        //Add new data to a sensor
         public JObject AddData(NewSensorData data)
         {
             var sensor = _dbSensor.GetSensor(data.Name, data.Room);
@@ -61,6 +64,7 @@ namespace API.Process
             }
         }
 
+        //Get every sensor of a room
         public JObject GetSensors(string roomName)
         {
             var sensors = _dbSensor.GetSensors(roomName);
@@ -70,6 +74,7 @@ namespace API.Process
             return _jsonEditor.SerilizeJObject(allSensors);
         }
 
+        //Get every data of a sensor
         public JObject GetData(string roomName, string sensorName)
         {
             var sensor = _dbSensor.GetSensor(sensorName, roomName);

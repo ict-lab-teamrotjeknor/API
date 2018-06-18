@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace API.Models.Data.Query
 {
+    //Database class for the agenda
     public class DbAgenda : IDbAgenda
     {
         private ApplicationDbContext _dbContext;

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace API.Models.Data.Query
 {
+    //Database class for the manage all components 
     public class DbManage : IDbManage
     {
         private ApplicationDbContext _dbContext;

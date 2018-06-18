@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Models.Data
 {
+    //Structure of the database
     public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

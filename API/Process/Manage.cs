@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 
 namespace API.Process
 {
+    //This class handles every componates
     public class Manage
     {
         private IDbManage _dbManage;
@@ -24,12 +25,14 @@ namespace API.Process
             Deployment = newDeployemnt;
         } 
         
+        //Get all classrooms
         public JObject FindAllClassrooms()
         {
             var classrooms = _dbManage.GetAllClassrooms();
             return _jsonEditor.MakeClassrooms(classrooms);
         }
-
+        
+        //Register a PI
         public JObject AddPi(NewPI newPi)
         {
             var pi = _dbManage.GetPi(newPi);
@@ -55,6 +58,7 @@ namespace API.Process
             }
         }
 
+        //Get Users
         public JObject GetUsers()
         {
             var users = _dbManage.GetUsers();
@@ -71,16 +75,19 @@ namespace API.Process
             return _jsonEditor.SerilizeJObject(allUsers);
         }
 
+        //Send Notifications
         public JObject SendNotification()
         {
             return _jsonEditor.GetSucced();
         }
-
+        
+        //Send Notifications group
         public JObject SendGroupNotification()
         {
             return _jsonEditor.GetSucced();
         }
 
+        //Get all Notifications
         public JObject GetNotifications()
         {
             var allNotifications = new Notifications();

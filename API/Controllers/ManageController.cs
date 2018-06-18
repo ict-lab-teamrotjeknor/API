@@ -12,6 +12,7 @@ using Newtonsoft.Json.Linq;
 
 namespace API.Controllers
 {
+    //Controls every components
     [Route("[controller]")]
     public class ManageController : Controller
     {
@@ -27,6 +28,7 @@ namespace API.Controllers
             _logger = logger;
         }
         
+        //Get all rooms
         [HttpGet("getallrooms")]
         public JObject GetAllClassrooms()
         {
@@ -34,6 +36,7 @@ namespace API.Controllers
             return _manage.FindAllClassrooms();
         }
         
+        //Add a pi to a room
         [Authorize(Roles = "Admin")]
         [HttpPost("add/pi")]
         public JObject AddPI([FromBody] JObject newPi)
@@ -46,6 +49,7 @@ namespace API.Controllers
             return sendBack;
         }
 
+        //Get all users
         [Authorize(Roles = "Admin")]
         [HttpGet("getusers")]
         public JObject GetUsers()
@@ -54,6 +58,7 @@ namespace API.Controllers
             return _manage.GetUsers();
         }
 
+        //Send a notification to a group
         [HttpPost("sendnotificationgroup")]
         public JObject SendGroupNotification([FromBody] JObject notification)
         {
@@ -63,6 +68,7 @@ namespace API.Controllers
             return sendBack;
         }
         
+        //Send a notifcation to a member
         [Authorize(Roles = "Admin")]
         [HttpPost("sendnotification")]
         public JObject SendSingleNotification([FromBody] JObject notification)
@@ -73,6 +79,7 @@ namespace API.Controllers
             return sendBack;
         }
 
+        //Get all notifications
         [HttpGet("notifications")]
         public JObject GetNotifications()
         {

@@ -16,6 +16,7 @@ using Newtonsoft.Json.Linq;
 
 namespace API.Process
 {
+    //Handles all users and authentications
     public class Authentication
     {
         private readonly UserManager<User> _userManager;
@@ -49,6 +50,7 @@ namespace API.Process
             _json = newJson;
         }
         
+        //Make users
         public async Task<JObject> SignUp(Account newAccount)
         {
             var user = new User { Email = newAccount.Email, UserName = newAccount.Email};
@@ -66,6 +68,7 @@ namespace API.Process
             return messsageBack;
         }
 
+        //Login the users
         public async Task<JObject> SignIn(Account account)
         {
             var access = false;
@@ -94,6 +97,7 @@ namespace API.Process
             return _json.SerilizeJObject(possibleError);
         }
 
+        //Make standard roles first time
         public async Task<JObject> CreateRoleAdminAndStudent()
         {   
             var exists = await _roleManager.RoleExistsAsync("Admin");
@@ -126,6 +130,7 @@ namespace API.Process
             return _json.GetSucced();
         }
 
+        //Create a now role
         public async Task<JObject> AddNewRole(JObject newRole)
         {
             var role = _json.GetRole(newRole);
@@ -144,6 +149,7 @@ namespace API.Process
             return _json.GetSucced();
         }
 
+        //Change somebodies role
         public async Task<JObject> ChangeRole(JObject changeRole)
         {
             var role = _json.GetRole(changeRole);
@@ -176,6 +182,7 @@ namespace API.Process
             }
         }
 
+        //Disable a account
         public async Task<JObject> DeleteAccount(Account deleteAccount)
         {
             var result = _dbManage.DeleteUser(deleteAccount);
@@ -191,7 +198,7 @@ namespace API.Process
             
         }
 
-
+        //Check somebodies role
         public async Task<JObject> CheckRole(string UserEmail)
         {
             var user = await _userManager.FindByNameAsync(UserEmail);

@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 
 namespace API.Process.Model
 {
+    //This class handles every json files
+    //The get methodes set Json to Objects
     public class JsonEditor : IJsonEditor
     {
         private ILogger _logger;
@@ -40,6 +42,7 @@ namespace API.Process.Model
             return new Account();
         }
 
+        //Sets every object to json
         public JObject SerilizeJObject(Object serilizeObject)
         {
             try
@@ -170,6 +173,7 @@ namespace API.Process.Model
             return sensor["Room"].ToString();
         }
         
+        //Create an error in json format
         public JObject GetError(string errorMessage)
         {
             var error = new ErrorMessage();
@@ -178,6 +182,7 @@ namespace API.Process.Model
             return SerilizeJObject(error);
         }
 
+        //Create an succeed in json format
         public JObject GetSucced()
         {
             var error = new ErrorMessage();

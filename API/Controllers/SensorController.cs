@@ -23,6 +23,7 @@ namespace API.Controllers
             _logger = logger;
         }
         
+        //Add new sensor
         [HttpPost("addnewsensor")]
         public JObject AddNewSensor([FromBody] JObject newSensor)
         {
@@ -31,6 +32,7 @@ namespace API.Controllers
             return sendBack;
         }
         
+        //Get all sensors of a room
         [HttpGet("getallsensors/{roomName}")]
         public JObject GetAllSensors(string roomName)
         {
@@ -39,6 +41,7 @@ namespace API.Controllers
             return sendBack;
         }
         
+        //Get all data from de sensor of a room
         [HttpGet("getsensordata/{roomName}/{sensorName}")]
         public JObject GetSensorData(string roomName, string sensorName)
         {
@@ -47,6 +50,7 @@ namespace API.Controllers
             return sendBack;
         }
         
+        //Upload Data
         [HttpPost("adddata")]
         public JObject AddNewSensorData([FromBody] JObject newData)
         {

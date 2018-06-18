@@ -6,6 +6,7 @@ using API.Models.Data;
 using API.Models.Data.Query;
 using API.Process.Model;
 using API.Process.Model.Agenda;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using Day = API.Models.Data.Day;
@@ -13,6 +14,7 @@ using Hour = API.Models.Data.Hour;
 
 namespace API.Process
 {
+    //It's class for handeling data for the agenda
     public class Agenda 
     {
         private IDbAgenda _dbAgenda;
@@ -35,6 +37,7 @@ namespace API.Process
             _jsonEditor = jsonEditor;
         }
         
+        //Upload a new week
         public JObject Upload(JObject newWeek)
         {
             var schedule = _jsonEditor.GetSchedule(newWeek);
@@ -43,6 +46,7 @@ namespace API.Process
             return _jsonEditor.GetSucced();
         }
 
+        //Upload a new hour && checked if it already exists
         public JObject NewHour(JObject newHour)
         {
             var sendBack = new JObject();
@@ -72,6 +76,7 @@ namespace API.Process
             return sendBack;
         }
 
+        //Get a week of a room
         public JObject GetWeek(string roomName, int year, int weekNumber)
         {
             var classroom = _dbAgenda.GetClassroom(roomName);
@@ -97,6 +102,7 @@ namespace API.Process
             }
         }
 
+        //Get All days of personal resovations
         public JObject GetPersonalReservations(string userId)
         {
             var days = _dbAgenda.GetReservations(userId);
@@ -106,6 +112,7 @@ namespace API.Process
             return sendBack;
         }
         
+        //Get all details of one day of persional resesvationts
         public JObject GetPersonalReservations(string userId, string day)
         {
             day = day + " 00:00:00,000";
@@ -118,6 +125,7 @@ namespace API.Process
             return sendBack;
         }
 
+        //Get All days
         private Schedule GetDays(Schedule schedule, Week week)
         {
             var days = _dbAgenda.GetDays(week.Id);
@@ -134,6 +142,7 @@ namespace API.Process
             return schedule;
         }
 
+        //Get all hours
         private Schedule GetHours(Schedule schedule, int currentDay , Day day)
         {
             var hours = _dbAgenda.GetHours(day.Id);
@@ -148,6 +157,7 @@ namespace API.Process
             return schedule;
         }
 
+        //Make classroom from hint
         private void NewClassroom(Schedule newSchedule)
         {
             var newRoom = new Classroom();
@@ -167,6 +177,7 @@ namespace API.Process
             NewYear(newSchedule, newRoom.Id);
         }
 
+        //Make year from hint
         private void NewYear(Schedule newSchedule, string roomId)
         {
             var newYear = new Year();
@@ -188,6 +199,7 @@ namespace API.Process
             NewPeriod(newSchedule, newYear.Id);
         }
 
+        //Make period from hint
         private void NewPeriod(Schedule newSchedule, string yearId)
         {
             var newPeriod = new Period();
@@ -209,6 +221,7 @@ namespace API.Process
             NewWeek(newSchedule, newPeriod.Id);
         }
 
+        //Make week from hint
         private void NewWeek(Schedule newSchedule, string periodId)
         {
             var newWeek = new Week();
@@ -240,6 +253,7 @@ namespace API.Process
             
         }
 
+        //Make day from hint
         private void NewDay(MDay currentMDay, string weekId, DateTime dayWeek)
         {
             var newDay = new Day();
@@ -266,6 +280,7 @@ namespace API.Process
             
         }
 
+        //Make hour from hint
         private void NewHour(MHour currentMHour, string dayId)
         {
             var newHour = new Hour();
@@ -279,6 +294,7 @@ namespace API.Process
             _dbAgenda.SaveHour(newHour);
         }
         
+        // Remove the zero data
         private Schedule RemoveZeroHours(Schedule schedule)
         {
             var newSchedule = schedule;
@@ -292,6 +308,7 @@ namespace API.Process
             return newSchedule;
         }
 
+        // Remove the zero data
         private MDay RemoveZeroHoursDay(MDay currentDay)
         {
             var newDay = currentDay;

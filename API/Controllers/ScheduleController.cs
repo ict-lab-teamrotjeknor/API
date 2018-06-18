@@ -32,6 +32,7 @@ namespace API.Controllers
 
         }
         
+        //Upload a new week from hint
         [HttpPost("uploadnewweek")]
         public JObject UploadWeek([FromBody] JObject weekSchedule)
         {
@@ -41,7 +42,7 @@ namespace API.Controllers
             return sendBack;
         }
 
-        
+        //Get a week from a room
         [HttpGet("getweek/{roomId}/{year}/{weekNumber}")]
         public JObject GetWeek(string roomId, int year, int weeknumber)
         {
@@ -50,6 +51,7 @@ namespace API.Controllers
             return sendBack;
         }
 
+        //upload a hour to a room
         [HttpPost("uploadhour")]
         public JObject UploadHour([FromBody] JObject hourSchedule)
         {
@@ -58,6 +60,7 @@ namespace API.Controllers
             return sendBack;
         }
 
+        //Get all days of personal users
         [HttpGet("getuserreservations")]
         public JObject GetUserReservations()
         {
@@ -67,6 +70,7 @@ namespace API.Controllers
             return sendBack;
         }
 
+        //Get detail days of personal users
         [HttpGet("getuserreservations/{day}")]
         public JObject GetUserReservations(string day)
         {

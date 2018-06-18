@@ -16,6 +16,7 @@ using Newtonsoft.Json.Linq;
 
 namespace API.Controllers
 {
+    //It's a controller for all authentications of users
     [Authorize]
     [Route("[controller]")]
     public class AuthenticationController : Controller
@@ -36,6 +37,7 @@ namespace API.Controllers
             _logger = logger;
         }
         
+        //Make a new account
         [AllowAnonymous]
         [HttpPost("signup")]
         public async Task<JObject> SignUp([FromBody] JObject createAccount)
@@ -46,6 +48,7 @@ namespace API.Controllers
             return await messageBack;
         }
         
+        //Inloggen
         [AllowAnonymous]
         [HttpPost("signin")]
         public async Task<JObject> SignIn([FromBody] JObject loginAccount)
@@ -56,6 +59,7 @@ namespace API.Controllers
             return await messageBack;
         }
         
+        //Delete a user
         [Authorize(Roles = "Admin")]
         [HttpPost("deleteaccount")]
         public async Task<JObject> DeleteAccount([FromBody] JObject account)
@@ -66,6 +70,7 @@ namespace API.Controllers
             return messageBack;
         }
         
+        //Make a the standard roles
         [AllowAnonymous]
         [HttpGet("createroles")]
         public async Task<JObject> CreateRoles()
@@ -75,6 +80,7 @@ namespace API.Controllers
             return await messageBack;
         }
         
+        //Make a new role
         [Authorize(Roles = "Admin")]
         [HttpPost("addrole")]
         public async Task<JObject> AddRole([FromBody] JObject newRole)
@@ -84,6 +90,7 @@ namespace API.Controllers
             return await messageBack;
         }
         
+        //Change a userrole
         [Authorize(Roles = "Admin")]
         [HttpPost("changerole")]
         public async Task<JObject> ChangeRole([FromBody] JObject changeRole)
@@ -93,6 +100,7 @@ namespace API.Controllers
             return await messageBack;
         }
         
+        //CheckSomebodies role
         [HttpGet("checkrole/{username}")]
         public async Task<JObject> CheckRole(string username)
         {
@@ -101,6 +109,7 @@ namespace API.Controllers
             return await messageBack;
         }
 
+        //Safe actions from someone
         private void LogUrl()
         {
             var location = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}{Request.QueryString}");
