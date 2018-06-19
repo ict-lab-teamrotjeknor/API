@@ -13,5 +13,7 @@ namespace API.Models.Data.Query
         bool SavePi(NewPI newPi, string roomId);
         List<User> GetUsers();
         bool DeleteUser(Account deleteAccount);
+        bool SetNotifications();
+        bool GetNotifications();
     }
 }

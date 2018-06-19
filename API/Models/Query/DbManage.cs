@@ -95,5 +95,15 @@ namespace API.Models.Data.Query
 
             return true;
         }
+
+        public bool SetNotifications()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool GetNotifications()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -7,6 +7,7 @@ using API.Models.Data;
 using API.Process;
 using API.Process.Model;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.OData.Query.SemanticAst;
@@ -104,7 +105,8 @@ namespace API.Controllers
         [HttpGet("checkrole/{username}")]
         public async Task<JObject> CheckRole(string username)
         {
-            LogUrl();
+
+            LogUrl();;
             var messageBack = _authentication.CheckRole(username);
             return await messageBack;
         }
