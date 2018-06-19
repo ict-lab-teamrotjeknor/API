@@ -24,7 +24,7 @@ namespace UnitTest
         }
 
         [Fact]
-        public void UploadNewMonth()
+        public void UploadNewWeek()
         {
             var newSchedule = new Schedule();
             newSchedule.ClassroomName = "H.3.103";

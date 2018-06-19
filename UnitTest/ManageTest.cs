@@ -5,7 +5,7 @@ using Xunit;
 
 namespace UnitTest
 {
-    public class ManageTest
+        public class ManageTest
     {
         private Manage _manage;
 
