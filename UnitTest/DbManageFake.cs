@@ -57,5 +57,15 @@ namespace UnitTest
         {
             return true;
         }
+
+        public bool SetNotifications()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool GetNotifications()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

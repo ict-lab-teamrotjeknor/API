@@ -50,7 +50,6 @@ namespace API.Controllers
         }
 
         //Get all users
-        [Authorize(Roles = "Admin")]
         [HttpGet("getusers")]
         public JObject GetUsers()
         {

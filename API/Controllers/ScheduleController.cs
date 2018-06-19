@@ -22,7 +22,7 @@ namespace API.Controllers
         private readonly ILogger _logger;
 
         public ScheduleController(ApplicationDbContext dbContext, UserManager<User> userManager,
-            ILogger logger)
+            ILogger<ScheduleController> logger)
         {
             var dbAgenda = new DbAgenda(dbContext, logger);
             var jsonEditor = new JsonEditor(logger);

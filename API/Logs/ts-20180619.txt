@@ -1,0 +1,180 @@
+2018-06-19T20:52:45.3365468+02:00 0HLEM2NC2MKK7:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/schedule/getweek/H.1.308/2018/20 application/json  (ca22a1cb)
+2018-06-19T20:52:46.3982753+02:00 0HLEM2NC2MKK7:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-19T20:52:47.1593365+02:00 0HLEM2NC2MKK7:00000001 [INF] Executed DbCommand ("39"ms) [Parameters=["@__get_Item_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"e\".\"Id\", \"e\".\"AccessFailedCount\", \"e\".\"ConcurrencyStamp\", \"e\".\"Delete\", \"e\".\"Email\", \"e\".\"EmailConfirmed\", \"e\".\"LockoutEnabled\", \"e\".\"LockoutEnd\", \"e\".\"NormalizedEmail\", \"e\".\"NormalizedUserName\", \"e\".\"PasswordHash\", \"e\".\"PhoneNumber\", \"e\".\"PhoneNumberConfirmed\", \"e\".\"SecurityStamp\", \"e\".\"TwoFactorEnabled\", \"e\".\"UserName\"
+FROM \"AspNetUsers\" AS \"e\"
+WHERE \"e\".\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-06-19T20:52:47.3769248+02:00 0HLEM2NC2MKK7:00000001 [INF] Executed DbCommand ("37"ms) [Parameters=["@__user_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"uc\".\"Id\", \"uc\".\"ClaimType\", \"uc\".\"ClaimValue\", \"uc\".\"UserId\"
+FROM \"AspNetUserClaims\" AS \"uc\"
+WHERE \"uc\".\"UserId\" = @__user_Id_0" (0723d8ff)
+2018-06-19T20:52:47.5063987+02:00 0HLEM2NC2MKK7:00000001 [INF] Executed DbCommand ("40"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"role\".\"Name\"
+FROM \"AspNetUserRoles\" AS \"userRole\"
+INNER JOIN \"AspNetRoles\" AS \"role\" ON \"userRole\".\"RoleId\" = \"role\".\"Id\"
+WHERE \"userRole\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-19T20:52:47.6341697+02:00 0HLEM2NC2MKK7:00000001 [INF] Executed DbCommand ("60"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2018-06-19T20:52:47.8238094+02:00 0HLEM2NC2MKK7:00000001 [INF] Executed DbCommand ("39"ms) [Parameters=["@__role_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"rc\".\"ClaimType\", \"rc\".\"ClaimValue\"
+FROM \"AspNetRoleClaims\" AS \"rc\"
+WHERE \"rc\".\"RoleId\" = @__role_Id_0" (0723d8ff)
+2018-06-19T20:52:47.8435124+02:00 0HLEM2NC2MKK7:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-19T20:52:48.7930522+02:00 0HLEM2NC2MKK7:00000001 [INF] Executed action "API.Controllers.ScheduleController.GetWeek (API)" in 755.8579ms (afa2e885)
+2018-06-19T20:52:49.2894713+02:00 0HLEM2NC2MKK7:00000001 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.InvalidOperationException: Unable to resolve service for type 'Microsoft.Extensions.Logging.ILogger' while attempting to activate 'API.Controllers.ScheduleController'.
+   at Microsoft.Extensions.Internal.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2018-06-19T20:52:49.4175964+02:00 0HLEM2NC2MKK7:00000001 [INF] Request finished in 4089.402ms 500 text/html; charset=utf-8 (791a596a)
+2018-06-19T20:53:44.3475855+02:00 0HLEM2NC2MKK7:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/schedule/getweek/H.1.308/2018/20 application/json  (ca22a1cb)
+2018-06-19T20:53:44.3522275+02:00 0HLEM2NC2MKK7:00000002 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-19T20:53:44.9614006+02:00 0HLEM2NC2MKK7:00000002 [INF] Executed action "API.Controllers.ScheduleController.GetWeek (API)" in 605.6671ms (afa2e885)
+2018-06-19T20:53:45.3634623+02:00 0HLEM2NC2MKK7:00000002 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.InvalidOperationException: Unable to resolve service for type 'Microsoft.Extensions.Logging.ILogger' while attempting to activate 'API.Controllers.ScheduleController'.
+   at Microsoft.Extensions.Internal.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2018-06-19T20:53:45.4399067+02:00 0HLEM2NC2MKK7:00000002 [INF] Request finished in 1070.6766ms 500 text/html; charset=utf-8 (791a596a)
+2018-06-19T20:54:53.1151581+02:00 0HLEM2OI57DPS:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/schedule/getweek/H.1.308/2018/20 application/json  (ca22a1cb)
+2018-06-19T20:54:53.3585972+02:00 0HLEM2OI57DPS:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-19T20:54:53.6098114+02:00 0HLEM2OI57DPS:00000001 [INF] Executing action method "API.Controllers.ScheduleController.GetWeek (API)" with arguments (["H.1.308", "2018", "20"]) - ModelState is Valid (ba7f4ac2)
+2018-06-19T20:54:57.5479972+02:00 0HLEM2OI57DPS:00000001 [INF] ::1: http://localhost:5000/schedule/getweek/H.1.308/2018/20 (d7f9e600)
+2018-06-19T20:54:58.2180807+02:00 0HLEM2OI57DPS:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-19T20:54:59.2052946+02:00 0HLEM2OI57DPS:00000001 [INF] Executed DbCommand ("22"ms) [Parameters=["@__classroomName_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"c\".\"Id\", \"c\".\"BuildingId\", \"c\".\"Name\", \"c\".\"PiID\"
+FROM \"Classrooms\" AS \"c\"
+WHERE \"c\".\"Name\" = @__classroomName_0
+LIMIT 2" (0723d8ff)
+2018-06-19T20:54:59.2909201+02:00 0HLEM2OI57DPS:00000001 [INF] Executed DbCommand ("4"ms) [Parameters=["@__year_0='?', @__roomId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"y\".\"Id\", \"y\".\"RoomId\", \"y\".\"SchoolYear\"
+FROM \"Years\" AS \"y\"
+WHERE (\"y\".\"SchoolYear\" = @__year_0) AND (\"y\".\"RoomId\" = @__roomId_1)
+LIMIT 2" (0723d8ff)
+2018-06-19T20:54:59.3293131+02:00 0HLEM2OI57DPS:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__periode_0='?', @__yearId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"p\".\"Id\", \"p\".\"PeriodNumber\", \"p\".\"ScheduleYearId\"
+FROM \"Periods\" AS \"p\"
+WHERE (\"p\".\"PeriodNumber\" = @__periode_0) AND (\"p\".\"ScheduleYearId\" = @__yearId_1)
+LIMIT 2" (0723d8ff)
+2018-06-19T20:54:59.3487290+02:00 0HLEM2OI57DPS:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__week_0='?', @__periodId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"w\".\"Id\", \"w\".\"EndWeek\", \"w\".\"SchedulePeriodId\", \"w\".\"StartWeek\", \"w\".\"WeekNumber\"
+FROM \"Weeks\" AS \"w\"
+WHERE (\"w\".\"WeekNumber\" = @__week_0) AND (\"w\".\"SchedulePeriodId\" = @__periodId_1)
+LIMIT 2" (0723d8ff)
+2018-06-19T20:54:59.3858466+02:00 0HLEM2OI57DPS:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__weekId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d\".\"Id\", \"d\".\"Date\", \"d\".\"WeekDay\", \"d\".\"WeekId\"
+FROM \"Days\" AS \"d\"
+WHERE \"d\".\"WeekId\" = @__weekId_0" (0723d8ff)
+2018-06-19T20:54:59.4051993+02:00 0HLEM2OI57DPS:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=["@__dayId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"h\".\"Id\", \"h\".\"Class\", \"h\".\"Course\", \"h\".\"ScheduleDayId\", \"h\".\"ShortName\", \"h\".\"UserId\", \"h\".\"which\"
+FROM \"Hours\" AS \"h\"
+WHERE \"h\".\"ScheduleDayId\" = @__dayId_0" (0723d8ff)
+2018-06-19T20:54:59.4181624+02:00 0HLEM2OI57DPS:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__dayId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"h\".\"Id\", \"h\".\"Class\", \"h\".\"Course\", \"h\".\"ScheduleDayId\", \"h\".\"ShortName\", \"h\".\"UserId\", \"h\".\"which\"
+FROM \"Hours\" AS \"h\"
+WHERE \"h\".\"ScheduleDayId\" = @__dayId_0" (0723d8ff)
+2018-06-19T20:54:59.4191842+02:00 0HLEM2OI57DPS:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__dayId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"h\".\"Id\", \"h\".\"Class\", \"h\".\"Course\", \"h\".\"ScheduleDayId\", \"h\".\"ShortName\", \"h\".\"UserId\", \"h\".\"which\"
+FROM \"Hours\" AS \"h\"
+WHERE \"h\".\"ScheduleDayId\" = @__dayId_0" (0723d8ff)
+2018-06-19T20:54:59.4202368+02:00 0HLEM2OI57DPS:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__dayId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"h\".\"Id\", \"h\".\"Class\", \"h\".\"Course\", \"h\".\"ScheduleDayId\", \"h\".\"ShortName\", \"h\".\"UserId\", \"h\".\"which\"
+FROM \"Hours\" AS \"h\"
+WHERE \"h\".\"ScheduleDayId\" = @__dayId_0" (0723d8ff)
+2018-06-19T20:54:59.4212159+02:00 0HLEM2OI57DPS:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__dayId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"h\".\"Id\", \"h\".\"Class\", \"h\".\"Course\", \"h\".\"ScheduleDayId\", \"h\".\"ShortName\", \"h\".\"UserId\", \"h\".\"which\"
+FROM \"Hours\" AS \"h\"
+WHERE \"h\".\"ScheduleDayId\" = @__dayId_0" (0723d8ff)
+2018-06-19T20:54:59.5660058+02:00 0HLEM2OI57DPS:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-19T20:54:59.5931957+02:00 0HLEM2OI57DPS:00000001 [INF] Executed action "API.Controllers.ScheduleController.GetWeek (API)" in 6018.9955ms (afa2e885)
+2018-06-19T20:54:59.5998634+02:00 0HLEM2OI57DPS:00000001 [INF] Request finished in 6489.5103ms 200 application/json; charset=utf-8 (791a596a)
