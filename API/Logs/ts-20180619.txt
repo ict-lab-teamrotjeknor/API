@@ -178,3 +178,66 @@ WHERE \"h\".\"ScheduleDayId\" = @__dayId_0" (0723d8ff)
 2018-06-19T20:54:59.5660058+02:00 0HLEM2OI57DPS:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
 2018-06-19T20:54:59.5931957+02:00 0HLEM2OI57DPS:00000001 [INF] Executed action "API.Controllers.ScheduleController.GetWeek (API)" in 6018.9955ms (afa2e885)
 2018-06-19T20:54:59.5998634+02:00 0HLEM2OI57DPS:00000001 [INF] Request finished in 6489.5103ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-19T21:47:20.3798106+02:00 0HLEM3LS3STID:00000001 [INF] Request starting HTTP/1.1 POST http://localhost:5000/authentication/signin application/json 62 (ca22a1cb)
+2018-06-19T21:47:21.3793337+02:00 0HLEM3LS3STID:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-19T21:47:22.0994927+02:00 0HLEM3LS3STID:00000001 [INF] Executed DbCommand ("47"ms) [Parameters=["@__get_Item_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"e\".\"Id\", \"e\".\"AccessFailedCount\", \"e\".\"ConcurrencyStamp\", \"e\".\"Delete\", \"e\".\"Email\", \"e\".\"EmailConfirmed\", \"e\".\"LockoutEnabled\", \"e\".\"LockoutEnd\", \"e\".\"NormalizedEmail\", \"e\".\"NormalizedUserName\", \"e\".\"PasswordHash\", \"e\".\"PhoneNumber\", \"e\".\"PhoneNumberConfirmed\", \"e\".\"SecurityStamp\", \"e\".\"TwoFactorEnabled\", \"e\".\"UserName\"
+FROM \"AspNetUsers\" AS \"e\"
+WHERE \"e\".\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-06-19T21:47:22.3295792+02:00 0HLEM3LS3STID:00000001 [INF] Executed DbCommand ("36"ms) [Parameters=["@__user_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"uc\".\"Id\", \"uc\".\"ClaimType\", \"uc\".\"ClaimValue\", \"uc\".\"UserId\"
+FROM \"AspNetUserClaims\" AS \"uc\"
+WHERE \"uc\".\"UserId\" = @__user_Id_0" (0723d8ff)
+2018-06-19T21:47:22.4206053+02:00 0HLEM3LS3STID:00000001 [INF] Executed DbCommand ("18"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"role\".\"Name\"
+FROM \"AspNetUserRoles\" AS \"userRole\"
+INNER JOIN \"AspNetRoles\" AS \"role\" ON \"userRole\".\"RoleId\" = \"role\".\"Id\"
+WHERE \"userRole\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-19T21:47:22.5300504+02:00 0HLEM3LS3STID:00000001 [INF] Executed DbCommand ("39"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2018-06-19T21:47:22.6921516+02:00 0HLEM3LS3STID:00000001 [INF] Executed DbCommand ("41"ms) [Parameters=["@__role_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"rc\".\"ClaimType\", \"rc\".\"ClaimValue\"
+FROM \"AspNetRoleClaims\" AS \"rc\"
+WHERE \"rc\".\"RoleId\" = @__role_Id_0" (0723d8ff)
+2018-06-19T21:47:22.7040033+02:00 0HLEM3LS3STID:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-19T21:47:23.0319886+02:00 0HLEM3LS3STID:00000001 [INF] Executing action method "API.Controllers.AuthenticationController.SignIn (API)" with arguments (["{
+  \"email\": \"Admin@admin.nl\",
+  \"password\": \"Test1234:)\"
+}"]) - ModelState is Valid (ba7f4ac2)
+2018-06-19T21:47:23.0363682+02:00 0HLEM3LS3STID:00000001 [INF] ::1: http://localhost:5000/authentication/signin (05bc2b84)
+2018-06-19T21:47:29.4046974+02:00 0HLEM3LS3STID:00000001 [INF] Executed DbCommand ("25"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"u\".\"Id\", \"u\".\"AccessFailedCount\", \"u\".\"ConcurrencyStamp\", \"u\".\"Delete\", \"u\".\"Email\", \"u\".\"EmailConfirmed\", \"u\".\"LockoutEnabled\", \"u\".\"LockoutEnd\", \"u\".\"NormalizedEmail\", \"u\".\"NormalizedUserName\", \"u\".\"PasswordHash\", \"u\".\"PhoneNumber\", \"u\".\"PhoneNumberConfirmed\", \"u\".\"SecurityStamp\", \"u\".\"TwoFactorEnabled\", \"u\".\"UserName\"
+FROM \"AspNetUsers\" AS \"u\"
+WHERE \"u\".\"NormalizedUserName\" = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2018-06-19T21:47:29.5901459+02:00 0HLEM3LS3STID:00000001 [INF] Executed DbCommand ("96"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"u\".\"Id\", \"u\".\"AccessFailedCount\", \"u\".\"ConcurrencyStamp\", \"u\".\"Delete\", \"u\".\"Email\", \"u\".\"EmailConfirmed\", \"u\".\"LockoutEnabled\", \"u\".\"LockoutEnd\", \"u\".\"NormalizedEmail\", \"u\".\"NormalizedUserName\", \"u\".\"PasswordHash\", \"u\".\"PhoneNumber\", \"u\".\"PhoneNumberConfirmed\", \"u\".\"SecurityStamp\", \"u\".\"TwoFactorEnabled\", \"u\".\"UserName\"
+FROM \"AspNetUsers\" AS \"u\"
+WHERE \"u\".\"NormalizedUserName\" = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2018-06-19T21:47:29.7188062+02:00 0HLEM3LS3STID:00000001 [INF] Executed DbCommand ("36"ms) [Parameters=["@__user_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"uc\".\"Id\", \"uc\".\"ClaimType\", \"uc\".\"ClaimValue\", \"uc\".\"UserId\"
+FROM \"AspNetUserClaims\" AS \"uc\"
+WHERE \"uc\".\"UserId\" = @__user_Id_0" (0723d8ff)
+2018-06-19T21:47:29.8971622+02:00 0HLEM3LS3STID:00000001 [INF] Executed DbCommand ("80"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"role\".\"Name\"
+FROM \"AspNetUserRoles\" AS \"userRole\"
+INNER JOIN \"AspNetRoles\" AS \"role\" ON \"userRole\".\"RoleId\" = \"role\".\"Id\"
+WHERE \"userRole\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-19T21:47:30.1224036+02:00 0HLEM3LS3STID:00000001 [INF] Executed DbCommand ("74"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2018-06-19T21:47:30.2688959+02:00 0HLEM3LS3STID:00000001 [INF] Executed DbCommand ("38"ms) [Parameters=["@__role_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"rc\".\"ClaimType\", \"rc\".\"ClaimValue\"
+FROM \"AspNetRoleClaims\" AS \"rc\"
+WHERE \"rc\".\"RoleId\" = @__role_Id_0" (0723d8ff)
+2018-06-19T21:47:30.3669621+02:00 0HLEM3LS3STID:00000001 [INF] AuthenticationScheme: "Identity.Application" signed in. (c66dd7e7)
+2018-06-19T21:47:30.3919107+02:00 0HLEM3LS3STID:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-19T21:47:30.4146478+02:00 0HLEM3LS3STID:00000001 [INF] Executed action "API.Controllers.AuthenticationController.SignIn (API)" in 7519.1892ms (afa2e885)
+2018-06-19T21:47:30.4231890+02:00 0HLEM3LS3STID:00000001 [INF] Request finished in 10052.6077ms 200 application/json; charset=utf-8 (791a596a)

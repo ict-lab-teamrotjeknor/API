@@ -1,0 +1,289 @@
+2018-06-24T21:08:25.1203550+02:00  [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-24T21:08:50.4907245+02:00  [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-24T21:08:50.8278045+02:00  [INF] Executed DbCommand ("30"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');" (0723d8ff)
+2018-06-24T21:08:50.8409510+02:00  [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');" (0723d8ff)
+2018-06-24T21:08:50.8499684+02:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"MigrationId\", \"ProductVersion\"
+FROM \"__EFMigrationsHistory\"
+ORDER BY \"MigrationId\";" (0723d8ff)
+2018-06-24T21:08:50.8661594+02:00  [INF] Applying migration '"20180624190825_ictlabV8"'. (0e2ac64d)
+2018-06-24T21:08:50.9612781+02:00  [INF] Executed DbCommand ("26"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE \"Notification\" (
+    \"Id\" text NOT NULL,
+    \"Message\" text NULL,
+    CONSTRAINT \"PK_Notification\" PRIMARY KEY (\"Id\")
+);" (0723d8ff)
+2018-06-24T21:08:50.9769937+02:00  [INF] Executed DbCommand ("15"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE \"NotificationUser\" (
+    \"Id\" text NOT NULL,
+    \"New\" bool NOT NULL,
+    \"NotificationId\" text NULL,
+    \"UserId\" text NULL,
+    CONSTRAINT \"PK_NotificationUser\" PRIMARY KEY (\"Id\"),
+    CONSTRAINT \"FK_NotificationUser_Notification_NotificationId\" FOREIGN KEY (\"NotificationId\") REFERENCES \"Notification\" (\"Id\") ON DELETE RESTRICT,
+    CONSTRAINT \"FK_NotificationUser_AspNetUsers_UserId\" FOREIGN KEY (\"UserId\") REFERENCES \"AspNetUsers\" (\"Id\") ON DELETE RESTRICT
+);" (0723d8ff)
+2018-06-24T21:08:50.9811051+02:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX \"IX_NotificationUser_NotificationId\" ON \"NotificationUser\" (\"NotificationId\");" (0723d8ff)
+2018-06-24T21:08:50.9845034+02:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX \"IX_NotificationUser_UserId\" ON \"NotificationUser\" (\"UserId\");" (0723d8ff)
+2018-06-24T21:08:50.9851572+02:00  [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"__EFMigrationsHistory\" (\"MigrationId\", \"ProductVersion\")
+VALUES ('20180624190825_ictlabV8', '2.0.2-rtm-10011');" (0723d8ff)
+2018-06-24T21:37:52.6198612+02:00 0HLEQ17SUAMUC:00000001 [INF] Request starting HTTP/1.1 POST http://localhost:5000/manage/sendnotification application/json 58 (ca22a1cb)
+2018-06-24T21:37:53.5953705+02:00 0HLEQ17SUAMUC:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-24T21:37:54.2775083+02:00 0HLEQ17SUAMUC:00000001 [INF] Executed DbCommand ("43"ms) [Parameters=["@__get_Item_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"e\".\"Id\", \"e\".\"AccessFailedCount\", \"e\".\"ConcurrencyStamp\", \"e\".\"Delete\", \"e\".\"Email\", \"e\".\"EmailConfirmed\", \"e\".\"LockoutEnabled\", \"e\".\"LockoutEnd\", \"e\".\"NormalizedEmail\", \"e\".\"NormalizedUserName\", \"e\".\"PasswordHash\", \"e\".\"PhoneNumber\", \"e\".\"PhoneNumberConfirmed\", \"e\".\"SecurityStamp\", \"e\".\"TwoFactorEnabled\", \"e\".\"UserName\"
+FROM \"AspNetUsers\" AS \"e\"
+WHERE \"e\".\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-06-24T21:37:54.4940019+02:00 0HLEQ17SUAMUC:00000001 [INF] Executed DbCommand ("34"ms) [Parameters=["@__user_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"uc\".\"Id\", \"uc\".\"ClaimType\", \"uc\".\"ClaimValue\", \"uc\".\"UserId\"
+FROM \"AspNetUserClaims\" AS \"uc\"
+WHERE \"uc\".\"UserId\" = @__user_Id_0" (0723d8ff)
+2018-06-24T21:37:54.6166781+02:00 0HLEQ17SUAMUC:00000001 [INF] Executed DbCommand ("35"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"role\".\"Name\"
+FROM \"AspNetUserRoles\" AS \"userRole\"
+INNER JOIN \"AspNetRoles\" AS \"role\" ON \"userRole\".\"RoleId\" = \"role\".\"Id\"
+WHERE \"userRole\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-24T21:37:54.7078579+02:00 0HLEQ17SUAMUC:00000001 [INF] Executed DbCommand ("40"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2018-06-24T21:37:54.8523536+02:00 0HLEQ17SUAMUC:00000001 [INF] Executed DbCommand ("37"ms) [Parameters=["@__role_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"rc\".\"ClaimType\", \"rc\".\"ClaimValue\"
+FROM \"AspNetRoleClaims\" AS \"rc\"
+WHERE \"rc\".\"RoleId\" = @__role_Id_0" (0723d8ff)
+2018-06-24T21:37:54.9074787+02:00 0HLEQ17SUAMUC:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-24T21:37:55.2532284+02:00 0HLEQ17SUAMUC:00000001 [INF] Executing action method "API.Controllers.ManageController.SendSingleNotification (API)" with arguments (["{
+  \"UserName\": \"0879062@hr.nl\",
+  \"Message\": \"Test message\"
+}"]) - ModelState is Valid (ba7f4ac2)
+2018-06-24T21:37:55.2566806+02:00 0HLEQ17SUAMUC:00000001 [INF] ::1: http://localhost:5000/manage/sendnotification (6fb7e188)
+2018-06-24T21:37:55.3307526+02:00 0HLEQ17SUAMUC:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__username_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"u\".\"Id\", \"u\".\"AccessFailedCount\", \"u\".\"ConcurrencyStamp\", \"u\".\"Delete\", \"u\".\"Email\", \"u\".\"EmailConfirmed\", \"u\".\"LockoutEnabled\", \"u\".\"LockoutEnd\", \"u\".\"NormalizedEmail\", \"u\".\"NormalizedUserName\", \"u\".\"PasswordHash\", \"u\".\"PhoneNumber\", \"u\".\"PhoneNumberConfirmed\", \"u\".\"SecurityStamp\", \"u\".\"TwoFactorEnabled\", \"u\".\"UserName\"
+FROM \"AspNetUsers\" AS \"u\"
+WHERE \"u\".\"Email\" = @__username_0
+LIMIT 2" (0723d8ff)
+2018-06-24T21:37:55.4537169+02:00 0HLEQ17SUAMUC:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@p0='?', @p1='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notification\" (\"Id\", \"Message\")
+VALUES (@p0, @p1);" (0723d8ff)
+2018-06-24T21:37:55.4588655+02:00 0HLEQ17SUAMUC:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@p2='?', @p3='?', @p4='?', @p5='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"NotificationUser\" (\"Id\", \"New\", \"NotificationId\", \"UserId\")
+VALUES (@p2, @p3, @p4, @p5);" (0723d8ff)
+2018-06-24T21:37:55.4933692+02:00 0HLEQ17SUAMUC:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-24T21:37:55.5334645+02:00 0HLEQ17SUAMUC:00000001 [INF] Executed action "API.Controllers.ManageController.SendSingleNotification (API)" in 413.7897ms (afa2e885)
+2018-06-24T21:37:55.5409121+02:00 0HLEQ17SUAMUC:00000001 [INF] Request finished in 2930.3144ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-24T22:05:38.1569346+02:00 0HLEQ1NDACDQL:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/manage/notifications application/json  (ca22a1cb)
+2018-06-24T22:05:38.4009658+02:00 0HLEQ1NDACDQL:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-24T22:05:38.5713969+02:00 0HLEQ1NDACDQL:00000001 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-24T22:05:38.5780592+02:00 0HLEQ1NDACDQL:00000001 [INF] Executing action method "API.Controllers.ManageController.GetNotifications (API)" with arguments (null) - ModelState is Valid (ba7f4ac2)
+2018-06-24T22:05:38.5810054+02:00 0HLEQ1NDACDQL:00000001 [INF] ::1: http://localhost:5000/manage/notifications (7dbe246a)
+2018-06-24T22:05:39.5620256+02:00 0HLEQ1NDACDQL:00000001 [INF] Executed action "API.Controllers.ManageController.GetNotifications (API)" in 993.5151ms (afa2e885)
+2018-06-24T22:05:39.9541229+02:00 0HLEQ1NDACDQL:00000001 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at API.Process.Authentication.GetCurrentUserId(ClaimsPrincipal currentUser) in /media/rodero/Media/Projects/ICTLAB/API/API/Process/Authentication.cs:line 56
+   at API.Controllers.ManageController.GetNotifications() in /media/rodero/Media/Projects/ICTLAB/API/API/Controllers/ManageController.cs:line 86
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2018-06-24T22:05:40.0499259+02:00 0HLEQ1NDACDQL:00000001 [INF] Request finished in 1899.0476ms 500 text/html; charset=utf-8 (791a596a)
+2018-06-24T22:06:13.6026380+02:00 0HLEQ1NDACDQL:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/manage/notifications application/json  (ca22a1cb)
+2018-06-24T22:06:13.6080666+02:00 0HLEQ1NDACDQL:00000002 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-24T22:06:13.6141299+02:00 0HLEQ1NDACDQL:00000002 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-24T22:06:13.6146069+02:00 0HLEQ1NDACDQL:00000002 [INF] Executing action method "API.Controllers.ManageController.GetNotifications (API)" with arguments (null) - ModelState is Valid (ba7f4ac2)
+2018-06-24T22:06:13.6147493+02:00 0HLEQ1NDACDQL:00000002 [INF] ::1: http://localhost:5000/manage/notifications (7dbe246a)
+2018-06-24T22:13:14.0625107+02:00 0HLEQ1RL6ANUF:00000001 [INF] Request starting HTTP/1.1 POST http://localhost:5000/manage/sendnotification application/json 59 (ca22a1cb)
+2018-06-24T22:13:14.9564868+02:00 0HLEQ1RL6ANUF:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-24T22:13:15.6100144+02:00 0HLEQ1RL6ANUF:00000001 [INF] Executed DbCommand ("39"ms) [Parameters=["@__get_Item_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"e\".\"Id\", \"e\".\"AccessFailedCount\", \"e\".\"ConcurrencyStamp\", \"e\".\"Delete\", \"e\".\"Email\", \"e\".\"EmailConfirmed\", \"e\".\"LockoutEnabled\", \"e\".\"LockoutEnd\", \"e\".\"NormalizedEmail\", \"e\".\"NormalizedUserName\", \"e\".\"PasswordHash\", \"e\".\"PhoneNumber\", \"e\".\"PhoneNumberConfirmed\", \"e\".\"SecurityStamp\", \"e\".\"TwoFactorEnabled\", \"e\".\"UserName\"
+FROM \"AspNetUsers\" AS \"e\"
+WHERE \"e\".\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-06-24T22:13:15.8155318+02:00 0HLEQ1RL6ANUF:00000001 [INF] Executed DbCommand ("35"ms) [Parameters=["@__user_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"uc\".\"Id\", \"uc\".\"ClaimType\", \"uc\".\"ClaimValue\", \"uc\".\"UserId\"
+FROM \"AspNetUserClaims\" AS \"uc\"
+WHERE \"uc\".\"UserId\" = @__user_Id_0" (0723d8ff)
+2018-06-24T22:13:15.8915045+02:00 0HLEQ1RL6ANUF:00000001 [INF] Executed DbCommand ("16"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"role\".\"Name\"
+FROM \"AspNetUserRoles\" AS \"userRole\"
+INNER JOIN \"AspNetRoles\" AS \"role\" ON \"userRole\".\"RoleId\" = \"role\".\"Id\"
+WHERE \"userRole\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-24T22:13:16.0353537+02:00 0HLEQ1RL6ANUF:00000001 [INF] Executed DbCommand ("55"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2018-06-24T22:13:16.1831559+02:00 0HLEQ1RL6ANUF:00000001 [INF] Executed DbCommand ("42"ms) [Parameters=["@__role_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"rc\".\"ClaimType\", \"rc\".\"ClaimValue\"
+FROM \"AspNetRoleClaims\" AS \"rc\"
+WHERE \"rc\".\"RoleId\" = @__role_Id_0" (0723d8ff)
+2018-06-24T22:13:16.2393411+02:00 0HLEQ1RL6ANUF:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-24T22:13:16.5266078+02:00 0HLEQ1RL6ANUF:00000001 [INF] Executing action method "API.Controllers.ManageController.SendSingleNotification (API)" with arguments (["{
+  \"UserName\": \"admin@admin.nl\",
+  \"Message\": \"Test message\"
+}"]) - ModelState is Valid (ba7f4ac2)
+2018-06-24T22:13:16.5297130+02:00 0HLEQ1RL6ANUF:00000001 [INF] ::1: http://localhost:5000/manage/sendnotification (6fb7e188)
+2018-06-24T22:13:16.5922849+02:00 0HLEQ1RL6ANUF:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__username_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"u\".\"Id\", \"u\".\"AccessFailedCount\", \"u\".\"ConcurrencyStamp\", \"u\".\"Delete\", \"u\".\"Email\", \"u\".\"EmailConfirmed\", \"u\".\"LockoutEnabled\", \"u\".\"LockoutEnd\", \"u\".\"NormalizedEmail\", \"u\".\"NormalizedUserName\", \"u\".\"PasswordHash\", \"u\".\"PhoneNumber\", \"u\".\"PhoneNumberConfirmed\", \"u\".\"SecurityStamp\", \"u\".\"TwoFactorEnabled\", \"u\".\"UserName\"
+FROM \"AspNetUsers\" AS \"u\"
+WHERE \"u\".\"Email\" = @__username_0
+LIMIT 2" (0723d8ff)
+2018-06-24T22:13:16.7066932+02:00 0HLEQ1RL6ANUF:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@p0='?', @p1='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notification\" (\"Id\", \"Message\")
+VALUES (@p0, @p1);" (0723d8ff)
+2018-06-24T22:13:16.7114202+02:00 0HLEQ1RL6ANUF:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@p2='?', @p3='?', @p4='?', @p5='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"NotificationUser\" (\"Id\", \"New\", \"NotificationId\", \"UserId\")
+VALUES (@p2, @p3, @p4, @p5);" (0723d8ff)
+2018-06-24T22:13:16.7416922+02:00 0HLEQ1RL6ANUF:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-24T22:13:16.7786324+02:00 0HLEQ1RL6ANUF:00000001 [INF] Executed action "API.Controllers.ManageController.SendSingleNotification (API)" in 375.4877ms (afa2e885)
+2018-06-24T22:13:16.7851587+02:00 0HLEQ1RL6ANUF:00000001 [INF] Request finished in 2730.1754ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-24T22:13:25.9600484+02:00 0HLEQ1RL6ANUF:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/manage/notifications application/json  (ca22a1cb)
+2018-06-24T22:13:25.9659974+02:00 0HLEQ1RL6ANUF:00000002 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-24T22:13:25.9743000+02:00 0HLEQ1RL6ANUF:00000002 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-24T22:13:25.9774104+02:00 0HLEQ1RL6ANUF:00000002 [INF] Executing action method "API.Controllers.ManageController.GetNotifications (API)" with arguments (null) - ModelState is Valid (ba7f4ac2)
+2018-06-24T22:13:25.9778698+02:00 0HLEQ1RL6ANUF:00000002 [INF] ::1: http://localhost:5000/manage/notifications (7dbe246a)
+2018-06-24T22:13:33.9869081+02:00 0HLEQ1RL6ANUF:00000002 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-24T22:13:35.7964146+02:00  [WRN] Heartbeat took longer than "00:00:01" at "06/24/2018 20:13:33 +00:00". (439152bf)
+2018-06-24T22:13:35.7964106+02:00  [WRN] Heartbeat took longer than "00:00:01" at "06/24/2018 20:13:33 +00:00". (439152bf)
+2018-06-24T22:13:36.6847900+02:00 0HLEQ1RL6ANUF:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"n\".\"Id\", \"n\".\"New\", \"n\".\"NotificationId\", \"n\".\"UserId\", \"nu\".\"Id\", \"nu\".\"Message\"
+FROM \"NotificationUser\" AS \"n\"
+INNER JOIN \"Notification\" AS \"nu\" ON \"n\".\"NotificationId\" = \"nu\".\"Id\"
+WHERE (\"n\".\"UserId\" = @__userId_0) AND (\"n\".\"Id\" = \"nu\".\"Id\")" (0723d8ff)
+2018-06-24T22:14:49.7052004+02:00 0HLEQ1SHM7NC1:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/manage/notifications application/json  (ca22a1cb)
+2018-06-24T22:14:49.9702521+02:00 0HLEQ1SHM7NC1:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-24T22:14:50.1525932+02:00 0HLEQ1SHM7NC1:00000001 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-24T22:14:50.1606829+02:00 0HLEQ1SHM7NC1:00000001 [INF] Executing action method "API.Controllers.ManageController.GetNotifications (API)" with arguments (null) - ModelState is Valid (ba7f4ac2)
+2018-06-24T22:14:50.1652462+02:00 0HLEQ1SHM7NC1:00000001 [INF] ::1: http://localhost:5000/manage/notifications (7dbe246a)
+2018-06-24T22:14:54.7927931+02:00 0HLEQ1SHM7NC1:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-24T22:14:57.3800215+02:00 0HLEQ1SHM7NC1:00000001 [INF] Executed DbCommand ("23"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"n\".\"Id\", \"n\".\"New\", \"n\".\"NotificationId\", \"n\".\"UserId\", \"nu\".\"Id\", \"nu\".\"Message\"
+FROM \"NotificationUser\" AS \"n\"
+INNER JOIN \"Notification\" AS \"nu\" ON \"n\".\"NotificationId\" = \"nu\".\"Id\"
+WHERE \"n\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-24T22:16:08.5467183+02:00 0HLEQ1T96C2ON:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/manage/notifications application/json  (ca22a1cb)
+2018-06-24T22:16:08.7821312+02:00 0HLEQ1T96C2ON:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-24T22:16:08.9571101+02:00 0HLEQ1T96C2ON:00000001 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-24T22:16:08.9636938+02:00 0HLEQ1T96C2ON:00000001 [INF] Executing action method "API.Controllers.ManageController.GetNotifications (API)" with arguments (null) - ModelState is Valid (ba7f4ac2)
+2018-06-24T22:16:08.9667163+02:00 0HLEQ1T96C2ON:00000001 [INF] ::1: http://localhost:5000/manage/notifications (7dbe246a)
+2018-06-24T22:16:16.9834537+02:00 0HLEQ1T96C2ON:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-24T22:16:19.4969052+02:00 0HLEQ1T96C2ON:00000001 [INF] Executed DbCommand ("20"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"n\".\"Id\", \"n\".\"New\", \"n\".\"NotificationId\", \"n\".\"UserId\", \"nu\".\"Id\", \"nu\".\"Message\"
+FROM \"NotificationUser\" AS \"n\"
+INNER JOIN \"Notification\" AS \"nu\" ON \"n\".\"NotificationId\" = \"nu\".\"Id\"
+WHERE \"n\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-24T22:22:52.7391351+02:00 0HLEQ211L2TJO:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/manage/notifications application/json  (ca22a1cb)
+2018-06-24T22:22:53.0253920+02:00 0HLEQ211L2TJO:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-24T22:22:53.2155954+02:00 0HLEQ211L2TJO:00000001 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-24T22:22:53.2231375+02:00 0HLEQ211L2TJO:00000001 [INF] Executing action method "API.Controllers.ManageController.GetNotifications (API)" with arguments (null) - ModelState is Valid (ba7f4ac2)
+2018-06-24T22:22:53.2264373+02:00 0HLEQ211L2TJO:00000001 [INF] ::1: http://localhost:5000/manage/notifications (7dbe246a)
+2018-06-24T22:23:01.7761763+02:00 0HLEQ211L2TJO:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-24T22:23:02.7491597+02:00 0HLEQ211L2TJO:00000001 [INF] Executed DbCommand ("21"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"n\".\"Id\", \"n\".\"New\", \"n\".\"NotificationId\", \"n\".\"UserId\", \"nu\".\"Id\", \"nu\".\"Message\"
+FROM \"NotificationUser\" AS \"n\"
+INNER JOIN \"Notification\" AS \"nu\" ON \"n\".\"NotificationId\" = \"nu\".\"Id\"
+WHERE \"n\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-24T22:23:02.9872911+02:00 0HLEQ211L2TJO:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-24T22:23:03.0121394+02:00 0HLEQ211L2TJO:00000001 [INF] Executed action "API.Controllers.ManageController.GetNotifications (API)" in 9799.8235ms (afa2e885)
+2018-06-24T22:23:03.0197275+02:00 0HLEQ211L2TJO:00000001 [INF] Request finished in 10284.2837ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-24T22:39:39.7514751+02:00 0HLEQ2ADOD6J5:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/manage/notifications application/json  (ca22a1cb)
+2018-06-24T22:39:39.9877501+02:00 0HLEQ2ADOD6J5:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-24T22:39:40.1747055+02:00 0HLEQ2ADOD6J5:00000001 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-24T22:39:40.1813024+02:00 0HLEQ2ADOD6J5:00000001 [INF] Executing action method "API.Controllers.ManageController.GetNotifications (API)" with arguments (null) - ModelState is Valid (ba7f4ac2)
+2018-06-24T22:39:40.1845395+02:00 0HLEQ2ADOD6J5:00000001 [INF] ::1: http://localhost:5000/manage/notifications (7dbe246a)
+2018-06-24T22:39:45.3742494+02:00 0HLEQ2ADOD6J5:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-24T22:39:46.2946790+02:00 0HLEQ2ADOD6J5:00000001 [INF] Executed DbCommand ("23"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"n\".\"Id\", \"n\".\"New\", \"n\".\"NotificationId\", \"n\".\"UserId\", \"nu\".\"Id\", \"nu\".\"Message\"
+FROM \"NotificationUser\" AS \"n\"
+INNER JOIN \"Notification\" AS \"nu\" ON \"n\".\"NotificationId\" = \"nu\".\"Id\"
+WHERE \"n\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-24T22:39:46.5292660+02:00 0HLEQ2ADOD6J5:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-24T22:39:46.5566023+02:00 0HLEQ2ADOD6J5:00000001 [INF] Executed action "API.Controllers.ManageController.GetNotifications (API)" in 6384.9437ms (afa2e885)
+2018-06-24T22:39:46.5639311+02:00 0HLEQ2ADOD6J5:00000001 [INF] Request finished in 6816.7758ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-24T22:40:06.1590734+02:00 0HLEQ2ADOD6J5:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/manage/notifications/979940e4-5141-4c0b-a9e7-c7fb052c09d1 application/json  (ca22a1cb)
+2018-06-24T22:40:06.2060583+02:00 0HLEQ2ADOD6J5:00000002 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-24T22:40:06.2262097+02:00 0HLEQ2ADOD6J5:00000002 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-24T22:40:06.2515830+02:00 0HLEQ2ADOD6J5:00000002 [INF] Executing action method "API.Controllers.ManageController.SetReadNotification (API)" with arguments (["979940e4-5141-4c0b-a9e7-c7fb052c09d1"]) - ModelState is Valid (ba7f4ac2)
+2018-06-24T22:40:06.2518132+02:00 0HLEQ2ADOD6J5:00000002 [INF] ::1: http://localhost:5000/manage/notifications/979940e4-5141-4c0b-a9e7-c7fb052c09d1 (78f40ed3)
+2018-06-24T22:40:06.2539702+02:00 0HLEQ2ADOD6J5:00000002 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-24T22:40:06.2758703+02:00 0HLEQ2ADOD6J5:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@__notificatieId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"n\".\"Id\", \"n\".\"New\", \"n\".\"NotificationId\", \"n\".\"UserId\"
+FROM \"NotificationUser\" AS \"n\"
+WHERE \"n\".\"NotificationId\" = @__notificatieId_0
+LIMIT 2" (0723d8ff)
+2018-06-24T22:40:06.3644031+02:00 0HLEQ2ADOD6J5:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@p3='?', @p0='?', @p1='?', @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"NotificationUser\" SET \"New\" = @p0, \"NotificationId\" = @p1, \"UserId\" = @p2
+WHERE \"Id\" = @p3;" (0723d8ff)
+2018-06-24T22:40:06.3768438+02:00 0HLEQ2ADOD6J5:00000002 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-24T22:40:06.3772757+02:00 0HLEQ2ADOD6J5:00000002 [INF] Executed action "API.Controllers.ManageController.SetReadNotification (API)" in 151.3242ms (afa2e885)
+2018-06-24T22:40:06.4026512+02:00 0HLEQ2ADOD6J5:00000002 [INF] Request finished in 241.3092ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-24T22:40:17.8054356+02:00 0HLEQ2ADOD6J5:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:5000/manage/notifications application/json  (ca22a1cb)
+2018-06-24T22:40:17.8062455+02:00 0HLEQ2ADOD6J5:00000003 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-24T22:40:17.8066859+02:00 0HLEQ2ADOD6J5:00000003 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-24T22:40:17.8068013+02:00 0HLEQ2ADOD6J5:00000003 [INF] Executing action method "API.Controllers.ManageController.GetNotifications (API)" with arguments (null) - ModelState is Valid (ba7f4ac2)
+2018-06-24T22:40:17.8069055+02:00 0HLEQ2ADOD6J5:00000003 [INF] ::1: http://localhost:5000/manage/notifications (7dbe246a)
+2018-06-24T22:40:17.8074164+02:00 0HLEQ2ADOD6J5:00000003 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-24T22:40:17.8139685+02:00 0HLEQ2ADOD6J5:00000003 [INF] Executed DbCommand ("0"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"n\".\"Id\", \"n\".\"New\", \"n\".\"NotificationId\", \"n\".\"UserId\", \"nu\".\"Id\", \"nu\".\"Message\"
+FROM \"NotificationUser\" AS \"n\"
+INNER JOIN \"Notification\" AS \"nu\" ON \"n\".\"NotificationId\" = \"nu\".\"Id\"
+WHERE \"n\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-24T22:40:17.8153399+02:00 0HLEQ2ADOD6J5:00000003 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-24T22:40:17.8158626+02:00 0HLEQ2ADOD6J5:00000003 [INF] Executed action "API.Controllers.ManageController.GetNotifications (API)" in 9.133ms (afa2e885)
+2018-06-24T22:40:17.8381106+02:00 0HLEQ2ADOD6J5:00000003 [INF] Request finished in 31.0684ms 200 application/json; charset=utf-8 (791a596a)

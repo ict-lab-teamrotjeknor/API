@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices.ComTypes;
+using System.Security.Claims;
 using API.Models.Data;
 using API.Models.Data.Query;
 using API.Process;
@@ -21,9 +22,10 @@ namespace API.Controllers
         private readonly ILogger _logger;
 
         public ManageController(ApplicationDbContext dbContext,
-            ILogger<ManageController> logger)
+            ILogger<ManageController> logger,
+            UserManager<User> userManager)
         {
-            _manage = new Manage(new DbManage(dbContext, logger), new JsonEditor(logger), logger);
+            _manage = new Manage(new DbManage(dbContext, logger), new JsonEditor(logger), logger, userManager);
             _jsonEditor = new JsonEditor(logger);
             _logger = logger;
         }
@@ -62,28 +64,38 @@ namespace API.Controllers
         public JObject SendGroupNotification([FromBody] JObject notification)
         {
             LogUrl();
-            var test = notification;    
-            var sendBack = _manage.SendGroupNotification();
+            var notificationMessage = _jsonEditor.GetNotification(notification);   
+            var sendBack = _manage.SendGroupNotification(notificationMessage);
             return sendBack;
         }
         
         //Send a notifcation to a member
-        [Authorize(Roles = "Admin")]
         [HttpPost("sendnotification")]
         public JObject SendSingleNotification([FromBody] JObject notification)
         {
             LogUrl();
-            var test = notification;
-            var sendBack = _manage.SendNotification();
+            var notificationMessage = _jsonEditor.GetNotification(notification);   
+            var sendBack = _manage.SendNotification(notificationMessage);
             return sendBack;
         }
 
         //Get all notifications
+        [Authorize]
         [HttpGet("notifications")]
         public JObject GetNotifications()
         {
             LogUrl();
-            return _manage.GetNotifications();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return _manage.GetNotifications(userId);
+        }
+
+        [Authorize]
+        [HttpGet("notifications/{id}")]
+        public JObject SetReadNotification(string id)
+        {
+            LogUrl();
+            var sendBack = _manage.SetRead(id);
+            return sendBack;
         }
 
         [HttpPost("testpost")]

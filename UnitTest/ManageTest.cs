@@ -11,7 +11,7 @@ namespace UnitTest
 
         public ManageTest()
         {
-            _manage = new Manage(new DbManageFake(), new JsonEditorFake(), null, false);
+            _manage = new Manage(new DbManageFake(), new JsonEditorFake(), null, null, false);
         }
 
         [Fact]

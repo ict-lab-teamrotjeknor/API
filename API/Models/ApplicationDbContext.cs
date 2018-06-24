@@ -60,6 +60,20 @@ namespace API.Models.Data
                 .HasOne(p => p.Pi)
                 .WithOne(c => c.Classroom)
                 .HasForeignKey<Classroom>(c => c.PiID);
+
+            modelBuilder.Entity<NotificationUser>()
+                .HasKey(nu => nu.Id);
+            
+            modelBuilder.Entity<NotificationUser>()
+                .HasOne(nu => nu.notification)
+                .WithMany(nm => nm.Notfication)
+                .HasForeignKey(nu => nu.NotificationId);
+            
+            modelBuilder.Entity<NotificationUser>()
+                .HasOne(nu => nu.user)
+                .WithMany(nm => nm.notfications)
+                .HasForeignKey(nu => nu.UserId);
+
         }
 
         public DbSet<Classroom> Classrooms { get; set; }
@@ -71,5 +85,7 @@ namespace API.Models.Data
         public DbSet<Sensor> Sensors { get; set; }
         public DbSet<SensorData> SensorDatas { get; set; }
         public DbSet<PI> PI { get; set; }
+        public DbSet<NotificationMessage> Notification { get; set; }
+        public DbSet<NotificationUser> NotificationUser { get; set; }
     }
 }

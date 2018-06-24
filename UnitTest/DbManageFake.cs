@@ -58,12 +58,17 @@ namespace UnitTest
             return true;
         }
 
-        public bool SetNotifications()
+        public bool SetNotifications(NotificationMessage notificationMessage, NotificationUser makeNotification, string username)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool GetNotifications()
+        public Notifications GetNotifications(string userId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool SetReadNotificatie(string notificatieId)
         {
             throw new System.NotImplementedException();
         }

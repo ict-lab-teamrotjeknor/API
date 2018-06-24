@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using API.Process.Model;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Logging;
 
 
@@ -96,14 +97,69 @@ namespace API.Models.Data.Query
             return true;
         }
 
-        public bool SetNotifications()
+        public bool SetNotifications(NotificationMessage notificationMessage, NotificationUser makeNotification,
+            string username)
         {
-            throw new NotImplementedException();
+            var user = _dbContext.Users
+                .SingleOrDefault(u => u.Email.Equals(username));
+
+            if (user == null) return false;
+            makeNotification.UserId = user.Id;
+
+            try
+            {
+                _dbContext.Add(notificationMessage);
+                _dbContext.Add(makeNotification);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+
+            return false;
         }
 
-        public bool GetNotifications()
+        public Notifications GetNotifications(string userId)
         {
-            throw new NotImplementedException();
+            var notifications = _dbContext.NotificationUser
+                .Where(n => n.UserId.Equals(userId))
+                .Join(_dbContext.Notification,
+                    n => n.NotificationId,
+                    nu => nu.Id,
+                    (n, nu) => new {NotificationMessage = nu, NotificationUser = n}).ToList();
+
+            var allNotifications = new Notifications();
+            foreach (var currentNotification in notifications)
+            {
+                var niceNotification = new Notification();
+                niceNotification.ID = currentNotification.NotificationMessage.Id;
+                niceNotification.Message = currentNotification.NotificationMessage.Message;
+                niceNotification.New = currentNotification.NotificationUser.New;
+                allNotifications.Messages.Add(niceNotification);
+            }
+
+            return allNotifications;
+        }
+
+        public bool SetReadNotificatie(string notificatieId)
+        {
+            var notification = _dbContext.NotificationUser
+                .Single(n => n.NotificationId.Equals(notificatieId));
+
+            if (notification != null)
+            {
+                notification.New = false;
+
+                _dbContext.Update(notification);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

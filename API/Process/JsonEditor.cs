@@ -191,6 +191,20 @@ namespace API.Process.Model
             return SerilizeJObject(error);
         }
 
+        public Notification GetNotification(JObject notification)
+        {
+            try
+            {
+                var newNotification = JsonConvert.DeserializeObject<Notification>(notification.ToString());
+                return newNotification;
+            }
+            catch (Exception e)
+            {
+                if (Deployment) _logger.LogInformation("Something went wrong with Sensor");
+                return new Notification();
+            }
+        }
+
         private JObject MakeSmallRoom(Classroom classroom)
         {
             var newClassroom = new JObject();
