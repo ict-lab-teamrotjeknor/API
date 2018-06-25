@@ -77,7 +77,10 @@ namespace API.Process
         {
             var access = false;
             var user = await _userManager.FindByNameAsync(account.Email);
-            access = !user.Delete;
+            if (user != null)
+            {
+                access = !user.Delete;
+            }
 
             if (access)
             {
