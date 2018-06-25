@@ -1,0 +1,294 @@
+2018-06-25T11:43:26.8501599+02:00 0HLEQG0CTVDTQ:00000001 [INF] Request starting HTTP/1.1 POST http://localhost:5000/authentication/signup application/json 56 (ca22a1cb)
+2018-06-25T11:43:27.7927931+02:00 0HLEQG0CTVDTQ:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-25T11:43:28.5044665+02:00 0HLEQG0CTVDTQ:00000001 [INF] Executed DbCommand ("59"ms) [Parameters=["@__get_Item_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"e\".\"Id\", \"e\".\"AccessFailedCount\", \"e\".\"ConcurrencyStamp\", \"e\".\"Delete\", \"e\".\"Email\", \"e\".\"EmailConfirmed\", \"e\".\"LockoutEnabled\", \"e\".\"LockoutEnd\", \"e\".\"NormalizedEmail\", \"e\".\"NormalizedUserName\", \"e\".\"PasswordHash\", \"e\".\"PhoneNumber\", \"e\".\"PhoneNumberConfirmed\", \"e\".\"SecurityStamp\", \"e\".\"TwoFactorEnabled\", \"e\".\"UserName\"
+FROM \"AspNetUsers\" AS \"e\"
+WHERE \"e\".\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-06-25T11:43:28.6830497+02:00 0HLEQG0CTVDTQ:00000001 [INF] Executed DbCommand ("13"ms) [Parameters=["@__user_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"uc\".\"Id\", \"uc\".\"ClaimType\", \"uc\".\"ClaimValue\", \"uc\".\"UserId\"
+FROM \"AspNetUserClaims\" AS \"uc\"
+WHERE \"uc\".\"UserId\" = @__user_Id_0" (0723d8ff)
+2018-06-25T11:43:28.7920825+02:00 0HLEQG0CTVDTQ:00000001 [INF] Executed DbCommand ("17"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"role\".\"Name\"
+FROM \"AspNetUserRoles\" AS \"userRole\"
+INNER JOIN \"AspNetRoles\" AS \"role\" ON \"userRole\".\"RoleId\" = \"role\".\"Id\"
+WHERE \"userRole\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-25T11:43:28.9171201+02:00 0HLEQG0CTVDTQ:00000001 [INF] Executed DbCommand ("75"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2018-06-25T11:43:29.0943132+02:00 0HLEQG0CTVDTQ:00000001 [INF] Executed DbCommand ("62"ms) [Parameters=["@__role_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"rc\".\"ClaimType\", \"rc\".\"ClaimValue\"
+FROM \"AspNetRoleClaims\" AS \"rc\"
+WHERE \"rc\".\"RoleId\" = @__role_Id_0" (0723d8ff)
+2018-06-25T11:43:29.1360401+02:00 0HLEQG0CTVDTQ:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-25T11:43:29.4526283+02:00 0HLEQG0CTVDTQ:00000001 [INF] Executing action method "API.Controllers.AuthenticationController.SignUp (API)" with arguments (["{
+  \"Email\": \"0879062@hr.nl\",
+  \"Password\": \"Test message\"
+}"]) - ModelState is Valid (ba7f4ac2)
+2018-06-25T11:43:29.4568799+02:00 0HLEQG0CTVDTQ:00000001 [INF] ::1: http://localhost:5000/authentication/signup (9d87b219)
+2018-06-25T11:43:29.5264922+02:00 0HLEQG0CTVDTQ:00000001 [WRN] User "c9106675-adca-4744-8bba-8cb90eacd3ae" password validation failed: "PasswordRequiresDigit". (2f223212)
+2018-06-25T11:43:29.5988173+02:00 0HLEQG0CTVDTQ:00000001 [INF] Executed DbCommand ("59"ms) [Parameters=["@__normalizedRoleName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedRoleName_0
+LIMIT 2" (0723d8ff)
+2018-06-25T11:43:29.7200902+02:00 0HLEQG0CTVDTQ:00000001 [INF] Executed DbCommand ("20"ms) [Parameters=["@__get_Item_0='?', @__get_Item_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"e\".\"UserId\", \"e\".\"RoleId\"
+FROM \"AspNetUserRoles\" AS \"e\"
+WHERE (\"e\".\"UserId\" = @__get_Item_0) AND (\"e\".\"RoleId\" = @__get_Item_1)
+LIMIT 1" (0723d8ff)
+2018-06-25T11:43:29.8606500+02:00 0HLEQG0CTVDTQ:00000001 [INF] Executed DbCommand ("36"ms) [Parameters=["@__normalizedRoleName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedRoleName_0
+LIMIT 2" (0723d8ff)
+2018-06-25T11:43:31.7173727+02:00 0HLEQG0CTVDTQ:00000001 [INF] Executed action "API.Controllers.AuthenticationController.SignUp (API)" in 2392.0197ms (afa2e885)
+2018-06-25T11:43:32.4596865+02:00 0HLEQG0CTVDTQ:00000001 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.InvalidOperationException: User security stamp cannot be null.
+   at Microsoft.AspNetCore.Identity.UserManager`1.<ValidateUserInternal>d__169.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.AspNetCore.Identity.UserManager`1.<UpdateUserAsync>d__171.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.AspNetCore.Identity.UserManager`1.<AddToRoleAsync>d__104.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at API.Process.Authentication.<SignUp>d__9.MoveNext() in /media/rodero/Media/Projects/ICTLAB/API/API/Process/Authentication.cs:line 59
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at API.Controllers.AuthenticationController.<SignUp>d__4.MoveNext() in /media/rodero/Media/Projects/ICTLAB/API/API/Controllers/AuthenticationController.cs:line 49
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2018-06-25T11:43:32.6357883+02:00 0HLEQG0CTVDTQ:00000001 [INF] Request finished in 5792.919ms 500 text/html; charset=utf-8 (791a596a)
+2018-06-25T11:43:48.0649797+02:00 0HLEQG0CTVDTQ:00000002 [INF] Request starting HTTP/1.1 POST http://localhost:5000/authentication/signup application/json 56 (ca22a1cb)
+2018-06-25T11:43:48.1086248+02:00 0HLEQG0CTVDTQ:00000002 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-25T11:43:48.1329957+02:00 0HLEQG0CTVDTQ:00000002 [INF] Executing action method "API.Controllers.AuthenticationController.SignUp (API)" with arguments (["{
+  \"Email\": \"0879062@hr.nl\",
+  \"Password\": \"Test message\"
+}"]) - ModelState is Valid (ba7f4ac2)
+2018-06-25T11:43:50.9036606+02:00 0HLEQG0CTVDTQ:00000002 [INF] ::1: http://localhost:5000/authentication/signup (9d87b219)
+2018-06-25T11:43:55.2805949+02:00 0HLEQG0CTVDTQ:00000002 [WRN] User "ea178d2f-fe5d-4f50-be5f-47e0e98bcdb1" password validation failed: "PasswordRequiresDigit". (2f223212)
+2018-06-25T11:43:59.6876753+02:00 0HLEQG0CTVDTQ:00000002 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-25T11:43:59.7512895+02:00 0HLEQG0CTVDTQ:00000002 [INF] Executed DbCommand ("37"ms) [Parameters=["@__normalizedRoleName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedRoleName_0
+LIMIT 2" (0723d8ff)
+2018-06-25T11:44:00.1640735+02:00 0HLEQG0CTVDTQ:00000002 [INF] Executed DbCommand ("5"ms) [Parameters=["@__get_Item_0='?', @__get_Item_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"e\".\"UserId\", \"e\".\"RoleId\"
+FROM \"AspNetUserRoles\" AS \"e\"
+WHERE (\"e\".\"UserId\" = @__get_Item_0) AND (\"e\".\"RoleId\" = @__get_Item_1)
+LIMIT 1" (0723d8ff)
+2018-06-25T11:44:00.2234781+02:00 0HLEQG0CTVDTQ:00000002 [INF] Executed DbCommand ("16"ms) [Parameters=["@__normalizedRoleName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedRoleName_0
+LIMIT 2" (0723d8ff)
+2018-06-25T11:44:01.8235217+02:00 0HLEQG0CTVDTQ:00000002 [INF] Executed action "API.Controllers.AuthenticationController.SignUp (API)" in 13714.2219ms (afa2e885)
+2018-06-25T11:44:02.4173755+02:00 0HLEQG0CTVDTQ:00000002 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.InvalidOperationException: User security stamp cannot be null.
+   at Microsoft.AspNetCore.Identity.UserManager`1.<ValidateUserInternal>d__169.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.AspNetCore.Identity.UserManager`1.<UpdateUserAsync>d__171.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.AspNetCore.Identity.UserManager`1.<AddToRoleAsync>d__104.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at API.Process.Authentication.<SignUp>d__9.MoveNext() in /media/rodero/Media/Projects/ICTLAB/API/API/Process/Authentication.cs:line 59
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at API.Controllers.AuthenticationController.<SignUp>d__4.MoveNext() in /media/rodero/Media/Projects/ICTLAB/API/API/Controllers/AuthenticationController.cs:line 49
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2018-06-25T11:44:02.6115714+02:00 0HLEQG0CTVDTQ:00000002 [INF] Request finished in 14505.7156ms 500 text/html; charset=utf-8 (791a596a)
+2018-06-25T11:44:41.7387764+02:00 0HLEQG137LHSI:00000001 [INF] Request starting HTTP/1.1 POST http://localhost:5000/authentication/signup application/json 56 (ca22a1cb)
+2018-06-25T11:44:41.9734803+02:00 0HLEQG137LHSI:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-25T11:44:42.3198367+02:00 0HLEQG137LHSI:00000001 [INF] Executing action method "API.Controllers.AuthenticationController.SignUp (API)" with arguments (["{
+  \"Email\": \"0879062@hr.nl\",
+  \"Password\": \"Test message\"
+}"]) - ModelState is Valid (ba7f4ac2)
+2018-06-25T11:44:45.3932189+02:00 0HLEQG137LHSI:00000001 [INF] ::1: http://localhost:5000/authentication/signup (9d87b219)
+2018-06-25T11:44:46.5298251+02:00 0HLEQG137LHSI:00000001 [WRN] User "10aaaf79-6ee2-4815-9e7f-39252fc8fe1e" password validation failed: "PasswordRequiresDigit". (2f223212)
+2018-06-25T11:44:53.0671334+02:00 0HLEQG137LHSI:00000001 [ERR] Passwords must have at least one digit ('0'-'9'). (3becccfb)
+2018-06-25T11:44:53.0901555+02:00 0HLEQG137LHSI:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-25T11:44:53.1068695+02:00 0HLEQG137LHSI:00000001 [INF] Executed action "API.Controllers.AuthenticationController.SignUp (API)" in 10917.5227ms (afa2e885)
+2018-06-25T11:44:53.1135739+02:00 0HLEQG137LHSI:00000001 [INF] Request finished in 11385.126ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-25T11:45:49.8351233+02:00 0HLEQG137LHSI:00000002 [INF] Request starting HTTP/1.1 POST http://localhost:5000/authentication/delete application/json 28 (ca22a1cb)
+2018-06-25T11:45:49.8471923+02:00 0HLEQG137LHSI:00000002 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-25T11:45:49.8546644+02:00 0HLEQG137LHSI:00000002 [INF] Request finished in 19.533ms 404  (791a596a)
+2018-06-25T11:45:56.6724133+02:00 0HLEQG137LHSI:00000003 [INF] Request starting HTTP/1.1 POST http://localhost:5000/authentication/deleteaccount application/json 28 (ca22a1cb)
+2018-06-25T11:45:56.6732216+02:00 0HLEQG137LHSI:00000003 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-25T11:45:56.6810314+02:00 0HLEQG137LHSI:00000003 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-25T11:45:56.6816723+02:00 0HLEQG137LHSI:00000003 [INF] Authorization was successful for user: "admin@admin.nl". (d7eb274a)
+2018-06-25T11:45:56.7036398+02:00 0HLEQG137LHSI:00000003 [INF] Executing action method "API.Controllers.AuthenticationController.DeleteAccount (API)" with arguments (["{
+  \"Email\": \"0879062@hr.nl\"
+}"]) - ModelState is Valid (ba7f4ac2)
+2018-06-25T11:45:56.7057412+02:00 0HLEQG137LHSI:00000003 [INF] ::1: http://localhost:5000/authentication/deleteaccount (7d55d24b)
+2018-06-25T11:46:13.1064830+02:00 0HLEQG137LHSI:00000003 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-25T11:46:13.9906743+02:00 0HLEQG137LHSI:00000003 [INF] Executed DbCommand ("23"ms) [Parameters=["@__deleteAccount_Email_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"u\".\"Id\", \"u\".\"AccessFailedCount\", \"u\".\"ConcurrencyStamp\", \"u\".\"Delete\", \"u\".\"Email\", \"u\".\"EmailConfirmed\", \"u\".\"LockoutEnabled\", \"u\".\"LockoutEnd\", \"u\".\"NormalizedEmail\", \"u\".\"NormalizedUserName\", \"u\".\"PasswordHash\", \"u\".\"PhoneNumber\", \"u\".\"PhoneNumberConfirmed\", \"u\".\"SecurityStamp\", \"u\".\"TwoFactorEnabled\", \"u\".\"UserName\"
+FROM \"AspNetUsers\" AS \"u\"
+WHERE \"u\".\"Email\" = @__deleteAccount_Email_0
+LIMIT 2" (0723d8ff)
+2018-06-25T11:46:18.4069791+02:00 0HLEQG137LHSI:00000003 [INF] Executed DbCommand ("8"ms) [Parameters=["@p15='?', @p0='?', @p1='?', @p16='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?', @p7='?', @p8='?', @p9='?', @p10='?', @p11='?', @p12='?', @p13='?', @p14='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AspNetUsers\" SET \"AccessFailedCount\" = @p0, \"ConcurrencyStamp\" = @p1, \"Delete\" = @p2, \"Email\" = @p3, \"EmailConfirmed\" = @p4, \"LockoutEnabled\" = @p5, \"LockoutEnd\" = @p6, \"NormalizedEmail\" = @p7, \"NormalizedUserName\" = @p8, \"PasswordHash\" = @p9, \"PhoneNumber\" = @p10, \"PhoneNumberConfirmed\" = @p11, \"SecurityStamp\" = @p12, \"TwoFactorEnabled\" = @p13, \"UserName\" = @p14
+WHERE \"Id\" = @p15 AND \"ConcurrencyStamp\" = @p16;" (0723d8ff)
+2018-06-25T11:46:36.9833648+02:00 0HLEQG137LHSI:00000003 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-25T11:46:38.0746533+02:00 0HLEQG137LHSI:00000003 [INF] Executed action "API.Controllers.AuthenticationController.DeleteAccount (API)" in 41396.9197ms (afa2e885)
+2018-06-25T11:46:40.1637929+02:00 0HLEQG137LHSI:00000003 [INF] Request finished in 43489.9798ms 200 application/json; charset=utf-8 (791a596a)

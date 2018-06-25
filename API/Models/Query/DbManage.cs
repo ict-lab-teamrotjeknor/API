@@ -74,7 +74,8 @@ namespace API.Models.Data.Query
 
         public List<User> GetUsers()
         {
-            return _dbContext.Users.ToList();
+            return _dbContext.Users.
+                Where(u => u.Delete == false).ToList();
         }
 
         public bool DeleteUser(Account deleteAccount)

@@ -96,13 +96,23 @@ namespace API.Process
         {
             var usersOfRole = _userManager.GetUsersInRoleAsync(newNotification.Role);
 
+            var total = 0;
+            
             foreach (var currentUser in usersOfRole.Result)
             {
                 newNotification.UserName = currentUser.Email;
                 SendNotification(newNotification);
+                total++;
             }
-            
-            return _jsonEditor.GetSucced();
+
+            if (total != 0)
+            {
+                return _jsonEditor.GetSucced();
+            }
+            else
+            {
+                return _jsonEditor.GetError("Role doesn't exists");
+            }
         }
 
         //Get all Notifications
