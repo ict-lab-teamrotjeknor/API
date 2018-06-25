@@ -6,6 +6,7 @@ namespace API.Process.Model.Agenda
     {
         public string ClassroomName { get; set; }
         public string ClassroomType { get; set; }
+        public int Week { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
         public string SchoolType { get; set; }

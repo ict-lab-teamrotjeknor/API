@@ -374,3 +374,855 @@ FROM \"AspNetRoles\" AS \"a\"" (0723d8ff)
 2018-06-25T15:18:18.2551253+02:00 0HLEQJOE3A7H0:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
 2018-06-25T15:18:18.3012679+02:00 0HLEQJOE3A7H0:00000001 [INF] Executed action "API.Controllers.AuthenticationController.GetRoles (API)" in 206.5396ms (afa2e885)
 2018-06-25T15:18:18.3081069+02:00 0HLEQJOE3A7H0:00000001 [INF] Request finished in 2595.1366ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-25T20:19:34.6282635+02:00 0HLEQJOE3A7H0:00000002 [INF] Request starting HTTP/1.1 POST http://localhost:5000/authentication/signup application/json 60 (ca22a1cb)
+2018-06-25T20:19:34.6672318+02:00 0HLEQJOE3A7H0:00000002 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-25T20:19:34.9144327+02:00 0HLEQJOE3A7H0:00000002 [INF] Executed DbCommand ("84"ms) [Parameters=["@__get_Item_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"e\".\"Id\", \"e\".\"AccessFailedCount\", \"e\".\"ConcurrencyStamp\", \"e\".\"Delete\", \"e\".\"Email\", \"e\".\"EmailConfirmed\", \"e\".\"LockoutEnabled\", \"e\".\"LockoutEnd\", \"e\".\"NormalizedEmail\", \"e\".\"NormalizedUserName\", \"e\".\"PasswordHash\", \"e\".\"PhoneNumber\", \"e\".\"PhoneNumberConfirmed\", \"e\".\"SecurityStamp\", \"e\".\"TwoFactorEnabled\", \"e\".\"UserName\"
+FROM \"AspNetUsers\" AS \"e\"
+WHERE \"e\".\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-06-25T20:19:35.0090253+02:00 0HLEQJOE3A7H0:00000002 [INF] Executed DbCommand ("47"ms) [Parameters=["@__user_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"uc\".\"Id\", \"uc\".\"ClaimType\", \"uc\".\"ClaimValue\", \"uc\".\"UserId\"
+FROM \"AspNetUserClaims\" AS \"uc\"
+WHERE \"uc\".\"UserId\" = @__user_Id_0" (0723d8ff)
+2018-06-25T20:19:35.1554900+02:00 0HLEQJOE3A7H0:00000002 [INF] Executed DbCommand ("63"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"role\".\"Name\"
+FROM \"AspNetUserRoles\" AS \"userRole\"
+INNER JOIN \"AspNetRoles\" AS \"role\" ON \"userRole\".\"RoleId\" = \"role\".\"Id\"
+WHERE \"userRole\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-25T20:19:35.3107735+02:00 0HLEQJOE3A7H0:00000002 [INF] Executed DbCommand ("62"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2018-06-25T20:19:35.4105473+02:00 0HLEQJOE3A7H0:00000002 [INF] Executed DbCommand ("41"ms) [Parameters=["@__role_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"rc\".\"ClaimType\", \"rc\".\"ClaimValue\"
+FROM \"AspNetRoleClaims\" AS \"rc\"
+WHERE \"rc\".\"RoleId\" = @__role_Id_0" (0723d8ff)
+2018-06-25T20:19:35.4802431+02:00 0HLEQJOE3A7H0:00000002 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-25T20:19:35.5488580+02:00 0HLEQJOE3A7H0:00000002 [INF] Executing action method "API.Controllers.AuthenticationController.SignUp (API)" with arguments (["{
+  \"email\": \"random@hr.nl\",
+  \"password\": \"Test1234:)\"
+}"]) - ModelState is Valid (ba7f4ac2)
+2018-06-25T20:19:39.7563467+02:00 0HLEQJOE3A7H0:00000002 [INF] ::1: http://localhost:5000/authentication/signup (9d87b219)
+2018-06-25T20:19:39.8833517+02:00 0HLEQJOE3A7H0:00000002 [INF] Executed DbCommand ("49"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"u\".\"Id\", \"u\".\"AccessFailedCount\", \"u\".\"ConcurrencyStamp\", \"u\".\"Delete\", \"u\".\"Email\", \"u\".\"EmailConfirmed\", \"u\".\"LockoutEnabled\", \"u\".\"LockoutEnd\", \"u\".\"NormalizedEmail\", \"u\".\"NormalizedUserName\", \"u\".\"PasswordHash\", \"u\".\"PhoneNumber\", \"u\".\"PhoneNumberConfirmed\", \"u\".\"SecurityStamp\", \"u\".\"TwoFactorEnabled\", \"u\".\"UserName\"
+FROM \"AspNetUsers\" AS \"u\"
+WHERE \"u\".\"NormalizedUserName\" = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2018-06-25T20:19:40.0896767+02:00 0HLEQJOE3A7H0:00000002 [INF] Executed DbCommand ("42"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?', @p7='?', @p8='?', @p9='?', @p10='?', @p11='?', @p12='?', @p13='?', @p14='?', @p15='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AspNetUsers\" (\"Id\", \"AccessFailedCount\", \"ConcurrencyStamp\", \"Delete\", \"Email\", \"EmailConfirmed\", \"LockoutEnabled\", \"LockoutEnd\", \"NormalizedEmail\", \"NormalizedUserName\", \"PasswordHash\", \"PhoneNumber\", \"PhoneNumberConfirmed\", \"SecurityStamp\", \"TwoFactorEnabled\", \"UserName\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15);" (0723d8ff)
+2018-06-25T20:19:40.2408364+02:00 0HLEQJOE3A7H0:00000002 [INF] Executed DbCommand ("82"ms) [Parameters=["@__normalizedRoleName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedRoleName_0
+LIMIT 2" (0723d8ff)
+2018-06-25T20:19:40.3873355+02:00 0HLEQJOE3A7H0:00000002 [INF] Executed DbCommand ("41"ms) [Parameters=["@__get_Item_0='?', @__get_Item_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"e\".\"UserId\", \"e\".\"RoleId\"
+FROM \"AspNetUserRoles\" AS \"e\"
+WHERE (\"e\".\"UserId\" = @__get_Item_0) AND (\"e\".\"RoleId\" = @__get_Item_1)
+LIMIT 1" (0723d8ff)
+2018-06-25T20:19:40.5042061+02:00 0HLEQJOE3A7H0:00000002 [INF] Executed DbCommand ("75"ms) [Parameters=["@__normalizedRoleName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedRoleName_0
+LIMIT 2" (0723d8ff)
+2018-06-25T20:19:40.7111014+02:00 0HLEQJOE3A7H0:00000002 [INF] Executed DbCommand ("105"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"u\".\"Id\", \"u\".\"AccessFailedCount\", \"u\".\"ConcurrencyStamp\", \"u\".\"Delete\", \"u\".\"Email\", \"u\".\"EmailConfirmed\", \"u\".\"LockoutEnabled\", \"u\".\"LockoutEnd\", \"u\".\"NormalizedEmail\", \"u\".\"NormalizedUserName\", \"u\".\"PasswordHash\", \"u\".\"PhoneNumber\", \"u\".\"PhoneNumberConfirmed\", \"u\".\"SecurityStamp\", \"u\".\"TwoFactorEnabled\", \"u\".\"UserName\"
+FROM \"AspNetUsers\" AS \"u\"
+WHERE \"u\".\"NormalizedUserName\" = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2018-06-25T20:19:40.7890285+02:00 0HLEQJOE3A7H0:00000002 [INF] Executed DbCommand ("39"ms) [Parameters=["@p0='?', @p1='?', @p17='?', @p2='?', @p3='?', @p18='?', @p4='?', @p5='?', @p6='?', @p7='?', @p8='?', @p9='?', @p10='?', @p11='?', @p12='?', @p13='?', @p14='?', @p15='?', @p16='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AspNetUserRoles\" (\"UserId\", \"RoleId\")
+VALUES (@p0, @p1);
+UPDATE \"AspNetUsers\" SET \"AccessFailedCount\" = @p2, \"ConcurrencyStamp\" = @p3, \"Delete\" = @p4, \"Email\" = @p5, \"EmailConfirmed\" = @p6, \"LockoutEnabled\" = @p7, \"LockoutEnd\" = @p8, \"NormalizedEmail\" = @p9, \"NormalizedUserName\" = @p10, \"PasswordHash\" = @p11, \"PhoneNumber\" = @p12, \"PhoneNumberConfirmed\" = @p13, \"SecurityStamp\" = @p14, \"TwoFactorEnabled\" = @p15, \"UserName\" = @p16
+WHERE \"Id\" = @p17 AND \"ConcurrencyStamp\" = @p18;" (0723d8ff)
+2018-06-25T20:19:40.8346570+02:00 0HLEQJOE3A7H0:00000002 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-25T20:19:40.8361679+02:00 0HLEQJOE3A7H0:00000002 [INF] Executed action "API.Controllers.AuthenticationController.SignUp (API)" in 5334.9004ms (afa2e885)
+2018-06-25T20:19:40.8476669+02:00 0HLEQJOE3A7H0:00000002 [INF] Request finished in 6219.568ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-25T22:38:30.4862744+02:00 0HLEQREEAJ3BJ:00000001 [INF] Request starting HTTP/1.1 POST http://localhost:5000/schedule/uploadnewweek application/json 6777 (ca22a1cb)
+2018-06-25T22:38:31.5194658+02:00 0HLEQREEAJ3BJ:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-25T22:38:32.2559881+02:00 0HLEQREEAJ3BJ:00000001 [INF] Executed DbCommand ("43"ms) [Parameters=["@__get_Item_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"e\".\"Id\", \"e\".\"AccessFailedCount\", \"e\".\"ConcurrencyStamp\", \"e\".\"Delete\", \"e\".\"Email\", \"e\".\"EmailConfirmed\", \"e\".\"LockoutEnabled\", \"e\".\"LockoutEnd\", \"e\".\"NormalizedEmail\", \"e\".\"NormalizedUserName\", \"e\".\"PasswordHash\", \"e\".\"PhoneNumber\", \"e\".\"PhoneNumberConfirmed\", \"e\".\"SecurityStamp\", \"e\".\"TwoFactorEnabled\", \"e\".\"UserName\"
+FROM \"AspNetUsers\" AS \"e\"
+WHERE \"e\".\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-06-25T22:38:32.4886794+02:00 0HLEQREEAJ3BJ:00000001 [INF] Executed DbCommand ("34"ms) [Parameters=["@__user_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"uc\".\"Id\", \"uc\".\"ClaimType\", \"uc\".\"ClaimValue\", \"uc\".\"UserId\"
+FROM \"AspNetUserClaims\" AS \"uc\"
+WHERE \"uc\".\"UserId\" = @__user_Id_0" (0723d8ff)
+2018-06-25T22:38:32.6182116+02:00 0HLEQREEAJ3BJ:00000001 [INF] Executed DbCommand ("41"ms) [Parameters=["@__userId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"role\".\"Name\"
+FROM \"AspNetUserRoles\" AS \"userRole\"
+INNER JOIN \"AspNetRoles\" AS \"role\" ON \"userRole\".\"RoleId\" = \"role\".\"Id\"
+WHERE \"userRole\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-06-25T22:38:32.7127891+02:00 0HLEQREEAJ3BJ:00000001 [INF] Executed DbCommand ("18"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"ConcurrencyStamp\", \"r\".\"Name\", \"r\".\"NormalizedName\"
+FROM \"AspNetRoles\" AS \"r\"
+WHERE \"r\".\"NormalizedName\" = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2018-06-25T22:38:32.8584519+02:00 0HLEQREEAJ3BJ:00000001 [INF] Executed DbCommand ("59"ms) [Parameters=["@__role_Id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"rc\".\"ClaimType\", \"rc\".\"ClaimValue\"
+FROM \"AspNetRoleClaims\" AS \"rc\"
+WHERE \"rc\".\"RoleId\" = @__role_Id_0" (0723d8ff)
+2018-06-25T22:38:32.8736805+02:00 0HLEQREEAJ3BJ:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-25T22:38:33.1869298+02:00 0HLEQREEAJ3BJ:00000001 [INF] Executing action method "API.Controllers.ScheduleController.UploadWeek (API)" with arguments (["{
+  \"ClassroomName\": \"H.1.308\",
+  \"ClassroomType\": null,
+  \"Week\": 23,
+  \"StartDate\": \"5/21/18 12:00:00 AM\",
+  \"EndDate\": \"5/27/18 12:00:00 AM\",
+  \"SchoolType\": null,
+  \"Days\": [
+    {
+      \"Name\": \"Maandag\",
+      \"Hours\": []
+    },
+    {
+      \"Name\": \"Dinsdag\",
+      \"Hours\": [
+        {
+          \"HourId\": 2,
+          \"Class\": \"COV2D.\",
+          \"Teacher\": \"VERBM\",
+          \"Course\": \"<b>CCOPPE12R2</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 3,
+          \"Class\": \"COV2D.\",
+          \"Teacher\": \"VERBM\",
+          \"Course\": \"<b>CCOPPE12R2</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 4,
+          \"Class\": \"COV2D.\",
+          \"Teacher\": \"VERBM\",
+          \"Course\": \"<b>CCOPPE12R2</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 5,
+          \"Class\": \"COV2D.\",
+          \"Teacher\": \"VERBM\",
+          \"Course\": \"<b>CCOPPE12R2</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 7,
+          \"Class\": \"COV2B\",
+          \"Teacher\": \"BOETR\",
+          \"Course\": \"<b>CCODKN10R2</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 8,
+          \"Class\": \"COV2B\",
+          \"Teacher\": \"BOETR\",
+          \"Course\": \"<b>CCODKN10R2</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 9,
+          \"Class\": \"COV4E\",
+          \"Teacher\": \"DULKB\",
+          \"Course\": \"<b>CCOLBC14R4</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 10,
+          \"Class\": \"COV4E\",
+          \"Teacher\": \"DULKB\",
+          \"Course\": \"<b>CCOLBC14R4</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        }
+      ]
+    },
+    {
+      \"Name\": \"Woensdag\",
+      \"Hours\": [
+        {
+          \"HourId\": 1,
+          \"Class\": \"COV3B\",
+          \"Teacher\": \"WITHU\",
+          \"Course\": \"<b>CCOLAB20R3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 2,
+          \"Class\": \"COV3B\",
+          \"Teacher\": \"WITHU\",
+          \"Course\": \"<b>CCOLAB20R3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 3,
+          \"Class\": \"COV3B\",
+          \"Teacher\": \"WITHU\",
+          \"Course\": \"<b>CCOLAB20R3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 4,
+          \"Class\": \"COV3B\",
+          \"Teacher\": \"WITHU\",
+          \"Course\": \"<b>CCOLAB20R3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 5,
+          \"Class\": \"COV1B.\",
+          \"Teacher\": \"FAAIJ\",
+          \"Course\": \"<b>CCOSCR10R1</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 6,
+          \"Class\": \"COV1B.\",
+          \"Teacher\": \"FAAIJ\",
+          \"Course\": \"<b>CCOSCR10R1</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 7,
+          \"Class\": \"COV1D\",
+          \"Teacher\": \"AMEML\",
+          \"Course\": \"<b>CCOSCR10R1</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 8,
+          \"Class\": \"COV1D\",
+          \"Teacher\": \"AMEML\",
+          \"Course\": \"<b>CCOSCR10R1</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        }
+      ]
+    },
+    {
+      \"Name\": \"Donderdag\",
+      \"Hours\": [
+        {
+          \"HourId\": 1,
+          \"Class\": \"COV1A.\",
+          \"Teacher\": \"AMMMQ\",
+          \"Course\": \"<b>Inzage P3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 2,
+          \"Class\": \"COV1A.\",
+          \"Teacher\": \"AMMMQ\",
+          \"Course\": \"<b>Inzage P3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 3,
+          \"Class\": \"COV1G.\",
+          \"Teacher\": \"HAMEE\",
+          \"Course\": \"<b>CCOSCR10R1</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 4,
+          \"Class\": \"COV1G.\",
+          \"Teacher\": \"HAMEE\",
+          \"Course\": \"<b>CCOSCR10R1</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 5,
+          \"Class\": \"COV3A\",
+          \"Teacher\": \"LOSBA\",
+          \"Course\": \"<b>CCOCAP11R3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 6,
+          \"Class\": \"COV3A\",
+          \"Teacher\": \"LOSBA\",
+          \"Course\": \"<b>CCOCAP11R3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        }
+      ]
+    },
+    {
+      \"Name\": \"Vrijdag\",
+      \"Hours\": []
+    }
+  ]
+}"]) - ModelState is Valid (ba7f4ac2)
+2018-06-25T22:38:33.1907841+02:00 0HLEQREEAJ3BJ:00000001 [INF] ::1: http://localhost:5000/schedule/uploadnewweek (f18fdccb)
+2018-06-25T22:38:43.6892316+02:00 0HLEQREEAJ3BJ:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=["@__classroomName_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"c\".\"Id\", \"c\".\"BuildingId\", \"c\".\"Name\", \"c\".\"PiID\"
+FROM \"Classrooms\" AS \"c\"
+WHERE \"c\".\"Name\" = @__classroomName_0
+LIMIT 2" (0723d8ff)
+2018-06-25T22:38:49.5457128+02:00 0HLEQREEAJ3BJ:00000001 [INF] Executed DbCommand ("4"ms) [Parameters=["@__year_0='?', @__roomId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"y\".\"Id\", \"y\".\"RoomId\", \"y\".\"SchoolYear\"
+FROM \"Years\" AS \"y\"
+WHERE (\"y\".\"SchoolYear\" = @__year_0) AND (\"y\".\"RoomId\" = @__roomId_1)
+LIMIT 2" (0723d8ff)
+2018-06-25T22:38:54.6140721+02:00 0HLEQREEAJ3BJ:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__periode_0='?', @__yearId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"p\".\"Id\", \"p\".\"PeriodNumber\", \"p\".\"ScheduleYearId\"
+FROM \"Periods\" AS \"p\"
+WHERE (\"p\".\"PeriodNumber\" = @__periode_0) AND (\"p\".\"ScheduleYearId\" = @__yearId_1)
+LIMIT 2" (0723d8ff)
+2018-06-25T22:39:01.0354869+02:00 0HLEQREEAJ3BJ:00000001 [INF] Executed action "API.Controllers.ScheduleController.UploadWeek (API)" in 27984.4409ms (afa2e885)
+2018-06-25T22:39:01.5850072+02:00 0HLEQREEAJ3BJ:00000001 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)
+   at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+   at API.Process.Agenda.NewWeek(Schedule newSchedule, String periodId) in /media/rodero/Media/Projects/ICTLAB/API/API/Process/Agenda.cs:line 231
+   at API.Process.Agenda.NewPeriod(Schedule newSchedule, String yearId) in /media/rodero/Media/Projects/ICTLAB/API/API/Process/Agenda.cs:line 221
+   at API.Process.Agenda.NewYear(Schedule newSchedule, String roomId) in /media/rodero/Media/Projects/ICTLAB/API/API/Process/Agenda.cs:line 199
+   at API.Process.Agenda.NewClassroom(Schedule newSchedule) in /media/rodero/Media/Projects/ICTLAB/API/API/Process/Agenda.cs:line 177
+   at API.Process.Agenda.Upload(JObject newWeek) in /media/rodero/Media/Projects/ICTLAB/API/API/Process/Agenda.cs:line 44
+   at API.Controllers.ScheduleController.UploadWeek(JObject weekSchedule) in /media/rodero/Media/Projects/ICTLAB/API/API/Controllers/ScheduleController.cs:line 40
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2018-06-25T22:39:01.7535513+02:00 0HLEQREEAJ3BJ:00000001 [INF] Request finished in 31276.0156ms 500 text/html; charset=utf-8 (791a596a)
+2018-06-25T22:53:26.9905091+02:00 0HLEQREEAJ3BJ:00000002 [INF] Request starting HTTP/1.1 POST http://localhost:5000/schedule/uploadnewweek application/json 6785 (ca22a1cb)
+2018-06-25T22:53:33.1149947+02:00 0HLEQREEAJ3BJ:00000002 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-25T22:53:33.1599577+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executing action method "API.Controllers.ScheduleController.UploadWeek (API)" with arguments (["{
+  \"ClassroomName\": \"H.1.308\",
+  \"ClassroomType\": null,
+  \"Week\": 25,
+  \"StartDate\": \"2018-06-20 00:00:00,000\",
+  \"EndDate\": \"2018-06-27 00:00:00,000\",
+  \"SchoolType\": null,
+  \"Days\": [
+    {
+      \"Name\": \"Maandag\",
+      \"Hours\": []
+    },
+    {
+      \"Name\": \"Dinsdag\",
+      \"Hours\": [
+        {
+          \"HourId\": 2,
+          \"Class\": \"COV2D.\",
+          \"Teacher\": \"VERBM\",
+          \"Course\": \"<b>CCOPPE12R2</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 3,
+          \"Class\": \"COV2D.\",
+          \"Teacher\": \"VERBM\",
+          \"Course\": \"<b>CCOPPE12R2</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 4,
+          \"Class\": \"COV2D.\",
+          \"Teacher\": \"VERBM\",
+          \"Course\": \"<b>CCOPPE12R2</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 5,
+          \"Class\": \"COV2D.\",
+          \"Teacher\": \"VERBM\",
+          \"Course\": \"<b>CCOPPE12R2</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 7,
+          \"Class\": \"COV2B\",
+          \"Teacher\": \"BOETR\",
+          \"Course\": \"<b>CCODKN10R2</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 8,
+          \"Class\": \"COV2B\",
+          \"Teacher\": \"BOETR\",
+          \"Course\": \"<b>CCODKN10R2</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 9,
+          \"Class\": \"COV4E\",
+          \"Teacher\": \"DULKB\",
+          \"Course\": \"<b>CCOLBC14R4</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 10,
+          \"Class\": \"COV4E\",
+          \"Teacher\": \"DULKB\",
+          \"Course\": \"<b>CCOLBC14R4</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        }
+      ]
+    },
+    {
+      \"Name\": \"Woensdag\",
+      \"Hours\": [
+        {
+          \"HourId\": 1,
+          \"Class\": \"COV3B\",
+          \"Teacher\": \"WITHU\",
+          \"Course\": \"<b>CCOLAB20R3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 2,
+          \"Class\": \"COV3B\",
+          \"Teacher\": \"WITHU\",
+          \"Course\": \"<b>CCOLAB20R3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 3,
+          \"Class\": \"COV3B\",
+          \"Teacher\": \"WITHU\",
+          \"Course\": \"<b>CCOLAB20R3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 4,
+          \"Class\": \"COV3B\",
+          \"Teacher\": \"WITHU\",
+          \"Course\": \"<b>CCOLAB20R3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 5,
+          \"Class\": \"COV1B.\",
+          \"Teacher\": \"FAAIJ\",
+          \"Course\": \"<b>CCOSCR10R1</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 6,
+          \"Class\": \"COV1B.\",
+          \"Teacher\": \"FAAIJ\",
+          \"Course\": \"<b>CCOSCR10R1</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 7,
+          \"Class\": \"COV1D\",
+          \"Teacher\": \"AMEML\",
+          \"Course\": \"<b>CCOSCR10R1</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 8,
+          \"Class\": \"COV1D\",
+          \"Teacher\": \"AMEML\",
+          \"Course\": \"<b>CCOSCR10R1</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        }
+      ]
+    },
+    {
+      \"Name\": \"Donderdag\",
+      \"Hours\": [
+        {
+          \"HourId\": 1,
+          \"Class\": \"COV1A.\",
+          \"Teacher\": \"AMMMQ\",
+          \"Course\": \"<b>Inzage P3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 2,
+          \"Class\": \"COV1A.\",
+          \"Teacher\": \"AMMMQ\",
+          \"Course\": \"<b>Inzage P3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 3,
+          \"Class\": \"COV1G.\",
+          \"Teacher\": \"HAMEE\",
+          \"Course\": \"<b>CCOSCR10R1</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 4,
+          \"Class\": \"COV1G.\",
+          \"Teacher\": \"HAMEE\",
+          \"Course\": \"<b>CCOSCR10R1</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 5,
+          \"Class\": \"COV3A\",
+          \"Teacher\": \"LOSBA\",
+          \"Course\": \"<b>CCOCAP11R3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        },
+        {
+          \"HourId\": 6,
+          \"Class\": \"COV3A\",
+          \"Teacher\": \"LOSBA\",
+          \"Course\": \"<b>CCOCAP11R3</b>\",
+          \"SpecialReason\": null,
+          \"Reserved\": true
+        }
+      ]
+    },
+    {
+      \"Name\": \"Vrijdag\",
+      \"Hours\": []
+    }
+  ]
+}"]) - ModelState is Valid (ba7f4ac2)
+2018-06-25T22:53:33.1602681+02:00 0HLEQREEAJ3BJ:00000002 [INF] ::1: http://localhost:5000/schedule/uploadnewweek (f18fdccb)
+2018-06-25T22:53:46.1105108+02:00 0HLEQREEAJ3BJ:00000002 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-25T22:53:46.4894902+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@__classroomName_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"c\".\"Id\", \"c\".\"BuildingId\", \"c\".\"Name\", \"c\".\"PiID\"
+FROM \"Classrooms\" AS \"c\"
+WHERE \"c\".\"Name\" = @__classroomName_0
+LIMIT 2" (0723d8ff)
+2018-06-25T22:53:46.4920233+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@__year_0='?', @__roomId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"y\".\"Id\", \"y\".\"RoomId\", \"y\".\"SchoolYear\"
+FROM \"Years\" AS \"y\"
+WHERE (\"y\".\"SchoolYear\" = @__year_0) AND (\"y\".\"RoomId\" = @__roomId_1)
+LIMIT 2" (0723d8ff)
+2018-06-25T22:53:46.4942299+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@__periode_0='?', @__yearId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"p\".\"Id\", \"p\".\"PeriodNumber\", \"p\".\"ScheduleYearId\"
+FROM \"Periods\" AS \"p\"
+WHERE (\"p\".\"PeriodNumber\" = @__periode_0) AND (\"p\".\"ScheduleYearId\" = @__yearId_1)
+LIMIT 2" (0723d8ff)
+2018-06-25T22:53:50.2219023+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__week_0='?', @__periodId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"w\".\"Id\", \"w\".\"EndWeek\", \"w\".\"SchedulePeriodId\", \"w\".\"StartWeek\", \"w\".\"WeekNumber\"
+FROM \"Weeks\" AS \"w\"
+WHERE (\"w\".\"WeekNumber\" = @__week_0) AND (\"w\".\"SchedulePeriodId\" = @__periodId_1)
+LIMIT 2" (0723d8ff)
+2018-06-25T22:53:52.0662169+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("7"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Weeks\" (\"Id\", \"EndWeek\", \"SchedulePeriodId\", \"StartWeek\", \"WeekNumber\")
+VALUES (@p0, @p1, @p2, @p3, @p4);" (0723d8ff)
+2018-06-25T22:53:57.2017586+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__day_0='?', @__weekId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d\".\"Id\", \"d\".\"Date\", \"d\".\"WeekDay\", \"d\".\"WeekId\"
+FROM \"Days\" AS \"d\"
+WHERE (\"d\".\"WeekDay\" = @__day_0) AND (\"d\".\"WeekId\" = @__weekId_1)
+LIMIT 2" (0723d8ff)
+2018-06-25T22:53:57.2172607+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Days\" (\"Id\", \"Date\", \"WeekDay\", \"WeekId\")
+VALUES (@p0, @p1, @p2, @p3);" (0723d8ff)
+2018-06-25T22:54:04.6083960+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@__day_0='?', @__weekId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d\".\"Id\", \"d\".\"Date\", \"d\".\"WeekDay\", \"d\".\"WeekId\"
+FROM \"Days\" AS \"d\"
+WHERE (\"d\".\"WeekDay\" = @__day_0) AND (\"d\".\"WeekId\" = @__weekId_1)
+LIMIT 2" (0723d8ff)
+2018-06-25T22:54:10.1890469+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Days\" (\"Id\", \"Date\", \"WeekDay\", \"WeekId\")
+VALUES (@p0, @p1, @p2, @p3);" (0723d8ff)
+2018-06-25T22:54:25.0467922+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("3"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.0523698+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.0568696+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.0611583+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.0657291+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.0707481+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.0760406+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.0813690+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.0866371+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@__day_0='?', @__weekId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d\".\"Id\", \"d\".\"Date\", \"d\".\"WeekDay\", \"d\".\"WeekId\"
+FROM \"Days\" AS \"d\"
+WHERE (\"d\".\"WeekDay\" = @__day_0) AND (\"d\".\"WeekId\" = @__weekId_1)
+LIMIT 2" (0723d8ff)
+2018-06-25T22:54:25.0950678+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Days\" (\"Id\", \"Date\", \"WeekDay\", \"WeekId\")
+VALUES (@p0, @p1, @p2, @p3);" (0723d8ff)
+2018-06-25T22:54:25.0979630+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.1025908+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.1072268+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.1118967+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.1164330+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.1236694+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.1288269+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.1335055+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.1361754+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@__day_0='?', @__weekId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d\".\"Id\", \"d\".\"Date\", \"d\".\"WeekDay\", \"d\".\"WeekId\"
+FROM \"Days\" AS \"d\"
+WHERE (\"d\".\"WeekDay\" = @__day_0) AND (\"d\".\"WeekId\" = @__weekId_1)
+LIMIT 2" (0723d8ff)
+2018-06-25T22:54:25.1382436+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Days\" (\"Id\", \"Date\", \"WeekDay\", \"WeekId\")
+VALUES (@p0, @p1, @p2, @p3);" (0723d8ff)
+2018-06-25T22:54:25.1409270+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.1434252+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.1458692+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.1485712+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.1510509+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.1534616+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Hours\" (\"Id\", \"Class\", \"Course\", \"ScheduleDayId\", \"ShortName\", \"UserId\", \"which\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);" (0723d8ff)
+2018-06-25T22:54:25.1555827+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@__day_0='?', @__weekId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d\".\"Id\", \"d\".\"Date\", \"d\".\"WeekDay\", \"d\".\"WeekId\"
+FROM \"Days\" AS \"d\"
+WHERE (\"d\".\"WeekDay\" = @__day_0) AND (\"d\".\"WeekId\" = @__weekId_1)
+LIMIT 2" (0723d8ff)
+2018-06-25T22:54:25.1571388+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?', @p2='?', @p3='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Days\" (\"Id\", \"Date\", \"WeekDay\", \"WeekId\")
+VALUES (@p0, @p1, @p2, @p3);" (0723d8ff)
+2018-06-25T22:54:25.1802485+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-25T22:54:25.1895643+02:00 0HLEQREEAJ3BJ:00000002 [INF] Executed action "API.Controllers.ScheduleController.UploadWeek (API)" in 52073.7208ms (afa2e885)
+2018-06-25T22:54:25.1913969+02:00 0HLEQREEAJ3BJ:00000002 [INF] Request finished in 58199.5222ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-25T22:54:46.0394637+02:00 0HLEQREEAJ3BJ:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:5000/schedule/getweek/H.4.308/2018/25 application/json  (ca22a1cb)
+2018-06-25T22:54:46.0407206+02:00 0HLEQREEAJ3BJ:00000003 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-25T22:54:46.0509254+02:00 0HLEQREEAJ3BJ:00000003 [INF] Executing action method "API.Controllers.ScheduleController.GetWeek (API)" with arguments (["H.4.308", "2018", "25"]) - ModelState is Valid (ba7f4ac2)
+2018-06-25T22:54:48.7261926+02:00 0HLEQREEAJ3BJ:00000003 [INF] ::1: http://localhost:5000/schedule/getweek/H.4.308/2018/25 (6a8d024e)
+2018-06-25T22:54:49.2123433+02:00 0HLEQREEAJ3BJ:00000003 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-25T22:54:49.2133109+02:00 0HLEQREEAJ3BJ:00000003 [INF] Executed DbCommand ("0"ms) [Parameters=["@__classroomName_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"c\".\"Id\", \"c\".\"BuildingId\", \"c\".\"Name\", \"c\".\"PiID\"
+FROM \"Classrooms\" AS \"c\"
+WHERE \"c\".\"Name\" = @__classroomName_0
+LIMIT 2" (0723d8ff)
+2018-06-25T22:54:49.2134059+02:00 0HLEQREEAJ3BJ:00000003 [INF] Classroom already exists (87715600)
+2018-06-25T22:54:57.3122504+02:00 0HLEQREEAJ3BJ:00000003 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-25T22:54:57.3130989+02:00 0HLEQREEAJ3BJ:00000003 [INF] Executed action "API.Controllers.ScheduleController.GetWeek (API)" in 11269.1086ms (afa2e885)
+2018-06-25T22:54:57.3570364+02:00 0HLEQREEAJ3BJ:00000003 [INF] Request finished in 11297.142ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-25T22:55:23.5578142+02:00 0HLEQRNS7OB0P:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/schedule/getweek/H.4.308/2018/25 application/json  (ca22a1cb)
+2018-06-25T22:55:23.8448452+02:00 0HLEQRNS7OB0P:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-25T22:55:24.0918627+02:00 0HLEQRNS7OB0P:00000001 [INF] Executing action method "API.Controllers.ScheduleController.GetWeek (API)" with arguments (["H.4.308", "2018", "25"]) - ModelState is Valid (ba7f4ac2)
+2018-06-25T22:55:30.6153229+02:00 0HLEQRNS7OB0P:00000001 [INF] ::1: http://localhost:5000/schedule/getweek/H.4.308/2018/25 (6a8d024e)
+2018-06-25T22:55:31.7619326+02:00 0HLEQRNS7OB0P:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-25T22:55:32.7459059+02:00 0HLEQRNS7OB0P:00000001 [INF] Executed DbCommand ("26"ms) [Parameters=["@__classroomName_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"c\".\"Id\", \"c\".\"BuildingId\", \"c\".\"Name\", \"c\".\"PiID\"
+FROM \"Classrooms\" AS \"c\"
+WHERE \"c\".\"Name\" = @__classroomName_0
+LIMIT 2" (0723d8ff)
+2018-06-25T22:55:32.7722761+02:00 0HLEQRNS7OB0P:00000001 [INF] Classroom already exists (87715600)
+2018-06-25T22:55:39.0562568+02:00 0HLEQRNS7OB0P:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-25T22:55:39.0801356+02:00 0HLEQRNS7OB0P:00000001 [INF] Executed action "API.Controllers.ScheduleController.GetWeek (API)" in 15017.625ms (afa2e885)
+2018-06-25T22:55:39.0866625+02:00 0HLEQRNS7OB0P:00000001 [INF] Request finished in 15535.2289ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-25T22:55:43.1389517+02:00 0HLEQRNS7OB0P:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/schedule/getweek/H.4.308/2018/25 application/json  (ca22a1cb)
+2018-06-25T22:55:43.1602119+02:00 0HLEQRNS7OB0P:00000002 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-25T22:55:43.1648630+02:00 0HLEQRNS7OB0P:00000002 [INF] Executing action method "API.Controllers.ScheduleController.GetWeek (API)" with arguments (["H.4.308", "2018", "25"]) - ModelState is Valid (ba7f4ac2)
+2018-06-25T22:55:48.6069729+02:00 0HLEQRNS7OB0P:00000002 [INF] ::1: http://localhost:5000/schedule/getweek/H.4.308/2018/25 (6a8d024e)
+2018-06-25T22:55:52.7326498+02:00 0HLEQRNS7OB0P:00000002 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-25T22:55:52.7400699+02:00 0HLEQRNS7OB0P:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@__classroomName_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"c\".\"Id\", \"c\".\"BuildingId\", \"c\".\"Name\", \"c\".\"PiID\"
+FROM \"Classrooms\" AS \"c\"
+WHERE \"c\".\"Name\" = @__classroomName_0
+LIMIT 2" (0723d8ff)
+2018-06-25T22:56:05.0674018+02:00 0HLEQRNS7OB0P:00000002 [INF] Classroom already exists (87715600)
+2018-06-25T22:56:12.4829827+02:00 0HLEQRNS7OB0P:00000002 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-25T22:56:12.4882496+02:00 0HLEQRNS7OB0P:00000002 [INF] Executed action "API.Controllers.ScheduleController.GetWeek (API)" in 29320.7788ms (afa2e885)
+2018-06-25T22:56:12.4886207+02:00 0HLEQRNS7OB0P:00000002 [INF] Request finished in 29350.078ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-25T22:57:59.6699698+02:00 0HLEQRPAOD2KP:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/schedule/getweek/H.4.308/2018/25 application/json  (ca22a1cb)
+2018-06-25T22:57:59.9592426+02:00 0HLEQRPAOD2KP:00000001 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-25T22:58:00.1971509+02:00 0HLEQRPAOD2KP:00000001 [INF] Executing action method "API.Controllers.ScheduleController.GetWeek (API)" with arguments (["H.4.308", "2018", "25"]) - ModelState is Valid (ba7f4ac2)
+2018-06-25T22:58:03.3729336+02:00 0HLEQRPAOD2KP:00000001 [INF] ::1: http://localhost:5000/schedule/getweek/H.4.308/2018/25 (6a8d024e)
+2018-06-25T22:58:06.3718280+02:00 0HLEQRPAOD2KP:00000001 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-25T22:58:07.2966629+02:00 0HLEQRPAOD2KP:00000001 [INF] Executed DbCommand ("22"ms) [Parameters=["@__classroomName_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"c\".\"Id\", \"c\".\"BuildingId\", \"c\".\"Name\", \"c\".\"PiID\"
+FROM \"Classrooms\" AS \"c\"
+WHERE \"c\".\"Name\" = @__classroomName_0
+LIMIT 2" (0723d8ff)
+2018-06-25T22:58:10.0963102+02:00 0HLEQRPAOD2KP:00000001 [INF] Classroom already exists (87715600)
+2018-06-25T22:58:10.2342269+02:00 0HLEQRPAOD2KP:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-25T22:58:10.2624958+02:00 0HLEQRPAOD2KP:00000001 [INF] Executed action "API.Controllers.ScheduleController.GetWeek (API)" in 10099.5874ms (afa2e885)
+2018-06-25T22:58:10.2697967+02:00 0HLEQRPAOD2KP:00000001 [INF] Request finished in 10605.696ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-25T22:58:12.4170482+02:00 0HLEQRPAOD2KP:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/schedule/getweek/H.4.308/2018/25 application/json  (ca22a1cb)
+2018-06-25T22:58:12.4282081+02:00 0HLEQRPAOD2KP:00000002 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-25T22:58:12.4296931+02:00 0HLEQRPAOD2KP:00000002 [INF] Executing action method "API.Controllers.ScheduleController.GetWeek (API)" with arguments (["H.4.308", "2018", "25"]) - ModelState is Valid (ba7f4ac2)
+2018-06-25T22:58:14.9049799+02:00 0HLEQRPAOD2KP:00000002 [INF] ::1: http://localhost:5000/schedule/getweek/H.4.308/2018/25 (6a8d024e)
+2018-06-25T22:58:20.0781985+02:00 0HLEQRPAOD2KP:00000002 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-25T22:58:20.0837110+02:00 0HLEQRPAOD2KP:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@__classroomName_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"c\".\"Id\", \"c\".\"BuildingId\", \"c\".\"Name\", \"c\".\"PiID\"
+FROM \"Classrooms\" AS \"c\"
+WHERE \"c\".\"Name\" = @__classroomName_0
+LIMIT 2" (0723d8ff)
+2018-06-25T22:58:54.4493273+02:00 0HLEQRPAOD2KP:00000002 [INF] Classroom already exists (87715600)
+2018-06-25T22:58:54.5192823+02:00 0HLEQRPAOD2KP:00000002 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-25T22:58:54.5612751+02:00 0HLEQRPAOD2KP:00000002 [INF] Executed action "API.Controllers.ScheduleController.GetWeek (API)" in 42091.0565ms (afa2e885)
+2018-06-25T22:58:54.5615930+02:00 0HLEQRPAOD2KP:00000002 [INF] Request finished in 42144.5794ms 200 application/json; charset=utf-8 (791a596a)
+2018-06-25T23:02:26.6365864+02:00 0HLEQRPAOD2KP:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:5000/schedule/getweek/H.1.308/2018/25 application/json  (ca22a1cb)
+2018-06-25T23:02:26.6372870+02:00 0HLEQRPAOD2KP:00000003 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2018-06-25T23:02:26.6376416+02:00 0HLEQRPAOD2KP:00000003 [INF] Executing action method "API.Controllers.ScheduleController.GetWeek (API)" with arguments (["H.1.308", "2018", "25"]) - ModelState is Valid (ba7f4ac2)
+2018-06-25T23:02:29.7948135+02:00 0HLEQRPAOD2KP:00000003 [INF] ::1: http://localhost:5000/schedule/getweek/H.1.308/2018/25 (b2359a78)
+2018-06-25T23:02:31.3712175+02:00 0HLEQRPAOD2KP:00000003 [INF] Entity Framework Core "2.0.2-rtm-10011" initialized '"ApplicationDbContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "None" (9958f5bb)
+2018-06-25T23:02:31.3724242+02:00 0HLEQRPAOD2KP:00000003 [INF] Executed DbCommand ("0"ms) [Parameters=["@__classroomName_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"c\".\"Id\", \"c\".\"BuildingId\", \"c\".\"Name\", \"c\".\"PiID\"
+FROM \"Classrooms\" AS \"c\"
+WHERE \"c\".\"Name\" = @__classroomName_0
+LIMIT 2" (0723d8ff)
+2018-06-25T23:02:32.9605414+02:00 0HLEQRPAOD2KP:00000003 [INF] Executed DbCommand ("3"ms) [Parameters=["@__year_0='?', @__roomId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"y\".\"Id\", \"y\".\"RoomId\", \"y\".\"SchoolYear\"
+FROM \"Years\" AS \"y\"
+WHERE (\"y\".\"SchoolYear\" = @__year_0) AND (\"y\".\"RoomId\" = @__roomId_1)
+LIMIT 2" (0723d8ff)
+2018-06-25T23:02:33.4396949+02:00 0HLEQRPAOD2KP:00000003 [INF] Executed DbCommand ("0"ms) [Parameters=["@__periode_0='?', @__yearId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"p\".\"Id\", \"p\".\"PeriodNumber\", \"p\".\"ScheduleYearId\"
+FROM \"Periods\" AS \"p\"
+WHERE (\"p\".\"PeriodNumber\" = @__periode_0) AND (\"p\".\"ScheduleYearId\" = @__yearId_1)
+LIMIT 2" (0723d8ff)
+2018-06-25T23:02:34.0419928+02:00 0HLEQRPAOD2KP:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=["@__week_0='?', @__periodId_1='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"w\".\"Id\", \"w\".\"EndWeek\", \"w\".\"SchedulePeriodId\", \"w\".\"StartWeek\", \"w\".\"WeekNumber\"
+FROM \"Weeks\" AS \"w\"
+WHERE (\"w\".\"WeekNumber\" = @__week_0) AND (\"w\".\"SchedulePeriodId\" = @__periodId_1)
+LIMIT 2" (0723d8ff)
+2018-06-25T23:02:37.0580349+02:00 0HLEQRPAOD2KP:00000003 [INF] Executed DbCommand ("0"ms) [Parameters=["@__weekId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d\".\"Id\", \"d\".\"Date\", \"d\".\"WeekDay\", \"d\".\"WeekId\"
+FROM \"Days\" AS \"d\"
+WHERE \"d\".\"WeekId\" = @__weekId_0" (0723d8ff)
+2018-06-25T23:02:37.0785641+02:00 0HLEQRPAOD2KP:00000003 [INF] Executed DbCommand ("2"ms) [Parameters=["@__dayId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"h\".\"Id\", \"h\".\"Class\", \"h\".\"Course\", \"h\".\"ScheduleDayId\", \"h\".\"ShortName\", \"h\".\"UserId\", \"h\".\"which\"
+FROM \"Hours\" AS \"h\"
+WHERE \"h\".\"ScheduleDayId\" = @__dayId_0" (0723d8ff)
+2018-06-25T23:02:37.0813953+02:00 0HLEQRPAOD2KP:00000003 [INF] Executed DbCommand ("0"ms) [Parameters=["@__dayId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"h\".\"Id\", \"h\".\"Class\", \"h\".\"Course\", \"h\".\"ScheduleDayId\", \"h\".\"ShortName\", \"h\".\"UserId\", \"h\".\"which\"
+FROM \"Hours\" AS \"h\"
+WHERE \"h\".\"ScheduleDayId\" = @__dayId_0" (0723d8ff)
+2018-06-25T23:02:37.0900742+02:00 0HLEQRPAOD2KP:00000003 [INF] Executed DbCommand ("0"ms) [Parameters=["@__dayId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"h\".\"Id\", \"h\".\"Class\", \"h\".\"Course\", \"h\".\"ScheduleDayId\", \"h\".\"ShortName\", \"h\".\"UserId\", \"h\".\"which\"
+FROM \"Hours\" AS \"h\"
+WHERE \"h\".\"ScheduleDayId\" = @__dayId_0" (0723d8ff)
+2018-06-25T23:02:37.0912355+02:00 0HLEQRPAOD2KP:00000003 [INF] Executed DbCommand ("0"ms) [Parameters=["@__dayId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"h\".\"Id\", \"h\".\"Class\", \"h\".\"Course\", \"h\".\"ScheduleDayId\", \"h\".\"ShortName\", \"h\".\"UserId\", \"h\".\"which\"
+FROM \"Hours\" AS \"h\"
+WHERE \"h\".\"ScheduleDayId\" = @__dayId_0" (0723d8ff)
+2018-06-25T23:02:37.0922281+02:00 0HLEQRPAOD2KP:00000003 [INF] Executed DbCommand ("0"ms) [Parameters=["@__dayId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"h\".\"Id\", \"h\".\"Class\", \"h\".\"Course\", \"h\".\"ScheduleDayId\", \"h\".\"ShortName\", \"h\".\"UserId\", \"h\".\"which\"
+FROM \"Hours\" AS \"h\"
+WHERE \"h\".\"ScheduleDayId\" = @__dayId_0" (0723d8ff)
+2018-06-25T23:02:40.9701894+02:00 0HLEQRPAOD2KP:00000003 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2018-06-25T23:02:40.9712169+02:00 0HLEQRPAOD2KP:00000003 [INF] Executed action "API.Controllers.ScheduleController.GetWeek (API)" in 14333.7548ms (afa2e885)
+2018-06-25T23:02:40.9735108+02:00 0HLEQRPAOD2KP:00000003 [INF] Request finished in 14336.9241ms 200 application/json; charset=utf-8 (791a596a)
