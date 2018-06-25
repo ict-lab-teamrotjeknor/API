@@ -111,6 +111,14 @@ namespace API.Controllers
             return await messageBack;
         }
 
+        [HttpGet("roles")]
+        public async Task<JObject> GetRoles()
+        {
+            LogUrl();;
+            var messageBack = _authentication.GetRoles();
+            return await messageBack;
+        }
+
         //Safe actions from someone
         private void LogUrl()
         {

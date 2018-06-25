@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Controllers;
@@ -219,6 +220,20 @@ namespace API.Process
             userRole.RoleName = currentRole[0];
             userRole.UserEmail = UserEmail;
             return _json.SerilizeJObject(userRole);
-        } 
+        }
+
+        public async Task<JObject> GetRoles()
+        {
+            var allRoles = _roleManager.Roles;
+            var lists = new JsonList();
+            lists.random = new List<string>();
+            
+            foreach (var currentRole in allRoles)
+            {
+                lists.random.Add(currentRole.ToString());
+            }
+            
+            return _json.SerilizeJObject(lists);
+        }
     }
 }
